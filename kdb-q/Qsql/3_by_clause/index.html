@@ -1,0 +1,1367 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal Blog to document my experiments with tech">
+      
+      
+      
+        <link rel="canonical" href="https://yogesh1314.github.io/kdb-q/Qsql/3_by_clause/">
+      
+      <link rel="icon" href="../../../static/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
+    
+    
+      
+        <title>By - Tech Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2b4465f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-by-clause" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Tech Blog" class="md-header__button md-logo" aria-label="Tech Blog" data-md-component="logo">
+      
+  <img src="../../../static/YR.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tech Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              By
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yogesh1314/yogesh1314-mkdocs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yogesh1314-mkdocs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../atom-lists/basic_operations/" class="md-tabs__link md-tabs__link--active">
+        KDB-q
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tech Blog" class="md-nav__button md-logo" aria-label="Tech Blog" data-md-component="logo">
+      
+  <img src="../../../static/YR.svg" alt="logo">
+
+    </a>
+    Tech Blog
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yogesh1314/yogesh1314-mkdocs/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    yogesh1314-mkdocs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          KDB-q
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="KDB-q" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          KDB-q
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Atom-lists
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Atom-lists" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Atom-lists
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/basic_operations/" class="md-nav__link">
+        Basic Operations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/atom/" class="md-nav__link">
+        Atoms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/introduction_to_lists/" class="md-nav__link">
+        Lists
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/list_operations/" class="md-nav__link">
+        List Operations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/hints_and_tricks/" class="md-nav__link">
+        Hints and Tricks
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Dictionary
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dictionary" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Dictionary
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/1_dictionaries/" class="md-nav__link">
+        Dictionaries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/2_operations_on_dictionaries/" class="md-nav__link">
+        Operation on Dictionaries
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/3_tables/" class="md-nav__link">
+        Tables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/4_functions/" class="md-nav__link">
+        Functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/5_execution_control/" class="md-nav__link">
+        Execution Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/6_scripts/" class="md-nav__link">
+        Scripts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/7_debugging/" class="md-nav__link">
+        Debugging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_8" type="checkbox" id="__nav_2_8" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_8">
+          Q-SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Q-SQL" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_8">
+          <span class="md-nav__icon md-icon"></span>
+          Q-SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_using_select_statements/" class="md-nav__link">
+        Select
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_where_clause/" class="md-nav__link">
+        Where
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          By
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        By
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hlocohlc" class="md-nav__link">
+    HLOC/OHLC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-in-by-clause" class="md-nav__link">
+    Function in by clause
+  </a>
+  
+    <nav class="md-nav" aria-label="Function in by clause">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xbar" class="md-nav__link">
+    xbar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tick-direction-example" class="md-nav__link">
+    tick direction example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trades-in-size-group" class="md-nav__link">
+    trades in size group
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_functional_form/" class="md-nav__link">
+        Functional Form
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords_joins_adverbs_attributes/1_keywords/" class="md-nav__link">
+        Keywords
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_10" type="checkbox" id="__nav_2_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_10">
+          Joins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Joins" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_10">
+          <span class="md-nav__icon md-icon"></span>
+          Joins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords_joins_adverbs_attributes/2_joins/" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords_joins_adverbs_attributes/3_asof_window_joins/" class="md-nav__link">
+        Asof-Windows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords_joins_adverbs_attributes/4_adverbs/" class="md-nav__link">
+        Adverbs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords_joins_adverbs_attributes/5_attributes/" class="md-nav__link">
+        Attributes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hlocohlc" class="md-nav__link">
+    HLOC/OHLC
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-in-by-clause" class="md-nav__link">
+    Function in by clause
+  </a>
+  
+    <nav class="md-nav" aria-label="Function in by clause">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xbar" class="md-nav__link">
+    xbar
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tick-direction-example" class="md-nav__link">
+    tick direction example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trades-in-size-group" class="md-nav__link">
+    trades in size group
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/yogesh1314/yogesh1314-mkdocs/edit/master/docs/kdb-q/Qsql/3_by_clause.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="the-by-clause">The <code>by</code> clause</h1>
+<ul>
+<li>used to group data</li>
+<li>tables are set of lists</li>
+</ul>
+<pre><code>q)/setup
+q)makedb[1000000;200000]
+tables[]
+q)`depth`quotes`trades
+</code></pre>
+<ul>
+<li>we can apply group data using <code>by</code> without aggregation - aggregation function <code>last</code> is applied by default</li>
+</ul>
+<pre><code>q)select by sym from trades
+sym | time                          src price size
+----| --------------------------------------------
+AAPL| 2020.12.25D16:29:55.722000000 N   29.89 210
+CSCO| 2020.12.25D16:29:56.120000000 O   35.29 2803
+DELL| 2020.12.25D16:29:57.739000000 N   28.66 1889
+GOOG| 2020.12.25D16:29:56.958000000 N   43.87 1254
+IBM | 2020.12.25D16:29:58.656000000 N   37.92 4379
+MSFT| 2020.12.25D16:29:59.677000000 L   38.88 6493
+NOK | 2020.12.25D16:29:57.448000000 N   34.55 1092
+ORCL| 2020.12.25D16:29:57.487000000 L   31.47 2685
+YHOO| 2020.12.25D16:29:59.662000000 N   37.01 5305
+</code></pre>
+<ul>
+<li>grouping with aggregation also works</li>
+</ul>
+<pre><code>q)select max price, sum size by sym from trades
+sym | price size
+----| --------------
+AAPL| 30.39 59274749
+CSCO| 38.11 58247173
+DELL| 31.11 58330222
+GOOG| 44.02 57776533
+IBM | 43.6  58945930
+MSFT| 41.2  58150838
+NOK | 35.56 57899767
+ORCL| 33.46 58335324
+YHOO| 38.11 59446175
+</code></pre>
+<ul>
+<li>in case of grouping by 2 columns, they are grouped in order they are queried</li>
+<li>in example below, it's grouped first by <code>sym</code> and then again by <code>src</code></li>
+</ul>
+<pre><code>q)select max price, sum size by sym,src from trades
+sym  src| price size
+--------| --------------
+AAPL L  | 30.36 20012403
+AAPL N  | 30.39 19782620
+AAPL O  | 30.33 19479726
+CSCO L  | 38.08 19537950
+CSCO N  | 38.11 19351658
+CSCO O  | 38.1  19357565
+DELL L  | 31.09 19188543
+DELL N  | 31.09 19677846
+DELL O  | 31.11 19463833
+GOOG L  | 44.02 19686298
+GOOG N  | 43.95 19884630
+GOOG O  | 44.02 18205605
+IBM  L  | 43.55 19806381
+IBM  N  | 43.54 19809111
+IBM  O  | 43.6  19330438
+MSFT L  | 41.2  19272596
+MSFT N  | 41.17 19105562
+MSFT O  | 41.19 19772680
+NOK  L  | 35.49 19366132
+NOK  N  | 35.56 19586497
+</code></pre>
+<ul>
+<li>we can also get values without aggregation</li>
+</ul>
+<pre><code>q)select max price, size by sym,src from trades
+sym  src| price size                                                         ..
+--------| -------------------------------------------------------------------..
+AAPL L  | 30.36 1344 922 1223 9988 5087 4250 384 6328 3506 4901 1216 6507 236..
+AAPL N  | 30.39 119 7205 125 137 2385 6201 5277 781 434 778 5221 165 3665 697..
+AAPL O  | 30.33 1132 4958 4875 2746 1006 686 636 3929 4680 7888 8422 4246 268..
+CSCO L  | 38.08 36 3243 1037 2923 994 2832 1613 1530 452 1381 1334 9846 1676 ..
+CSCO N  | 38.11 2144 1363 7463 5020 2068 1329 2075 4074 549 5471 812 7790 251..
+CSCO O  | 38.1  154 2171 797 1579 1868 2098 2910 1525 921 744 2132 6843 3296 ..
+DELL L  | 31.09 4317 4648 27 5416 1379 3476 2331 154 1246 5158 558 5662 4337 ..
+DELL N  | 31.09 2356 357 170 5101 460 2933 751 4031 1950 4837 5847 5596 244 1..
+DELL O  | 31.11 22 7472 376 440 2789 1247 520 3012 272 5445 6697 581 1201 108..
+</code></pre>
+<ul>
+<li>data is sorted by columns in ascending order of <code>by</code> clause</li>
+<li>in example below trades are first sorted ascending by <code>time</code> then by <code>sym</code></li>
+</ul>
+<pre><code>q)select max price by time, sym from trades
+time                          sym | price
+----------------------------------| -----
+2020.12.25D08:00:00.029000000 CSCO| 35.46
+2020.12.25D08:00:00.229000000 NOK | 31.82
+2020.12.25D08:00:00.250000000 YHOO| 35.5
+2020.12.25D08:00:00.861000000 GOOG| 41.41
+2020.12.25D08:00:00.946000000 IBM | 43.54
+2020.12.25D08:00:00.958000000 MSFT| 36.09
+2020.12.25D08:00:01.156000000 CSCO| 35.46
+2020.12.25D08:00:01.255000000 NOK | 31.78
+2020.12.25D08:00:01.272000000 MSFT| 36.09
+2020.12.25D08:00:01.527000000 NOK | 31.76
+2020.12.25D08:00:01.546000000 AAPL| 25.36
+2020.12.25D08:00:01.629000000 MSFT| 36.08
+2020.12.25D08:00:01.680000000 YHOO| 35.54
+2020.12.25D08:00:01.836000000 DELL| 29.07
+2020.12.25D08:00:01.889000000 CSCO| 35.45
+2020.12.25D08:00:02.127000000 DELL| 29.07
+2020.12.25D08:00:02.161000000 YHOO| 35.5
+2020.12.25D08:00:02.824000000 YHOO| 35.5
+2020.12.25D08:00:03.191000000 YHOO| 35.52
+2020.12.25D08:00:03.309000000 GOOG| 41.3
+</code></pre>
+<h2 id="hlocohlc">HLOC/OHLC</h2>
+<ul>
+<li>high, low, open and close / open, high, low and close</li>
+</ul>
+<pre><code>q)select high:max price, low:min price, open:first price, close:last price by sym from trades
+sym | high  low   open  close
+----| -----------------------
+AAPL| 30.39 24.61 25.36 29.89
+CSCO| 38.11 34.25 35.46 35.29
+DELL| 31.11 28.48 29.07 28.66
+GOOG| 44.02 39.9  41.41 43.87
+IBM | 43.6  37.66 43.54 37.92
+MSFT| 41.2  35.9  36.09 38.88
+NOK | 35.56 29.09 31.82 34.55
+ORCL| 33.46 30.55 32.22 31.47
+YHOO| 38.11 32.83 35.5  37.01
+
+</code></pre>
+<h2 id="function-in-by-clause">Function in <code>by</code> clause</h2>
+<h3 id="xbar"><code>xbar</code></h3>
+<ul>
+<li>frequently used to split data into time buckets</li>
+<li>sample use case : select maximum price for each sym for every hour/every half hour</li>
+<li><code>n xbar list</code> is used for bucketing <code>list</code> of any q entity into <code>n</code> number of buckets
+ <code>q)select max price by 1 xbar time.hh from trades
+hh| price
+--| -----
+8 | 43.6
+9 | 42.62
+10| 43.06
+11| 42.61
+12| 42.57
+13| 42.27
+14| 42.03
+15| 43.75
+16| 44.02
+q)select max price by 0.5 xbar time.hh from trades
+hh | price
+---| -----
+4  | 43.6
+4.5| 42.62
+5  | 43.06
+5.5| 42.61
+6  | 42.57
+6.5| 42.27
+7  | 42.03
+7.5| 43.75
+8  | 44.02
+q)select max price, sum size by sym, 5 xbar time.minute from trades
+sym  minute| price size
+-----------| ------------
+AAPL 08:00 | 25.44 559983
+AAPL 08:05 | 25.41 658484
+AAPL 08:10 | 25.45 568858
+AAPL 08:15 | 25.05 590919
+AAPL 08:20 | 24.97 592187
+AAPL 08:25 | 25.18 618660
+AAPL 08:30 | 24.94 536795
+q) // not just for temporal data, xbar works on all types of q datatypes
+q)select sum size by sym, 5 xbar price from trades
+sym  price| size
+----------| --------
+AAPL 20   | 2778333
+AAPL 25   | 55483203
+AAPL 30   | 1013213
+CSCO 30   | 4698809
+CSCO 35   | 53548364
+DELL 25   | 39015640
+DELL 30   | 19314582
+GOOG 35   | 78225
+GOOG 40   | 57698308
+IBM  35   | 18314146
+IBM  40   | 40631784
+MSFT 35   | 52387686
+MSFT 40   | 5763152
+NOK  25   | 11650507
+NOK  30   | 42933232
+NOK  35   | 3316028
+ORCL 30   | 58335324
+YHOO 30   | 20237630
+YHOO 35   | 39208545</code></li>
+</ul>
+<h3 id="tick-direction-example">tick direction example</h3>
+<ul>
+<li>we want to add new column <code>dir</code> showing direction of price : +1 = increase in price, -1 = decrease in price, 0 = no change</li>
+<li>we define a function <code>tradedirection</code></li>
+</ul>
+<pre><code>q)tradedirection:{signum deltas x}
+q)tradedirection:{signum deltas x}
+q)update dir:tradedirection price by sym from trades
+time                          sym  src price size dir
+-----------------------------------------------------
+2020.12.25D08:00:00.029000000 CSCO O   35.46 154  0
+2020.12.25D08:00:00.229000000 NOK  L   31.82 690  0
+2020.12.25D08:00:00.250000000 YHOO L   35.5  1583 0
+2020.12.25D08:00:00.861000000 GOOG N   41.41 3183 0
+2020.12.25D08:00:00.946000000 IBM  N   43.54 7605 0
+2020.12.25D08:00:00.958000000 MSFT N   36.09 1592 0
+2020.12.25D08:00:01.156000000 CSCO N   35.46 2144 0
+2020.12.25D08:00:01.255000000 NOK  O   31.78 508  -1
+2020.12.25D08:00:01.272000000 MSFT L   36.09 4960 0
+2020.12.25D08:00:01.527000000 NOK  L   31.76 7832 -1
+..
+</code></pre>
+<ul>
+<li>here we see for first row dir is 1 which is incorrect and should be 0</li>
+<li>hence, we re-define our <code>tradedirection</code> function</li>
+<li>now we are using diadic form of <code>deltas</code> function</li>
+</ul>
+<pre><code>q)tradedirection:{signum deltas[first x;x]}
+q)update dir:tradedirection price by sym from trades
+time                          sym  src price size dir
+-----------------------------------------------------
+2020.12.25D08:00:00.029000000 CSCO O   35.46 154  0
+2020.12.25D08:00:00.229000000 NOK  L   31.82 690  0
+2020.12.25D08:00:00.250000000 YHOO L   35.5  1583 0
+2020.12.25D08:00:00.861000000 GOOG N   41.41 3183 0
+2020.12.25D08:00:00.946000000 IBM  N   43.54 7605 0
+2020.12.25D08:00:00.958000000 MSFT N   36.09 1592 0
+2020.12.25D08:00:01.156000000 CSCO N   35.46 2144 0
+2020.12.25D08:00:01.255000000 NOK  O   31.78 508  -1
+2020.12.25D08:00:01.272000000 MSFT L   36.09 4960 0
+2020.12.25D08:00:01.527000000 NOK  L   31.76 7832 -1
+..
+</code></pre>
+<ul>
+<li>now if we want to use <code>dir</code> column in grouping, to group by sym and upticks(dir=+1)/downticks(dir=-1)/no movement(dir=0)</li>
+<li>we do this by first updating <code>dir</code> in trades then group them by <code>sym</code> and <code>dir</code></li>
+</ul>
+<pre><code>q)select sum size by sym, dir from update dir:tradedirection price by sym from trades
+sym  dir| size
+--------| --------
+AAPL -1 | 23669600
+AAPL 0  | 10796074
+AAPL 1  | 24809075
+CSCO -1 | 24273006
+CSCO 0  | 10492199
+CSCO 1  | 23481968
+DELL -1 | 23765475
+DELL 0  | 11081873
+DELL 1  | 23482874
+GOOG -1 | 23767777
+..
+</code></pre>
+<ul>
+<li>we can also use <code>fby</code> in order to get same results in single statement</li>
+</ul>
+<pre><code>q)select sum size by sym, dir:(tradedirection;price) fby sym from trades
+sym  dir| size
+--------| --------
+AAPL -1 | 23669600
+AAPL 0  | 10796074
+AAPL 1  | 24809075
+CSCO -1 | 24273006
+CSCO 0  | 10492199
+CSCO 1  | 23481968
+DELL -1 | 23765475
+DELL 0  | 11081873
+DELL 1  | 23482874
+GOOG -1 | 23767777
+..
+</code></pre>
+<ul>
+<li><strong>same can be used for calculating a value which is dependent on another value in the group</strong></li>
+<li><strong>example</strong> : we want to know total size of trades for each sym where price is more than 10 tick moving average</li>
+</ul>
+<pre><code>q)select sum size by sym, price&gt;(mavg[10];price) fby sym from trades
+sym  sym1| size
+---------| --------
+AAPL 0   | 29193756
+AAPL 1   | 30080993
+CSCO 0   | 29465592
+CSCO 1   | 28781581
+DELL 0   | 29500402
+DELL 1   | 28829820
+GOOG 0   | 28792193
+GOOG 1   | 28984340
+IBM  0   | 30403277
+IBM  1   | 28542653
+..
+</code></pre>
+<h3 id="trades-in-size-group">trades in size group</h3>
+<ul>
+<li>Suppose we want to classify trades into 3 groups:</li>
+<li>size&lt;1000 - small</li>
+<li>1000&lt;size&lt;9000 - medium</li>
+<li>size&gt;9000 - big</li>
+<li>we can do it using</li>
+<li>multiple selects</li>
+<li>have a function and apply <code>fby</code> in <code>by</code> clause</li>
+</ul>
+<pre><code>q) // my attempt
+q)sizegroup:{?[x&lt;1000;`small;?[x within 1000 8999; `medium;`big]]}
+q)select by sym, sg:(sizegroup;size) fby sym from trades
+sym  sg    | time                          src price size
+-----------| --------------------------------------------
+AAPL big   | 2020.12.25D16:22:11.344000000 N   30.05 9746
+AAPL medium| 2020.12.25D16:29:54.842000000 O   29.87 1568
+AAPL small | 2020.12.25D16:29:55.722000000 N   29.89 210
+CSCO big   | 2020.12.25D16:28:52.974000000 N   35.27 9805
+CSCO medium| 2020.12.25D16:29:56.120000000 O   35.29 2803
+CSCO small | 2020.12.25D16:29:53.908000000 L   35.38 906
+DELL big   | 2020.12.25D16:29:01.330000000 O   29.02 9338
+DELL medium| 2020.12.25D16:29:57.739000000 N   28.66 1889
+DELL small | 2020.12.25D16:29:41.032000000 O   28.69 386
+GOOG big   | 2020.12.25D16:28:03.979000000 O   44.02 9368
+..
+</code></pre>
+<pre><code>q) // instructor's attempt using bin
+q)sizegroup2:{`small`medium`big 0 1000 9000 bin x}
+q)select by sym, (sizegroup2;size) fby sym from trades
+sym  sym1  | time                          src price size
+-----------| --------------------------------------------
+AAPL big   | 2020.12.25D12:47:22.215000000 L   25.27 9008
+AAPL medium| 2020.12.25D16:29:14.600000000 L   25.48 1226
+AAPL small | 2020.12.25D16:29:52.700000000 L   25.48 167
+CSCO big   | 2020.12.25D14:04:40.319000000 N   36.22 9027
+CSCO medium| 2020.12.25D16:29:17.739000000 N   36.4  4333
+CSCO small | 2020.12.25D16:28:08.296000000 N   36.46 815
+DELL medium| 2020.12.25D16:27:11.848000000 O   29.81 4049
+DELL small | 2020.12.25D16:22:44.943000000 N   29.82 39
+GOOG medium| 2020.12.25D16:26:30.366000000 N   41.84 4956
+GOOG small | 2020.12.25D16:23:11.310000000 N   41.8  264
+IBM  big   | 2020.12.25D14:35:04.732000000 N   46.19 9051
+IBM  medium| 2020.12.25D16:28:57.502000000 O   46.89 1322
+IBM  small | 2020.12.25D16:22:03.114000000 N   47.04 796
+MSFT big   | 2020.12.25D16:22:42.020000000 N   35.59 9636
+MSFT medium| 2020.12.25D16:14:50.382000000 N   35.59 1055
+MSFT small | 2020.12.25D16:21:07.118000000 L   35.55 937
+NOK  big   | 2020.12.25D10:29:07.054000000 L   31.16 9045
+NOK  medium| 2020.12.25D16:22:24.261000000 L   31.04 2457
+NOK  small | 2020.12.25D16:27:15.083000000 O   31.14 357
+ORCL big   | 2020.12.25D11:32:42.294000000 O   33.26 9812
+..
+</code></pre>
+<pre><code>q)// solution with bin needs size list to be sorted, solution with ? would work otherwise as well
+q)// performance comparison
+q) count trades`size
+2000
+q)sizegroup
+{?[x&lt;1000;`small;?[x within 1000 8999; `medium;`big]]}
+q)\t:10000 sizegroup trades`size
+2069
+q)\t:10000 sizegroup trades`size
+2083
+q)sizegroup2
+{`small`medium`big 0 1000 9000 bin x}
+q)\t:10000 sizegroup2 trades`size
+1675
+q)\t:10000 sizegroup2 trades`size
+1677
+q) // solution with bin is more optimized, faster by ~300-400ms, only restriction is list needs to be sorted, otherwise solution with ? would work in both cases sorted or otherwise
+</code></pre>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../2_where_clause/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Where" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Where
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../4_functional_form/" class="md-footer__link md-footer__link--next" aria-label="Next: Functional Form" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Functional Form
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://github.com/yogesh1314" target="_blank" rel="noopener" title="Yogesh Rana on github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://in.linkedin.com/in/yogesh1314" target="_blank" rel="noopener" title="Yogesh Rana on linkedin" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.top", "navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.960e086b.min.js"></script>
+      
+    
+  </body>
+</html>

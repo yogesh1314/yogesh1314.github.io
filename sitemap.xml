@@ -6,122 +6,127 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/Qsql/1_using_select_statements/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/Qsql/1_using_select_statements/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/Qsql/2_where_clause/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/Qsql/2_where_clause/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/Qsql/3_by_clause/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/Qsql/3_by_clause/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/Qsql/4_functional_form/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/Qsql/4_functional_form/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/atom-lists/atom/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/atom/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/atom-lists/basic_operations/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/basic_operations/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/atom-lists/hints_and_tricks/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/hints_and_tricks/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/atom-lists/introduction_to_lists/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/introduction_to_lists/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/atom-lists/list_operations/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/list_operations/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/dict_table_func/1_dictionaries/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/1_dictionaries/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/dict_table_func/2_operations_on_dictionaries/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/2_operations_on_dictionaries/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/dict_table_func/3_tables/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/3_tables/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/dict_table_func/4_functions/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/4_functions/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/dict_table_func/5_execution_control/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/5_execution_control/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/dict_table_func/6_scripts/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/6_scripts/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/dict_table_func/7_debugging/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/7_debugging/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/ipc_web_access/ipc-sending-receiving/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/ipc_web_access/ipc-sending-receiving/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/ipc_web_access/ipc_connecting/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/ipc_web_access/ipc_connecting/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/ipc_web_access/kdb-via-web-browser/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/ipc_web_access/kdb-via-web-browser/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/keywords_joins_adverbs_attributes/1_keywords/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/1_keywords/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/keywords_joins_adverbs_attributes/2_joins/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/2_joins/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/keywords_joins_adverbs_attributes/3_asof_window_joins/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/3_asof_window_joins/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/keywords_joins_adverbs_attributes/4_adverbs/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/4_adverbs/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/basic/keywords_joins_adverbs_attributes/5_attributes/</loc>
+         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/5_attributes/</loc>
+         <lastmod>2022-10-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/6_index_amend_apply/</loc>
          <lastmod>2022-10-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
