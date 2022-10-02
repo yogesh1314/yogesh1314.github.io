@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#and" class="md-skip">
+        <a href="#index-amend-and-apply" class="md-skip">
           Skip to content
         </a>
       
@@ -757,9 +757,103 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Index Amend
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Index Amend
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#operators-and" class="md-nav__link">
+    Operators @ and .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-using-and" class="md-nav__link">
+    Index using @ and .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amendapply-using" class="md-nav__link">
+    Amend/Apply using @
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    @ vs []
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-use-of-index" class="md-nav__link">
+    Advanced use of @ index
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-with-database-tables" class="md-nav__link">
+    Using . with database tables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-to" class="md-nav__link">
+    Convert @ to .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-using-and" class="md-nav__link">
+    Apply using @ and .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-on-database-tables" class="md-nav__link">
+    Using @ on database tables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-trapping" class="md-nav__link">
+    Error trapping
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -792,6 +886,84 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#operators-and" class="md-nav__link">
+    Operators @ and .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index-using-and" class="md-nav__link">
+    Index using @ and .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amendapply-using" class="md-nav__link">
+    Amend/Apply using @
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    @ vs []
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-use-of-index" class="md-nav__link">
+    Advanced use of @ index
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-with-database-tables" class="md-nav__link">
+    Using . with database tables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#convert-to" class="md-nav__link">
+    Convert @ to .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-using-and" class="md-nav__link">
+    Apply using @ and .
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-on-database-tables" class="md-nav__link">
+    Using @ on database tables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-trapping" class="md-nav__link">
+    Error trapping
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -807,13 +979,14 @@
 </a>
 
 
-<h1 id="and"><code>@</code> and <code>.</code></h1>
+<h1 id="index-amend-and-apply">Index Amend and Apply</h1>
+<h2 id="operators-and">Operators <code>@</code> and <code>.</code></h2>
 <ul>
 <li>
 <p><code>@</code> and <code>.</code> build on the functionality provided by square bracket notation</p>
 </li>
 <li>
-<p>If x is a data structure, <code>x[y]</code> means 'Index':</p>
+<p>If <code>x</code> is a data structure, <code>x[y]</code> means 'Index' </p>
 </li>
 </ul>
 <pre><code class="language-q">q)x
@@ -822,11 +995,11 @@ q)x[3]
 5
 </code></pre>
 <ul>
-<li>If x is a function, <code>x[y]</code> means 'Apply':</li>
+<li>If <code>f</code> is a function, <code>f[y]</code> means 'Apply':</li>
 </ul>
-<pre><code class="language-q">q)x
+<pre><code class="language-q">q)f
 {(x*2)+5}
-q)x[3]
+q)f[3]
 11
 </code></pre>
 <ul>
@@ -834,7 +1007,7 @@ q)x[3]
 <li><code>@</code> is used for single-dimensional lists </li>
 <li><code>.</code> is used for nested lists </li>
 </ul>
-<h1 id="index-using-and">Index using <code>@</code> and <code>.</code></h1>
+<h2 id="index-using-and">Index using <code>@</code> and <code>.</code></h2>
 <ul>
 <li>If list is single-dimensional list and index is 2:</li>
 </ul>
@@ -868,11 +1041,233 @@ q)list[row;column]
 q).[list;0 1]
 2
 </code></pre>
-<p>?[list: (1 2 3;4 5 6; 7 8) - Which of these will return a value of 3]
--[ ] .[list;0 2]
--[ ] list[0][2]
-- list 0 2
-- @[list;0 2]</p>
+<h2 id="amendapply-using">Amend/Apply using <code>@</code></h2>
+<ul>
+<li>Previously we used <code>:</code> operator to amend items in a single-dimensional list</li>
+</ul>
+<pre><code class="language-q">q)list
+&quot;ABCDE&quot;
+q)list[2]:&quot;Z&quot;
+q)list
+&quot;ABZDE&quot;
+</code></pre>
+<ul>
+<li>Same can be acheived using <code>@</code> for single-dimensional list, however we need to give list name as symbol for changes to be permanent</li>
+</ul>
+<pre><code class="language-q">q)list
+&quot;ABZDE&quot;
+q)@[list;2;:;&quot;K&quot;]
+&quot;ABKDE&quot;
+q)list
+&quot;ABZDE&quot;
+q)@[`list;2;:;&quot;K&quot;]
+`list
+q)list
+&quot;ABKDE&quot;
+</code></pre>
+<ul>
+<li>we can also apply mathematical operator to list</li>
+</ul>
+<pre><code class="language-q">q)list
+4 9 2 7 0 1 9 2 1 8
+q)@[list;3;+;66]
+4 9 2 73 0 1 9 2 1 8
+q)list:(8 4 3;9 8 76;7 8)
+q)list
+8 4 3
+9 8 76
+7 8
+q).[list;1 2;+;100]
+8 4 3
+9 8 176
+7 8
+
+</code></pre>
+<ul>
+<li>we can also update more than 1 item in the list</li>
+</ul>
+<pre><code class="language-q">q)list
+4 9 2 7 0 1 9 2 1 8
+q)@[list;0 1 2;:;44 55 66]
+44 55 66 7 0 1 9 2 1 8
+</code></pre>
+<h2 id="vs"><code>@</code> vs <code>[]</code></h2>
+<ul>
+<li>square brackets are easy to read for simple use cases, but there are cases where <code>@</code> can be used where <code>[]</code> cannot</li>
+<li><code>[]</code> can only be used with named variables but <code>@</code> can be used without named variables, it can also be used with result of previous operation</li>
+</ul>
+<pre><code>q)@[0000b;2;:;1b]
+0010b
+q)@[10#.Q.A;2;:;&quot;H&quot;]
+&quot;ABHDEFGHIJ&quot;
+</code></pre>
+<ol>
+<li><code>@</code> has a wider range of operations - square bracket allows us to append to a dictionary item</li>
+</ol>
+<pre><code>q)d:(`a`b`c)!(1 2;3 4 5;6 7 8 9)
+q)d
+a| 1 2
+b| 3 4 5
+c| 6 7 8 9
+q)d[`c],:10
+q)d
+a| 1 2
+b| 3 4 5
+c| 6 7 8 9 10
+</code></pre>
+<p>but <code>@</code> also allows us to prepend</p>
+<pre><code>q)d
+a| 1 2
+b| 3 4 5
+c| 6 7 8 9 10
+q)@[d;`c]
+6 7 8 9 10
+q)@[d;`c;{y,x};55]
+a| 1 2
+b| 3 4 5
+c| 55 6 7 8 9 10
+</code></pre>
+<ol>
+<li>we can use <code>@</code>  with non-dyadic operators</li>
+</ol>
+<pre><code>q)@[&quot;avcdf&quot;;4;upper]
+&quot;avcdF&quot;
+</code></pre>
+<ul>
+<li>to use a function taking more than 2 arguments, we create a monadic projection by fixing the other arguments inside the 3rd part of <code>@</code> expression</li>
+</ul>
+<pre><code>q)applyInterest:{[x;nperiods;rate] nperiods{x*1+y%100}[;rate]/x}
+q)account:`ram`bheem!12.33 2033.56
+q)account
+ram  | 12.33
+bheem| 2033.56
+q)@[account;`bheem;applyInterest[;2;5.5]] // fix nperiods to 2 and rate to 5.5
+ram  | 12.33
+bheem| 2263.403
+</code></pre>
+<h2 id="advanced-use-of-index">Advanced use of <code>@</code> index</h2>
+<ul>
+<li>Setup 2 structures:</li>
+<li>l is a mixed list of symbols and integers</li>
+<li>m is a mapping of symbol to integers</li>
+<li>we can apply the mapping at the indexes of the symbols</li>
+</ul>
+<pre><code>q)l: (`a;1;2;`b;5;90)
+q)l
+`a
+1
+2
+`b
+5
+90
+q)m:`a`b!500 600
+q)m
+a| 500
+b| 600
+q)@[l; where -11=type each l;m]
+500 1 2 600 5 90
+</code></pre>
+<h2 id="using-with-database-tables">Using <code>.</code> with database tables</h2>
+<ul>
+<li>we can use <code>.</code> to index into a table</li>
+</ul>
+<pre><code class="language-q">q)t:([sym:`MSFT`IBM] prc: 10.29 24.66; size: 100 200)
+q)t
+sym | prc   size
+----| ----------
+MSFT| 10.29 100
+IBM | 24.66 200
+q).[t;(`MSFT;`prc)]
+10.29
+</code></pre>
+<ul>
+<li><code>.</code> also allows us to update entire object at once by passing an empty set of indexes - this allows us to amend each element of the list</li>
+</ul>
+<pre><code>q)list:(1 2;3 4 5;6 7 8 9)
+q)list
+1 2
+3 4 5
+6 7 8 9
+q).[list;();+;90]
+91 92
+93 94 95
+96 97 98 99
+</code></pre>
+<h2 id="convert-to">Convert <code>@</code> to <code>.</code></h2>
+<ul>
+<li>we can convert an <code>@</code> statement to <code>.</code> statement as <code>@</code> is a speacial case of <code>.</code></li>
+</ul>
+<pre><code>q)list
+1 2
+3 4 5
+6 7 8 9
+q)f
+{2*x}
+q)@[list;1;f]
+1 2
+6 8 10
+6 7 8 9
+q).[list;enlist 1;f]
+1 2
+6 8 10
+6 7 8 9
+</code></pre>
+<h2 id="apply-using-and">Apply using <code>@</code> and <code>.</code></h2>
+<ul>
+<li>we have seen that when <code>f</code> is a function then <code>f[x]</code> means apply</li>
+<li><code>[]</code> can be replaced with <code>@</code> (for single argument)and <code>.</code> (for multiple arguments)</li>
+</ul>
+<pre><code>q)f
+{2*x}
+q)f[2]
+4
+q)@[f;2]
+4
+</code></pre>
+<ul>
+<li>Let's say we have list of lists with varying length and we want to flip it into a table - we can't do it straight away as lenghts are not same</li>
+</ul>
+<pre><code>q)list:(1 2 3;4 5 ; 7 8 9 0)
+q)list
+1 2 3
+4 5
+7 8 9 0
+q)flip `a`b`c!list
+'length
+  [0]  flip `a`b`c!list
+       ^
+</code></pre>
+<ul>
+<li>instead we can use <code>@</code> to fill the lists with <code>0N</code> to make them of same lenght and then flip it into a table </li>
+</ul>
+<pre><code>q)@[max[c]#0N;;:;]'[til each c:count each list;list]
+1 2 3
+4 5
+7 8 9 0
+q)flip `a`b`c!@[max[c]#0N;;:;]'[til each c:count each list;list]
+a b c
+-----
+1 4 7
+2 5 8
+3   9
+    0
+</code></pre>
+<h2 id="using-on-database-tables">Using <code>@</code> on database tables</h2>
+<ul>
+<li>we can use <code>@</code> as simple version of functional select - here column name is used as symbol so it can be passed programatically</li>
+</ul>
+<pre><code>q) @[select from trades where sym=`AAPL;`size;sums]
+</code></pre>
+<h2 id="error-trapping">Error trapping</h2>
+<pre><code>q)f
+{2*x}
+q)g
+{x*y}
+q)@[f;&quot;ABC&quot;;{-2 &quot;Error: &quot;,x;}]
+Error: type
+q).[g;(&quot;ABC&quot;;5);{-2 &quot;Error: &quot;,x;}]
+Error: type
+</code></pre>
 
               
             </article>
