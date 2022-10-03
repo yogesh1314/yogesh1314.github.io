@@ -1037,10 +1037,10 @@ q)\p
 0i
 </code></pre>
 <ul>
+<li>let's create 2 q processes:</li>
+<li>server - one which is serving queries</li>
 <li>
-<p>let's create 2 q processes:
-<strong> server - one which is serving queries
-</strong> client - one which is making queries</p>
+<p>client - one which is making queries</p>
 </li>
 <li>
 <p>we can open a connection from client to server using function <code>hopen</code></p>
@@ -1110,46 +1110,40 @@ q).z.W
 </code></pre>
 <h3 id="zpo"><code>.z.po</code></h3>
 <ul>
-<li>this is executed whenever a handle is opened and <code>.z.pw</code> has executed successfully</li>
+<li>this is executed whenever a handle is opened and after <code>.z.pw</code> has executed successfully</li>
 <li>we can print details of just opened handle in this function, like: ip address, username, date time and handle number</li>
 <li>argument passed to function <code>.z.po</code> is handle number</li>
 <li><code>.z.a</code> - show ip address</li>
 <li><code>.z.p</code> - current timestamp</li>
 <li><code>.z.u</code> - user opening handle</li>
 </ul>
-<pre><code>//server
+<pre><code class="language-q">// server
 q).z.po:{[x] show(.z.a;.z.p;.z.u;x)}
 {[x] show(.z.a;.z.p;.z.u;x)}
 q)2130706433i
 2022.02.21D03:38:51.578467000
 `abc
 10i
-```q
-
-
-```q
-//client
+</code></pre>
+<pre><code class="language-q">//client
 q)h2:hopen `::1234:abc:pass
 </code></pre>
 <h3 id="zpc"><code>.z.pc</code></h3>
 <ul>
 <li>we can use <code>.z.pc</code> to be executed whenever a handle is closed to server</li>
 </ul>
-<pre><code>//server
+<pre><code class="language-q">//server
 q).z.pc:{[x] show(.z.h;.z.p;x)}
 q)`ykr-mbam1.local
 2022.02.21D03:42:57.717442000
 10i
-```q
-
-
-```q
-//client
+</code></pre>
+<pre><code class="language-q">//client
 q)hclose h2
 </code></pre>
 <h2 id="timeout">Timeout</h2>
 <ul>
-<li>we can also define timeout when opening a handle</li>
+<li>we can also define timeout in millisecods when opening a handle</li>
 </ul>
 <pre><code class="language-q">// server
 q)system &quot;sleep 60&quot;

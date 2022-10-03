@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#ipc-sending-and-receiving" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -805,10 +810,57 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Send Receive
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Send Receive
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sync-send-and-receive" class="md-nav__link">
+    Sync Send and Receive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zpg" class="md-nav__link">
+    .z.pg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-send-and-receive" class="md-nav__link">
+    Async Send and Receive
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -849,6 +901,53 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sync-send-and-receive" class="md-nav__link">
+    Sync Send and Receive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zpg" class="md-nav__link">
+    .z.pg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-send-and-receive" class="md-nav__link">
+    Async Send and Receive
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -859,9 +958,136 @@
 </a>
 
 
-  <h1>Send Receive</h1>
-
-
+<h1 id="ipc-sending-and-receiving">IPC - Sending and Receiving</h1>
+<ul>
+<li>server at port 1234 and client with handle opened to server</li>
+</ul>
+<pre><code class="language-q">q)// server
+q)\p 
+1234i
+</code></pre>
+<pre><code class="language-q">q)// client
+q)h:hopen 1234
+q)h
+3i
+</code></pre>
+<h2 id="sync-send-and-receive">Sync Send and Receive</h2>
+<ul>
+<li>Synchronous message: client sends the message and blocks the handle until servers sends a response</li>
+<li>To send a message we can use "string" format along with handle h</li>
+</ul>
+<pre><code class="language-q">//client
+q)h&quot;2+2&quot;
+4i
+q)h&quot;g:23&quot;
+q)
+</code></pre>
+<pre><code class="language-q">//server
+q)g
+23
+</code></pre>
+<ul>
+<li>Messages can also be send in functional form - <code>handle(function;arg1;arg2;..;arg n)</code></li>
+</ul>
+<pre><code class="language-q">//client
+q)h(+;2;2)
+4i
+q)h(set;`abc;245)
+`abc
+</code></pre>
+<pre><code class="language-q">//server
+q)abc
+234
+</code></pre>
+<ul>
+<li>For assigning value in functional form we use variable name as symbol or we can use function name as string</li>
+<li>We can also execute functions defined in server side from client</li>
+</ul>
+<pre><code class="language-q">//server
+q)f:{x*x}
+q)f
+{x*x}
+</code></pre>
+<pre><code class="language-q">//client
+q)h(`f;2)
+4
+q)h(&quot;f&quot;;2)
+4
+</code></pre>
+<ul>
+<li>we can also send client side function to server along with arguments and get the results with server running the execution </li>
+</ul>
+<pre><code class="language-q">//client
+q)f2:{x-y}
+q)h(f2;45;23)
+22
+</code></pre>
+<pre><code class="language-q">//server
+q)f2
+'f2
+  [0]  f2
+       ^
+</code></pre>
+<ul>
+<li>we can get data from server using <code>get</code> function or using variable name directly which exists in server</li>
+</ul>
+<pre><code class="language-q">//server
+q)list: 1 2 3 4 5
+</code></pre>
+<pre><code class="language-q">//client
+q)h(get;`list)
+1 2 3 4 5
+q)h(get;&quot;list&quot;)
+1 2 3 4 5
+q)h&quot;list&quot;
+1 2 3 4 5
+q)h(&quot;list&quot;)
+1 2 3 4 5
+</code></pre>
+<h2 id="zpg"><code>.z.pg</code></h2>
+<ul>
+<li>message handler function for handling synchronous messages</li>
+<li>executes everytime process/server receives synchronous message</li>
+</ul>
+<pre><code class="language-q">//server
+q).z.pg:{0N!value x}
+q)13
+</code></pre>
+<pre><code class="language-q">//client
+q)h&quot;2+3+8&quot;
+q)13
+</code></pre>
+<h2 id="async-send-and-receive">Async Send and Receive</h2>
+<ul>
+<li>client doesn't wait for server to send the response, it continues its execution</li>
+<li>to send a async message we use negative handle</li>
+<li>Sending async messages does not send the message immediately. It serializes x, and queues it for sending at a later time - either when the main loop spins, or a blocking request is issued on that handle</li>
+<li><code>.z.ps</code> async message handler</li>
+</ul>
+<pre><code class="language-q">//client
+q)(neg h)&quot;2*5&quot;
+q)(neg h)(+;2;5)
+q)(neg h)&quot;mko:908&quot;
+q)h&quot;&quot; // to ensure async messages queue is processed
+q)(neg h)[] //used to flush the queue
+</code></pre>
+<pre><code class="language-q">//server
+q)mko
+908
+</code></pre>
+<ul>
+<li>To confirm async messages are received and processed, chase with sync message <code>q)h""</code></li>
+<li>To block until all pending outgoing messages have been written into the handle</li>
+</ul>
+<pre><code class="language-q">q)(neg h)[] //or 
+q)(neg h)(::)
+</code></pre>
+<ul>
+<li>if we want to ensure an async message really has been sent as soon as possible, use: </li>
+</ul>
+<pre><code class="language-q">q)(neg h)&quot;x&quot;;
+q)(neg h)[];
+</code></pre>
 
               
             </article>
