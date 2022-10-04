@@ -67,6 +67,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#load-save-files" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -880,10 +885,64 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Load save files
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Load save files
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#writing-to-csv-file" class="md-nav__link">
+    Writing to csv file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-csv" class="md-nav__link">
+    Loading csv
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read0" class="md-nav__link">
+    read0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read1" class="md-nav__link">
+    read1
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -910,6 +969,60 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#writing-to-csv-file" class="md-nav__link">
+    Writing to csv file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-csv" class="md-nav__link">
+    Loading csv
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read0" class="md-nav__link">
+    read0
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read1" class="md-nav__link">
+    read1
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -920,9 +1033,118 @@
 </a>
 
 
-  <h1>Load save files</h1>
-
-
+<h1 id="load-save-files">Load Save Files</h1>
+<h2 id="writing-to-csv-file">Writing to csv file</h2>
+<ul>
+<li>Given an in-memory table we can write it to disk as <code>.csv</code> file</li>
+<li><code>save</code> can be used if we want filename be same as tablename in memory </li>
+</ul>
+<pre><code class="language-q">q)tab:([]sym:`a`b`c`d; prc: 1 2 3 4;cmt: &quot;ABCD&quot;; dt: 2022.10.01 2022.10.02 2022.10.03 2022.10.04)
+q)tab
+sym prc cmt dt
+----------------------
+a   1   A   2022.10.01
+b   2   B   2022.10.02
+c   3   C   2022.10.03
+d   4   D   2022.10.04
+q)tab2:([]col1: `q`w`e; col2: 10 20 30)
+q)tab2
+col1 col2
+---------
+q    10
+w    20
+e    30
+q)save `:tab.csv
+`:tab.csv
+q)save `:tab2.csv
+`:tab2.csv
+</code></pre>
+<h2 id="loading-csv">Loading csv</h2>
+<ul>
+<li>command to load file is <code>0:</code> </li>
+<li>right hand argument is handle to csv file</li>
+<li>left hand argument is list with first item listing type of columns in string type format and second argument is deliminator for csv it is <code>","</code> - enlisting deliminator means we have column headers in our file and they will be column name when read as table</li>
+</ul>
+<pre><code class="language-q">q)tab:(&quot;SICD&quot;;enlist&quot;,&quot;)0: `:tab.csv
+q)tab
+sym prc cmt dt
+----------------------
+a   1   A   2022.10.01
+b   2   B   2022.10.02
+c   3   C   2022.10.03
+d   4   D   2022.10.04
+q)tab2:(&quot;SI&quot;;enlist&quot;,&quot;)0: `:tab2.csv
+q)tab2
+col1 col2
+---------
+q    10
+w    20
+e    30
+</code></pre>
+<ul>
+<li>we can leave out a column if we dont want to read it into memory by keeping type as blank</li>
+</ul>
+<pre><code class="language-q">q)(&quot;SICD&quot;;enlist &quot;,&quot;)0: `:tab.csv
+sym prc cmt dt
+----------------------
+a   1   A   2022.10.01
+b   2   B   2022.10.02
+c   3   C   2022.10.03
+d   4   D   2022.10.04
+q)(&quot;SIC &quot;;enlist &quot;,&quot;)0: `:tab.csv //leave out last column
+sym prc cmt
+-----------
+a   1   A
+b   2   B
+c   3   C
+d   4   D
+q)(&quot;S CD&quot;;enlist &quot;,&quot;)0: `:tab.csv //leave out one of middle column
+sym cmt dt
+------------------
+a   A   2022.10.01
+b   B   2022.10.02
+c   C   2022.10.03
+d   D   2022.10.04
+</code></pre>
+<ul>
+<li>we can also read data without headers</li>
+</ul>
+<pre><code class="language-q">q)(&quot;SICD&quot;;&quot;,&quot;)0: `:tab.csv
+sym a          b          c          d
+    1          2          3          4
+    A          B          C          D
+    2022.10.01 2022.10.02 2022.10.03 2022.10.04
+q)flip `col1`col2`col3`col4!1_'(&quot;SICD&quot;;&quot;,&quot;)0: `:tab.csv
+col1 col2 col3 col4
+-------------------------
+a    1    A    2022.10.01
+b    2    B    2022.10.02
+c    3    C    2022.10.03
+d    4    D    2022.10.04
+</code></pre>
+<h2 id="read0"><code>read0</code></h2>
+<ul>
+<li>we can read file in string format using <code>read0</code></li>
+<li>can be used with csv or txt files as well</li>
+</ul>
+<pre><code class="language-q">q)read0 `:tab.csv
+&quot;sym,prc,cmt,dt&quot;
+&quot;a,1,A,2022-10-01&quot;
+&quot;b,2,B,2022-10-02&quot;
+&quot;c,3,C,2022-10-03&quot;
+&quot;d,4,D,2022-10-04&quot;
+q)read0 `:tab.txt
+&quot; 1 a 3 b 4&quot;
+&quot; 2 b 5 c 6&quot;
+&quot; 3 d 4 e 5&quot;
+</code></pre>
+<h2 id="read1"><code>read1</code></h2>
+<ul>
+<li>we can also read file as binary</li>
+</ul>
+<pre><code class="language-q">q)read1 `:tab.txt
+0x203120612033206220340a203220622035206320360a203320642034206520350a
+</code></pre>
 
               
             </article>
