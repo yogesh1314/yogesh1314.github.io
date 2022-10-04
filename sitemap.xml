@@ -51,6 +51,26 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/compare-profile/</loc>
+         <lastmod>2022-10-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/map-reduce-parallel/</loc>
+         <lastmod>2022-10-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/rack-align-pivot/</loc>
+         <lastmod>2022-10-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/trade-analysis/</loc>
+         <lastmod>2022-10-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/1_dictionaries/</loc>
          <lastmod>2022-10-04</lastmod>
          <changefreq>daily</changefreq>
