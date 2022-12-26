@@ -1106,61 +1106,61 @@
 <li>This script can be put in QHOME directory and loaded in q.q <code>\l help.q</code>, thus when q sessions opens q.q is called and help.q will be loaded</li>
 <li>It acts like man page for q, providing info for most of the cases required in daily use</li>
 </ul>
-<pre><code class="language-q">q)help`
-attributes| data attributes
-cmdline   | command line parameters
-data      | data types
-debug     | debug - debugger commands
-define    | assign, define, control and debug
-doth      | .h namespace: markup
-dotj      | .j namespace: JSON
-dotq      | .Q namespace: utilities
-dotz      | .z namespace: system information and callbacks
-envvar    | envvar - environment variables
-errors    | error messages
-internal  | negative bang - -n!x - internal system calls
-iterator  | iterators (formerly adverbs)
-keyword   | keywords (functions)
-kill      | kill - killing a q session
-lic       | licenses - kdb+ license files
-operator  | operators (functions)
-save      | save/load tables
-syscmd    | system commands
-temporal  | temporal - date &amp; time casts
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)help`
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>attributes| data attributes
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cmdline   | command line parameters
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>data      | data types
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>debug     | debug - debugger commands
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>define    | assign, define, control and debug
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>doth      | .h namespace: markup
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>dotj      | .j namespace: JSON
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>dotq      | .Q namespace: utilities
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>dotz      | .z namespace: system information and callbacks
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>envvar    | envvar - environment variables
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>errors    | error messages
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>internal  | negative bang - -n!x - internal system calls
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>iterator  | iterators (formerly adverbs)
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>keyword   | keywords (functions)
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>kill      | kill - killing a q session
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>lic       | licenses - kdb+ license files
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>operator  | operators (functions)
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>save      | save/load tables
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>syscmd    | system commands
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>temporal  | temporal - date &amp; time casts
+</code></pre></div>
 <ul>
 <li>providing key in will show all existing options</li>
 </ul>
-<pre><code class="language-q">q)help`cmdline
-q [f] [-b] [-c r c] [-C r c] [-g 0|1] [-l] [-L][-o N] [-p N] [-P N] [-q]
-      [-r :H:P] [-s N] [-t N] [-T N] [-u|U F] [-w N] [-W N] [-z 0|1]
-
-f load script (*.q, *.k, *.s), file or directory
-
--b               block client write access
--c r c           console maxRows maxCols
--C r c           http display maxRows maxCols
--e [0|1|2]       disable|enable|display error trap clients
--g [0|1]         disable|enable immediate garbage collect, default 0
--l               log updates to filesystem
--L               as -l, but sync logging
--o N             offset hours (from GMT: affects .z.Z/T/P/N), default 0
--p N             port kdbc(/jdbc/odbc) http(html xml txt csv)
--p -N            port multithreaded kdbc
--P N             printdigits, default 7, 0=&gt;all
--q               quiet, no startup banner text
--r :H:P          replicate from :host:port
--s N             slaves for parallel execution
--S N             set random seed
--t N             timer milliseconds, default 0 (=&gt; none)
--T N             timeout seconds(applies to all client queries), default 0 (=&gt; none)
--u F             usr:pwd file, no access above start directory
--u [0|1]         enable|disable system escapes
--U F             as -u, but no file restrictions
--w N             workspace MB limit (default: 2*RAM)
--W N             week offset, default 2, 0=&gt;saturday
--z [0|1]         &quot;D&quot; uses 0:mm/dd/yyyy or 1:dd/mm/yyyy, default 0
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)help`cmdline
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q [f] [-b] [-c r c] [-C r c] [-g 0|1] [-l] [-L][-o N] [-p N] [-P N] [-q]
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>      [-r :H:P] [-s N] [-t N] [-T N] [-u|U F] [-w N] [-W N] [-z 0|1]
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>f load script (*.q, *.k, *.s), file or directory
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>-b               block client write access
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>-c r c           console maxRows maxCols
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>-C r c           http display maxRows maxCols
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>-e [0|1|2]       disable|enable|display error trap clients
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>-g [0|1]         disable|enable immediate garbage collect, default 0
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>-l               log updates to filesystem
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>-L               as -l, but sync logging
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>-o N             offset hours (from GMT: affects .z.Z/T/P/N), default 0
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>-p N             port kdbc(/jdbc/odbc) http(html xml txt csv)
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>-p -N            port multithreaded kdbc
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>-P N             printdigits, default 7, 0=&gt;all
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>-q               quiet, no startup banner text
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>-r :H:P          replicate from :host:port
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>-s N             slaves for parallel execution
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>-S N             set random seed
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>-t N             timer milliseconds, default 0 (=&gt; none)
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>-T N             timeout seconds(applies to all client queries), default 0 (=&gt; none)
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>-u F             usr:pwd file, no access above start directory
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>-u [0|1]         enable|disable system escapes
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>-U F             as -u, but no file restrictions
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>-w N             workspace MB limit (default: 2*RAM)
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>-W N             week offset, default 2, 0=&gt;saturday
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>-z [0|1]         &quot;D&quot; uses 0:mm/dd/yyyy or 1:dd/mm/yyyy, default 0
+</code></pre></div>
 <ul>
 <li>Helps to reduce time in opening up ref page of kdb</li>
 </ul>

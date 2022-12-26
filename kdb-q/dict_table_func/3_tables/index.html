@@ -1186,44 +1186,44 @@
 <li>can be created using format <code>([] column_name: values; col...)</code></li>
 <li>data type is 98</li>
 </ul>
-<pre><code class="language-q">q)t:([]a:1 2 3; b:4 5 6)
-q)t
-a b
----
-1 4
-2 5
-3 6
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)t:([]a:1 2 3; b:4 5 6)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)t
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>a b
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>---
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>1 4
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>2 5
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>3 6
+</code></pre></div>
 <h2 id="keyed-table">Keyed table</h2>
 <ul>
 <li>dictionary with mapping of table to table</li>
 <li>can be created using table format <code>([key_columns] column_name: values; col...)</code></li>
 <li>data type is 99</li>
 </ul>
-<pre><code class="language-q">q)kt:([a:`a`b`c] b: 1 2 3; c:4 5 6)
-q)kt
-a| b c
--| ---
-a| 1 4
-b| 2 5
-c| 3 6
-q)type kt
-99h
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)kt:([a:`a`b`c] b: 1 2 3; c:4 5 6)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)kt
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>a| b c
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>-| ---
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>a| 1 4
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>b| 2 5
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>c| 3 6
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>q)type kt
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>99h
+</code></pre></div>
 <h2 id="empty-table">Empty table</h2>
 <ul>
 <li>used to specify schema of table before inserting anything in it</li>
 <li>we can force column type while defining, if defined, only values with matching type can be inserted</li>
 </ul>
-<pre><code class="language-q">q)et:([]a:(); b:())
-q)et
-a b
----
-q)et2:([]a:`int$(); b:`float$())
-q)et2
-a b
----
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)et:([]a:(); b:())
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>q)et
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>a b
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>---
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>q)et2:([]a:`int$(); b:`float$())
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>q)et2
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>a b
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>---
+</code></pre></div>
 <h2 id="meta"><code>meta</code></h2>
 <ul>
 <li>applied to a table will return table info</li>
@@ -1235,124 +1235,122 @@ a b
 <li>f is for foreign key</li>
 <li>a is for attributes</li>
 </ul>
-<pre><code class="language-q">q)meta kt
-c| t f a
--| -----
-a| s
-b| j
-c| j
-q)t2:([]a: ((1 2);(3 4)); b: 4 5f)
-q)t2
-a   b
------
-1 2 4
-3 4 5
-q)meta t2
-c| t f a
--| -----
-a| J
-b| f
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)meta kt
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>c| t f a
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>-| -----
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>a| s
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>b| j
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>c| j
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>q)t2:([]a: ((1 2);(3 4)); b: 4 5f)
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>q)t2
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>a   b
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>-----
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>1 2 4
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>3 4 5
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>q)meta t2
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>c| t f a
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>-| -----
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>a| J
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>b| f
+</code></pre></div>
 <h2 id="foreign-keys">Foreign keys</h2>
 <ul>
 <li>table can be linked to another keyed table using foreign keys</li>
 <li>while defining foreign keys we use `keyed_table_name$values</li>
 <li>meta of new table will show <code>f</code> column to have linked to <code>kt</code> keyed_table_name</li>
 </ul>
-<pre><code class="language-q">q)kt
-a| b c
--| ---
-a| 1 4
-b| 2 5
-c| 3 6
-q)t3:([]id: `kt$`a`b`c; prc: 10 20 30f)
-q)t3
-id prc
-------
-a  10
-b  20
-c  30
-q)meta t3
-c  | t f  a
----| ------
-id | s kt
-prc| f
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)kt
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>a| b c
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>-| ---
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>a| 1 4
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>b| 2 5
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>c| 3 6
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>q)t3:([]id: `kt$`a`b`c; prc: 10 20 30f)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>q)t3
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>id prc
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>------
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>a  10
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>b  20
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>c  30
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>q)meta t3
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>c  | t f  a
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>---| ------
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>id | s kt
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>prc| f
+</code></pre></div>
 <h2 id="extracting-rows-and-columns">Extracting rows and columns</h2>
 <ul>
 <li>we can extract rows using row index number, return type is dictionary</li>
-<li>we can extract column using column name</li>
-</ul>
-<pre><code class="language-q">q)t[0]
-a| 1
-b| 4
-q)t[`a]
-1 2 3
-q)t[`a`b]
-1 2 3
-4 5 6
-</code></pre>
-<ul>
+<li>we can extract column using column name
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)t[0]
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>a| 1
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>b| 4
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>q)t[`a]
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>1 2 3
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>q)t[`a`b]
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>1 2 3
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>4 5 6
+</code></pre></div></li>
 <li>take operator <code>#</code> can be used to pull first n or last n rows from table</li>
 <li>similarly drop operator <code>_</code> can be used</li>
 </ul>
-<pre><code class="language-q">q)2#t
-a b
----
-1 4
-2 5
-q)-2#t
-a b
----
-2 5
-3 6
-q)1 _ t
-a b
----
-2 5
-3 6
-q)-1 _ t
-a b
----
-1 4
-2 5
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)2#t
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>a b
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>---
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>1 4
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>2 5
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>q)-2#t
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>a b
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>---
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>2 5
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>3 6
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>q)1 _ t
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>a b
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>---
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>2 5
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>3 6
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>q)-1 _ t
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>a b
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>---
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>1 4
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>2 5
+</code></pre></div>
 <h2 id="table-lookup">Table lookup</h2>
 <ul>
 <li>we can lookup using find operator</li>
 <li>we can also find using list(row values) in a table</li>
 </ul>
-<pre><code class="language-q">q)t2:([]a: 1 2 3; b: 4 5 6; c: 7 8 9)
-q)t2
-a b c
------
-1 4 7
-2 5 8
-3 6 9
-q)t2?`a`b`c!3 6 9
-2
-q)t2?3 6 9
-2
-q)t2?(2 5 8; 3 6 9)
-1 2
-q)t2?([]a:1 2; b:4 5; c:7 8)
-0 1
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)t2:([]a: 1 2 3; b: 4 5 6; c: 7 8 9)
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>q)t2
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>a b c
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>-----
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>1 4 7
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>2 5 8
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>3 6 9
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>q)t2?`a`b`c!3 6 9
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>2
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>q)t2?3 6 9
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>2
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>q)t2?(2 5 8; 3 6 9)
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>1 2
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>q)t2?([]a:1 2; b:4 5; c:7 8)
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>0 1
+</code></pre></div>
 <h2 id="table-arithmetic">Table arithmetic</h2>
 <ul>
 <li>we can perform arithmetic operations on keyed tables</li>
 <li>operation will be performed for matching keys and rest will remain unchanged</li>
 </ul>
-<pre><code class="language-q">q)kt1:([ks:`a`b`c] v1: 1 2 3; v2: 10 11 12)
-q)kt2:([ks:`b`c`e] v1: 20 30 40; v2: 100 101 102)
-q)kt1+kt2
-ks| v1 v2
---| ------
-a | 1  10
-b | 22 111
-c | 33 113
-e | 40 102
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)kt1:([ks:`a`b`c] v1: 1 2 3; v2: 10 11 12)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>q)kt2:([ks:`b`c`e] v1: 20 30 40; v2: 100 101 102)
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>q)kt1+kt2
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>ks| v1 v2
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>--| ------
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>a | 1  10
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>b | 22 111
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>c | 33 113
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>e | 40 102
+</code></pre></div>
 
               
             </article>

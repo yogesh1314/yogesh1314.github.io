@@ -1214,285 +1214,268 @@
 <p>If <code>x</code> is a data structure, <code>x[y]</code> means 'Index' </p>
 </li>
 </ul>
-<pre><code class="language-q">q)x
-8 1 9 5 4 6 6 1 8 5
-q)x[3]
-5
-</code></pre>
-<ul>
-<li>If <code>f</code> is a function, <code>f[y]</code> means 'Apply':</li>
-</ul>
-<pre><code class="language-q">q)f
-{(x*2)+5}
-q)f[3]
-11
-</code></pre>
-<ul>
-<li><code>@</code> and <code>.</code> provides more powerful, flexible and alternatives to square bracket notation</li>
-<li><code>@</code> is used for single-dimensional lists </li>
-<li><code>.</code> is used for nested lists </li>
-</ul>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)x
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>8 1 9 5 4 6 6 1 8 5
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>q)x[3]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>5
+</code></pre></div>
+* If <code>f</code> is a function, <code>f[y]</code> means 'Apply':</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)f
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>{(x*2)+5}
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q)f[3]
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>11
+</code></pre></div>
+* <code>@</code> and <code>.</code> provides more powerful, flexible and alternatives to square bracket notation
+* <code>@</code> is used for single-dimensional lists 
+* <code>.</code> is used for nested lists </p>
 <h2 id="index-using-and">Index using <code>@</code> and <code>.</code></h2>
 <ul>
-<li>If list is single-dimensional list and index is 2:</li>
+<li>If list is single-dimensional list and index is 2:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)list
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>4 9 2 7 0 1 9 2 1 8
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>q)index: 2
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>q)list[index]
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>2
+</code></pre></div>
+then same can be acheived using <code>@</code> operator as:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)@[list;index]
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>2
+</code></pre></div></li>
+<li>If list is nested list and row is 1 and column is 2:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)list
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>1 2 3
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>4 5
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>6 7
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>q)row:0
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>q)column:1
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>q)list[row][column]
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>2
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>q)list[row;column]
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>2
+</code></pre></div>
+then same can be acheived using <code>.</code> operator as: 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q).[list;(row;column)]
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>2
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>q).[list;0 1]
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>2
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)list
-4 9 2 7 0 1 9 2 1 8
-q)index: 2
-q)list[index]
-2
-</code></pre>
-<p>then same can be acheived using <code>@</code> operator as:</p>
-<pre><code class="language-q">q)@[list;index]
-2
-</code></pre>
-<ul>
-<li>If list is nested list and row is 1 and column is 2:</li>
-</ul>
-<pre><code class="language-q">q)list
-1 2 3
-4 5
-6 7
-q)row:0
-q)column:1
-q)list[row][column]
-2
-q)list[row;column]
-2
-</code></pre>
-<p>then same can be acheived using <code>.</code> operator as: </p>
-<pre><code class="language-q">q).[list;(row;column)]
-2
-q).[list;0 1]
-2
-</code></pre>
 <h2 id="amendapply-using">Amend/Apply using <code>@</code></h2>
 <ul>
 <li>Previously we used <code>:</code> operator to amend items in a single-dimensional list</li>
 </ul>
-<pre><code class="language-q">q)list
-&quot;ABCDE&quot;
-q)list[2]:&quot;Z&quot;
-q)list
-&quot;ABZDE&quot;
-</code></pre>
-<ul>
-<li>Same can be acheived using <code>@</code> for single-dimensional list, however we need to give list name as symbol for changes to be permanent</li>
-</ul>
-<pre><code class="language-q">q)list
-&quot;ABZDE&quot;
-q)@[list;2;:;&quot;K&quot;]
-&quot;ABKDE&quot;
-q)list
-&quot;ABZDE&quot;
-q)@[`list;2;:;&quot;K&quot;]
-`list
-q)list
-&quot;ABKDE&quot;
-</code></pre>
-<ul>
-<li>we can also apply mathematical operator to list</li>
-</ul>
-<pre><code class="language-q">q)list
-4 9 2 7 0 1 9 2 1 8
-q)@[list;3;+;66]
-4 9 2 73 0 1 9 2 1 8
-q)list:(8 4 3;9 8 76;7 8)
-q)list
-8 4 3
-9 8 76
-7 8
-q).[list;1 2;+;100]
-8 4 3
-9 8 176
-7 8
-
-</code></pre>
-<ul>
-<li>we can also update more than 1 item in the list</li>
-</ul>
-<pre><code class="language-q">q)list
-4 9 2 7 0 1 9 2 1 8
-q)@[list;0 1 2;:;44 55 66]
-44 55 66 7 0 1 9 2 1 8
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)list
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>&quot;ABCDE&quot;
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>q)list[2]:&quot;Z&quot;
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>q)list
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>&quot;ABZDE&quot;
+</code></pre></div>
+* Same can be acheived using <code>@</code> for single-dimensional list, however we need to give list name as symbol for changes to be permanent
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)list
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>&quot;ABZDE&quot;
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>q)@[list;2;:;&quot;K&quot;]
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>&quot;ABKDE&quot;
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>q)list
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>&quot;ABZDE&quot;
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>q)@[`list;2;:;&quot;K&quot;]
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>`list
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>q)list
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>&quot;ABKDE&quot;
+</code></pre></div>
+* we can also apply mathematical operator to list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)list
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>4 9 2 7 0 1 9 2 1 8
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>q)@[list;3;+;66]
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>4 9 2 73 0 1 9 2 1 8
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>q)list:(8 4 3;9 8 76;7 8)
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>q)list
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>8 4 3
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>9 8 76
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>7 8
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>q).[list;1 2;+;100]
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>8 4 3
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>9 8 176
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>7 8
+</code></pre></div>
+* we can also update more than 1 item in the list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)list
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>4 9 2 7 0 1 9 2 1 8
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>q)@[list;0 1 2;:;44 55 66]
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>44 55 66 7 0 1 9 2 1 8
+</code></pre></div></p>
 <h2 id="vs"><code>@</code> vs <code>[]</code></h2>
 <ul>
 <li>square brackets are easy to read for simple use cases, but there are cases where <code>@</code> can be used where <code>[]</code> cannot</li>
-<li><code>[]</code> can only be used with named variables but <code>@</code> can be used without named variables, it can also be used with result of previous operation</li>
+<li><code>[]</code> can only be used with named variables but <code>@</code> can be used without named variables, it can also be used with result of previous operation
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)@[0000b;2;:;1b]
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>0010b
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>q)@[10#.Q.A;2;:;&quot;H&quot;]
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>&quot;ABHDEFGHIJ&quot;
+</code></pre></div></li>
+<li><code>@</code> has a wider range of operations - square bracket allows us to append to a dictionary item
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q)d:(`a`b`c)!(1 2;3 4 5;6 7 8 9)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>q)d
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>a| 1 2
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>b| 3 4 5
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>c| 6 7 8 9
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>q)d[`c],:10
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>q)d
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>a| 1 2
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>b| 3 4 5
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>c| 6 7 8 9 10
+</code></pre></div>
+but <code>@</code> also allows us to prepend
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q)d
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>a| 1 2
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>b| 3 4 5
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>c| 6 7 8 9 10
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>q)@[d;`c]
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>6 7 8 9 10
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>q)@[d;`c;{y,x};55]
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>a| 1 2
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>b| 3 4 5
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>c| 55 6 7 8 9 10
+</code></pre></div></li>
+<li>
+<p>we can use <code>@</code>  with non-dyadic operators
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q)@[&quot;avcdf&quot;;4;upper]
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>&quot;avcdF&quot;
+</code></pre></div></p>
+</li>
+<li>
+<p>to use a function taking more than 2 arguments, we create a monadic projection by fixing the other arguments inside the 3rd part of <code>@</code> expression
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)applyInterest:{[x;nperiods;rate] nperiods{x*1+y%100}[;rate]/x}
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>q)account:`ram`bheem!12.33 2033.56
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>q)account
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>ram  | 12.33
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>bheem| 2033.56
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>q)@[account;`bheem;applyInterest[;2;5.5]] // fix nperiods to 2 and rate to 5.5
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>ram  | 12.33
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>bheem| 2263.403
+</code></pre></div></p>
+</li>
 </ul>
-<pre><code>q)@[0000b;2;:;1b]
-0010b
-q)@[10#.Q.A;2;:;&quot;H&quot;]
-&quot;ABHDEFGHIJ&quot;
-</code></pre>
-<ol>
-<li><code>@</code> has a wider range of operations - square bracket allows us to append to a dictionary item</li>
-</ol>
-<pre><code>q)d:(`a`b`c)!(1 2;3 4 5;6 7 8 9)
-q)d
-a| 1 2
-b| 3 4 5
-c| 6 7 8 9
-q)d[`c],:10
-q)d
-a| 1 2
-b| 3 4 5
-c| 6 7 8 9 10
-</code></pre>
-<p>but <code>@</code> also allows us to prepend</p>
-<pre><code>q)d
-a| 1 2
-b| 3 4 5
-c| 6 7 8 9 10
-q)@[d;`c]
-6 7 8 9 10
-q)@[d;`c;{y,x};55]
-a| 1 2
-b| 3 4 5
-c| 55 6 7 8 9 10
-</code></pre>
-<ol>
-<li>we can use <code>@</code>  with non-dyadic operators</li>
-</ol>
-<pre><code>q)@[&quot;avcdf&quot;;4;upper]
-&quot;avcdF&quot;
-</code></pre>
-<ul>
-<li>to use a function taking more than 2 arguments, we create a monadic projection by fixing the other arguments inside the 3rd part of <code>@</code> expression</li>
-</ul>
-<pre><code>q)applyInterest:{[x;nperiods;rate] nperiods{x*1+y%100}[;rate]/x}
-q)account:`ram`bheem!12.33 2033.56
-q)account
-ram  | 12.33
-bheem| 2033.56
-q)@[account;`bheem;applyInterest[;2;5.5]] // fix nperiods to 2 and rate to 5.5
-ram  | 12.33
-bheem| 2263.403
-</code></pre>
 <h2 id="advanced-use-of-index">Advanced use of <code>@</code> index</h2>
 <ul>
 <li>Setup 2 structures:</li>
 <li>l is a mixed list of symbols and integers</li>
 <li>m is a mapping of symbol to integers</li>
-<li>we can apply the mapping at the indexes of the symbols</li>
+<li>we can apply the mapping at the indexes of the symbols
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)l: (`a;1;2;`b;5;90)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>q)l
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>`a
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>1
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>2
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>`b
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>5
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>90
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>q)m:`a`b!500 600
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>q)m
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>a| 500
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>b| 600
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>q)@[l; where -11=type each l;m]
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>500 1 2 600 5 90
+</code></pre></div></li>
 </ul>
-<pre><code>q)l: (`a;1;2;`b;5;90)
-q)l
-`a
-1
-2
-`b
-5
-90
-q)m:`a`b!500 600
-q)m
-a| 500
-b| 600
-q)@[l; where -11=type each l;m]
-500 1 2 600 5 90
-</code></pre>
 <h2 id="using-with-database-tables">Using <code>.</code> with database tables</h2>
 <ul>
-<li>we can use <code>.</code> to index into a table</li>
+<li>
+<p>we can use <code>.</code> to index into a table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q)t:([sym:`MSFT`IBM] prc: 10.29 24.66; size: 100 200)
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>q)t
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>sym | prc   size
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>----| ----------
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>MSFT| 10.29 100
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>IBM | 24.66 200
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>q).[t;(`MSFT;`prc)]
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>10.29
+</code></pre></div></p>
+</li>
+<li>
+<p><code>.</code> also allows us to update entire object at once by passing an empty set of indexes - this allows us to amend each element of the list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>q)list:(1 2;3 4 5;6 7 8 9)
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>q)list
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>1 2
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>3 4 5
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>6 7 8 9
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>q).[list;();+;90]
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>91 92
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>93 94 95
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>96 97 98 99
+</code></pre></div></p>
+</li>
 </ul>
-<pre><code class="language-q">q)t:([sym:`MSFT`IBM] prc: 10.29 24.66; size: 100 200)
-q)t
-sym | prc   size
-----| ----------
-MSFT| 10.29 100
-IBM | 24.66 200
-q).[t;(`MSFT;`prc)]
-10.29
-</code></pre>
-<ul>
-<li><code>.</code> also allows us to update entire object at once by passing an empty set of indexes - this allows us to amend each element of the list</li>
-</ul>
-<pre><code>q)list:(1 2;3 4 5;6 7 8 9)
-q)list
-1 2
-3 4 5
-6 7 8 9
-q).[list;();+;90]
-91 92
-93 94 95
-96 97 98 99
-</code></pre>
 <h2 id="convert-to">Convert <code>@</code> to <code>.</code></h2>
 <ul>
-<li>we can convert an <code>@</code> statement to <code>.</code> statement as <code>@</code> is a speacial case of <code>.</code></li>
+<li>we can convert an <code>@</code> statement to <code>.</code> statement as <code>@</code> is a speacial case of <code>.</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>q)list
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>1 2
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>3 4 5
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>6 7 8 9
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>q)f
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>{2*x}
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>q)@[list;1;f]
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>1 2
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>6 8 10
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>6 7 8 9
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>q).[list;enlist 1;f]
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>1 2
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>6 8 10
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>6 7 8 9
+</code></pre></div></li>
 </ul>
-<pre><code>q)list
-1 2
-3 4 5
-6 7 8 9
-q)f
-{2*x}
-q)@[list;1;f]
-1 2
-6 8 10
-6 7 8 9
-q).[list;enlist 1;f]
-1 2
-6 8 10
-6 7 8 9
-</code></pre>
 <h2 id="apply-using-and">Apply using <code>@</code> and <code>.</code></h2>
 <ul>
 <li>we have seen that when <code>f</code> is a function then <code>f[x]</code> means apply</li>
-<li><code>[]</code> can be replaced with <code>@</code> (for single argument)and <code>.</code> (for multiple arguments)</li>
+<li><code>[]</code> can be replaced with <code>@</code> (for single argument)and <code>.</code> (for multiple arguments)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>q)f
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>{2*x}
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>q)f[2]
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>4
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>q)@[f;2]
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>4
+</code></pre></div></li>
+<li>Let's say we have list of lists with varying length and we want to flip it into a table - we can't do it straight away as lenghts are not same
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>q)list:(1 2 3;4 5 ; 7 8 9 0)
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>q)list
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>1 2 3
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>4 5
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>7 8 9 0
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>q)flip `a`b`c!list
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>&#39;length
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>  [0]  flip `a`b`c!list
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>       ^
+</code></pre></div></li>
+<li>instead we can use <code>@</code> to fill the lists with <code>0N</code> to make them of same lenght and then flip it into a table 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>q)@[max[c]#0N;;:;]&#39;[til each c:count each list;list]
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>1 2 3
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>4 5
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>7 8 9 0
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>q)flip `a`b`c!@[max[c]#0N;;:;]&#39;[til each c:count each list;list]
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>a b c
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>-----
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>1 4 7
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>2 5 8
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>3   9
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    0
+</code></pre></div></li>
 </ul>
-<pre><code>q)f
-{2*x}
-q)f[2]
-4
-q)@[f;2]
-4
-</code></pre>
-<ul>
-<li>Let's say we have list of lists with varying length and we want to flip it into a table - we can't do it straight away as lenghts are not same</li>
-</ul>
-<pre><code>q)list:(1 2 3;4 5 ; 7 8 9 0)
-q)list
-1 2 3
-4 5
-7 8 9 0
-q)flip `a`b`c!list
-'length
-  [0]  flip `a`b`c!list
-       ^
-</code></pre>
-<ul>
-<li>instead we can use <code>@</code> to fill the lists with <code>0N</code> to make them of same lenght and then flip it into a table </li>
-</ul>
-<pre><code>q)@[max[c]#0N;;:;]'[til each c:count each list;list]
-1 2 3
-4 5
-7 8 9 0
-q)flip `a`b`c!@[max[c]#0N;;:;]'[til each c:count each list;list]
-a b c
------
-1 4 7
-2 5 8
-3   9
-    0
-</code></pre>
 <h2 id="using-on-database-tables">Using <code>@</code> on database tables</h2>
 <ul>
-<li>we can use <code>@</code> as simple version of functional select - here column name is used as symbol so it can be passed programatically</li>
+<li>we can use <code>@</code> as simple version of functional select - here column name is used as symbol so it can be passed programatically
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>q) @[select from trades where sym=`AAPL;`size;sums]
+</code></pre></div></li>
 </ul>
-<pre><code>q) @[select from trades where sym=`AAPL;`size;sums]
-</code></pre>
 <h2 id="error-trapping">Error trapping</h2>
-<pre><code>q)f
-{2*x}
-q)g
-{x*y}
-q)@[f;&quot;ABC&quot;;{-2 &quot;Error: &quot;,x;}]
-Error: type
-q).[g;(&quot;ABC&quot;;5);{-2 &quot;Error: &quot;,x;}]
-Error: type
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>q)f
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>{2*x}
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>q)g
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>{x*y}
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>q)@[f;&quot;ABC&quot;;{-2 &quot;Error: &quot;,x;}]
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>Error: type
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>q).[g;(&quot;ABC&quot;;5);{-2 &quot;Error: &quot;,x;}]
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>Error: type
+</code></pre></div>
 
               
             </article>

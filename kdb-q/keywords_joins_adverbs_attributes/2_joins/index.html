@@ -1151,460 +1151,439 @@
 
 
 <h1 id="joins">Joins</h1>
-<pre><code>q)// setup
-q)\l 2_where_clause_fakedb.q
-USAGE: makedb[NUM QUOTES;NUM TRADES] eg makedb[100000;10000]
-
-makedb1[NUM QUOTES;NUM TRADES;DATE;RANDOMISED COUNT FACTOR] eg makedb1[100000;10000;.z.d;.3]
-
-makehdb[HDBDIR;NUM DAYS;APPROXIMATE NUM QUOTES PER DAY; APPROXIMATE NUM TRADES PER DAY] eg makehdb[`:hdb; 5; 100000; 10000]
-
-makecsv[CSVDIR;NUM DAYS;NUM QUOTES;NUM TRADES]
-
-q)makedb[1000;1000]
-q)tables[]
-`depth`quotes`trades
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)// setup
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)\l 2_where_clause_fakedb.q
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>USAGE: makedb[NUM QUOTES;NUM TRADES] eg makedb[100000;10000]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>makedb1[NUM QUOTES;NUM TRADES;DATE;RANDOMISED COUNT FACTOR] eg makedb1[100000;10000;.z.d;.3]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>makehdb[HDBDIR;NUM DAYS;APPROXIMATE NUM QUOTES PER DAY; APPROXIMATE NUM TRADES PER DAY] eg makehdb[`:hdb; 5; 100000; 10000]
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>makecsv[CSVDIR;NUM DAYS;NUM QUOTES;NUM TRADES]
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>q)makedb[1000;1000]
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>q)tables[]
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>`depth`quotes`trades
+</code></pre></div>
 <h2 id="vertical-join">Vertical Join <code>,</code></h2>
 <ul>
-<li>used to append 1 table at the end of another table</li>
+<li>used to append 1 table at the end of another table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)t1:5#trades
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)t2:-5#trades
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q)t1,t2
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>time                          sym  src price size
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>-------------------------------------------------
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>2020.12.26D16:28:13.574000000 GOOG L   41.42 746
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>2020.12.26D16:28:51.196000000 NOK  N   31.77 147
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>2020.12.26D16:28:56.993000000 CSCO O   35.51 6233
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>2020.12.26D16:29:05.901000000 AAPL L   25.32 64
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>2020.12.26D16:29:38.453000000 NOK  N   31.81 307
+</code></pre></div></li>
+<li>columns of the 2 tables must match
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)t1,5#quotes
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&#39;mismatch
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  [0]  t1,5#quotes
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>         ^
+</code></pre></div></li>
+<li>if we want to append subset of columns to table we must use <code>,:</code> (join in-place) which will fill missing values with null
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)t1,5#select time, sym, price from trades
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&#39;mismatch
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  [0]  t1,5#select time, sym, price from trades
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>         ^
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>q)t1,:5#select time, sym, price from trades
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>q)t1
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>time                          sym  src price size
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>-------------------------------------------------
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>2020.12.26D08:00:13.099000000 IBM      43.52
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>2020.12.26D08:00:39.491000000 CSCO     35.45
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>2020.12.26D08:01:46.279000000 AAPL     25.34
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>2020.12.26D08:02:09.670000000 AAPL     25.37
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>2020.12.26D08:02:31.911000000 ORCL     32.25
+</code></pre></div></li>
+<li>if we want to add single row of data, then also we must use join in-place(<code>,:</code>)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)t1,(.z.p;`GOOG;`N;45.55;098)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>`time`sym`src`price`size!(2020.12.26D08:00:13.099000000;`IBM;`N;43.52;326i)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>`time`sym`src`price`size!(2020.12.26D08:00:39.491000000;`CSCO;`L;35.45;2382i)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>`time`sym`src`price`size!(2020.12.26D08:01:46.279000000;`AAPL;`O;25.34;211i)
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>`time`sym`src`price`size!(2020.12.26D08:02:09.670000000;`AAPL;`L;25.37;8077i)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>`time`sym`src`price`size!(2020.12.26D08:02:31.911000000;`ORCL;`L;32.25;5730i)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>`time`sym`src`price`size!(2020.12.26D08:00:13.099000000;`IBM;`;43.52;0Ni)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>`time`sym`src`price`size!(2020.12.26D08:00:39.491000000;`CSCO;`;35.45;0Ni)
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>`time`sym`src`price`size!(2020.12.26D08:01:46.279000000;`AAPL;`;25.34;0Ni)
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>`time`sym`src`price`size!(2020.12.26D08:02:09.670000000;`AAPL;`;25.37;0Ni)
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>`time`sym`src`price`size!(2020.12.26D08:02:31.911000000;`ORCL;`;32.25;0Ni)
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>2020.12.26D09:12:37.087587000
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>`GOOG
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>`N
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>45.55
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>98
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>q)t1,:(.z.p;`GOOG;`N;45.55;098)
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>q)t1
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>time                          sym  src price size
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>-------------------------------------------------
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>2020.12.26D08:00:13.099000000 IBM      43.52
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>2020.12.26D08:00:39.491000000 CSCO     35.45
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>2020.12.26D08:01:46.279000000 AAPL     25.34
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>2020.12.26D08:02:09.670000000 AAPL     25.37
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>2020.12.26D08:02:31.911000000 ORCL     32.25
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>2020.12.26D09:12:41.729632000 GOOG N   45.55 98
+</code></pre></div></li>
 </ul>
-<pre><code>q)t1:5#trades
-q)t2:-5#trades
-q)t1,t2
-time                          sym  src price size
--------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
-2020.12.26D16:28:13.574000000 GOOG L   41.42 746
-2020.12.26D16:28:51.196000000 NOK  N   31.77 147
-2020.12.26D16:28:56.993000000 CSCO O   35.51 6233
-2020.12.26D16:29:05.901000000 AAPL L   25.32 64
-2020.12.26D16:29:38.453000000 NOK  N   31.81 307
-</code></pre>
-<ul>
-<li>columns of the 2 tables must match</li>
-</ul>
-<pre><code>q)t1,5#quotes
-'mismatch
-  [0]  t1,5#quotes
-         ^
-</code></pre>
-<ul>
-<li>if we want to append subset of columns to table we must use <code>,:</code> (join in-place) which will fill missing values with null</li>
-</ul>
-<pre><code>q)t1,5#select time, sym, price from trades
-'mismatch
-  [0]  t1,5#select time, sym, price from trades
-         ^
-q)t1,:5#select time, sym, price from trades
-q)t1
-time                          sym  src price size
--------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
-2020.12.26D08:00:13.099000000 IBM      43.52
-2020.12.26D08:00:39.491000000 CSCO     35.45
-2020.12.26D08:01:46.279000000 AAPL     25.34
-2020.12.26D08:02:09.670000000 AAPL     25.37
-2020.12.26D08:02:31.911000000 ORCL     32.25
-</code></pre>
-<ul>
-<li>if we want to add single row of data, then also we must use join in-place(<code>,:</code>)</li>
-</ul>
-<pre><code>q)t1,(.z.p;`GOOG;`N;45.55;098)
-`time`sym`src`price`size!(2020.12.26D08:00:13.099000000;`IBM;`N;43.52;326i)
-`time`sym`src`price`size!(2020.12.26D08:00:39.491000000;`CSCO;`L;35.45;2382i)
-`time`sym`src`price`size!(2020.12.26D08:01:46.279000000;`AAPL;`O;25.34;211i)
-`time`sym`src`price`size!(2020.12.26D08:02:09.670000000;`AAPL;`L;25.37;8077i)
-`time`sym`src`price`size!(2020.12.26D08:02:31.911000000;`ORCL;`L;32.25;5730i)
-`time`sym`src`price`size!(2020.12.26D08:00:13.099000000;`IBM;`;43.52;0Ni)
-`time`sym`src`price`size!(2020.12.26D08:00:39.491000000;`CSCO;`;35.45;0Ni)
-`time`sym`src`price`size!(2020.12.26D08:01:46.279000000;`AAPL;`;25.34;0Ni)
-`time`sym`src`price`size!(2020.12.26D08:02:09.670000000;`AAPL;`;25.37;0Ni)
-`time`sym`src`price`size!(2020.12.26D08:02:31.911000000;`ORCL;`;32.25;0Ni)
-2020.12.26D09:12:37.087587000
-`GOOG
-`N
-45.55
-98
-q)t1,:(.z.p;`GOOG;`N;45.55;098)
-q)t1
-time                          sym  src price size
--------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
-2020.12.26D08:00:13.099000000 IBM      43.52
-2020.12.26D08:00:39.491000000 CSCO     35.45
-2020.12.26D08:01:46.279000000 AAPL     25.34
-2020.12.26D08:02:09.670000000 AAPL     25.37
-2020.12.26D08:02:31.911000000 ORCL     32.25
-2020.12.26D09:12:41.729632000 GOOG N   45.55 98
-</code></pre>
 <h2 id="horizontal-join">Horizontal Join <code>,'</code></h2>
 <ul>
 <li>join each</li>
-<li>it adds extra columns to the right of existing table</li>
+<li>it adds extra columns to the right of existing table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)flip (enlist `side)!enlist 1000?`buy`sell  // created new column side
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>side
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>----
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>sell
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>buy
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>sell
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>sell
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>sell
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>..
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>q)trades,&#39;flip (enlist `side)!enlist 1000?`buy`sell
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>time                          sym  src price size side
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>------------------------------------------------------
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326  sell
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 buy
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211  buy
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077 buy
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 sell
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>..
+</code></pre></div></li>
+<li>two table must have same number of rows, otherwise we would get <code>'length</code> error
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)count flip (enlist `side)!enlist 50?`buy`sell
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>50
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>q)trades,&#39;flip (enlist `side)!enlist 50?`buy`sell
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>&#39;length
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  [0]  trades,&#39;flip (enlist `side)!enlist 50?`buy`sell
+</code></pre></div></li>
 </ul>
-<pre><code>q)flip (enlist `side)!enlist 1000?`buy`sell  // created new column side
-side
-----
-sell
-buy
-sell
-sell
-sell
-..
-q)trades,'flip (enlist `side)!enlist 1000?`buy`sell
-time                          sym  src price size side
-------------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326  sell
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 buy
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211  buy
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077 buy
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 sell
-..
-</code></pre>
-<ul>
-<li>two table must have same number of rows, otherwise we would get <code>'length</code> error</li>
-</ul>
-<pre><code>q)count flip (enlist `side)!enlist 50?`buy`sell
-50
-q)trades,'flip (enlist `side)!enlist 50?`buy`sell
-'length
-  [0]  trades,'flip (enlist `side)!enlist 50?`buy`sell
-
-</code></pre>
 <h2 id="left-join-lj">Left Join <code>lj</code></h2>
 <ul>
 <li>joins 2 tables on the keyed columns of the right hand table</li>
 <li>right hand table must be a keyed table</li>
-<li>this can be used to add static data to a table</li>
+<li>this can be used to add static data to a table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)voltrades:select vol:sum size by sym from trades
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>q)voltrades
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>sym | vol
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>----| ------
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>AAPL| 272375
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>CSCO| 295679
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>DELL| 274055
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>GOOG| 207724
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>IBM | 400192
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>..
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>q)trades lj voltrades
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>time                          sym  src price size vol
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>--------------------------------------------------------
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 295679
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211  272375
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077 272375
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>..
+</code></pre></div></li>
+<li>if keyed table doesnt have values for each keyed column in left hand side table, then null data will be added for missing keys
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)1_voltrades
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sym | vol
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>----| ------
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>CSCO| 295679
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>DELL| 274055
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>GOOG| 207724
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>IBM | 400192
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>MSFT| 330837
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>..
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>q)trades lj 1_voltrades
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>time                          sym  src price size vol
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>--------------------------------------------------------
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 295679
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>..
+</code></pre></div></li>
+<li>joins can also be made for more than 1 columns
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)voltrades2: select sum size by sym,src from trades
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>q)voltrades2
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>sym  src| size
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>--------| ------
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>AAPL L  | 110676
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>AAPL N  | 56876
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>AAPL O  | 104823
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>CSCO L  | 122109
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>CSCO N  | 75468
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>..
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>q)trades lj voltrades2
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>time                          sym  src price size
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>---------------------------------------------------
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 134448
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 122109
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 104823
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 110676
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 186353
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)voltrades:select vol:sum size by sym from trades
-q)voltrades
-sym | vol
-----| ------
-AAPL| 272375
-CSCO| 295679
-DELL| 274055
-GOOG| 207724
-IBM | 400192
-..
-q)trades lj voltrades
-time                          sym  src price size vol
---------------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 295679
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211  272375
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077 272375
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
-..
-</code></pre>
-<ul>
-<li>if keyed table doesnt have values for each keyed column in left hand side table, then null data will be added for missing keys</li>
-</ul>
-<pre><code>q)1_voltrades
-sym | vol
-----| ------
-CSCO| 295679
-DELL| 274055
-GOOG| 207724
-IBM | 400192
-MSFT| 330837
-..
-q)trades lj 1_voltrades
-time                          sym  src price size vol
---------------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 295679
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
-..
-</code></pre>
-<ul>
-<li>joins can also be made for more than 1 columns</li>
-</ul>
-<pre><code>q)voltrades2: select sum size by sym,src from trades
-q)voltrades2
-sym  src| size
---------| ------
-AAPL L  | 110676
-AAPL N  | 56876
-AAPL O  | 104823
-CSCO L  | 122109
-CSCO N  | 75468
-..
-q)trades lj voltrades2
-time                          sym  src price size
----------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 134448
-2020.12.26D08:00:39.491000000 CSCO L   35.45 122109
-2020.12.26D08:01:46.279000000 AAPL O   25.34 104823
-2020.12.26D08:02:09.670000000 AAPL L   25.37 110676
-2020.12.26D08:02:31.911000000 ORCL L   32.25 186353
-..
-</code></pre>
 <h2 id="plus-join-pj">Plus Join <code>pj</code></h2>
 <ul>
 <li>similar to a <code>left join</code></li>
 <li>it will add the values in keyed table to the corresponding values in left-hand table</li>
-<li>if the value in the left hand table has no matching value in the keyed table, it will add <code>0</code></li>
+<li>if the value in the left hand table has no matching value in the keyed table, it will add <code>0</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)trades
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>time                          sym  src price size
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>-------------------------------------------------
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>..
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>q)correction:([sym:`AAPL`GOOG] price:.5 .5; changed:1 1)
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>q)correction
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>sym | price changed
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>----| -------------
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>AAPL| 0.5   1
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>GOOG| 0.5   1
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>q)
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>q)trades pj correction
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>time                          sym  src price size changed
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>---------------------------------------------------------
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326  0
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 0
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>2020.12.26D08:01:46.279000000 AAPL O   25.84 211  1
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>2020.12.26D08:02:09.670000000 AAPL L   25.87 8077 1
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 0
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>..
+</code></pre></div></li>
+<li>values in the keyed table must be compatible with addition
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q)correction:([sym:`AAPL`GOOG] price:.5 .5; changed:`y`y)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>q)correction
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>sym | price changed
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>----| -------------
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>AAPL| 0.5   y
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>GOOG| 0.5   y
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>q)trades pj correction
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>&#39;type
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  [0]  trades pj correction
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>              ^
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>q))\
+</code></pre></div></li>
 </ul>
-<pre><code>q)trades
-time                          sym  src price size
--------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730
-..
-q)correction:([sym:`AAPL`GOOG] price:.5 .5; changed:1 1)
-q)correction
-sym | price changed
-----| -------------
-AAPL| 0.5   1
-GOOG| 0.5   1
-q)
-q)trades pj correction
-time                          sym  src price size changed
----------------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326  0
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 0
-2020.12.26D08:01:46.279000000 AAPL O   25.84 211  1
-2020.12.26D08:02:09.670000000 AAPL L   25.87 8077 1
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 0
-..
-</code></pre>
-<ul>
-<li>values in the keyed table must be compatible with addition</li>
-</ul>
-<pre><code>q)correction:([sym:`AAPL`GOOG] price:.5 .5; changed:`y`y)
-q)correction
-sym | price changed
-----| -------------
-AAPL| 0.5   y
-GOOG| 0.5   y
-q)trades pj correction
-'type
-  [0]  trades pj correction
-              ^
-q))\
-</code></pre>
 <h2 id="inner-join-ij">Inner Join <code>ij</code></h2>
 <ul>
 <li>inner join is similar to left join, however it will only return a value from left hand table if there is corresponding value in the keyed table</li>
 <li>only values present in both the table for each key are returned</li>
-<li>in left join, it would return all the rows from left table with null data joined even if there is no data in keyed table</li>
+<li>in left join, it would return all the rows from left table with null data joined even if there is no data in keyed table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q)voltrades
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sym | vol
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>----| ------
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>AAPL| 272375
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>CSCO| 295679
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>DELL| 274055
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>GOOG| 207724
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>IBM | 400192
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>..
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>q)voltrades2:2_voltrades
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>q)voltrades2
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>sym | vol
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>----| ------
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>DELL| 274055
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>GOOG| 207724
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>IBM | 400192
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>MSFT| 330837
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>NOK | 215976
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>..
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>q)count trades lj voltrades2
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>1000
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>q)count trades ij voltrades2
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>788
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>q)trades ij voltrades2
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>time                          sym  src price size vol
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>--------------------------------------------------------
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>2020.12.26D08:02:40.066000000 ORCL N   32.22 4295 337317
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>2020.12.26D08:03:00.934000000 YHOO N   35.49 5339 320482
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>2020.12.26D08:03:29.198000000 ORCL L   32.25 2629 337317
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>..
+<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>q)trades lj voltrades
+<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a>time                          sym  src price size vol
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>--------------------------------------------------------
+<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a>2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
+<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a>2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 295679
+<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a>2020.12.26D08:01:46.279000000 AAPL O   25.34 211  272375
+<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a>2020.12.26D08:02:09.670000000 AAPL L   25.37 8077 272375
+<a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a>2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
+<a id="__codelineno-12-41" name="__codelineno-12-41" href="#__codelineno-12-41"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)voltrades
-sym | vol
-----| ------
-AAPL| 272375
-CSCO| 295679
-DELL| 274055
-GOOG| 207724
-IBM | 400192
-..
-q)voltrades2:2_voltrades
-q)voltrades2
-sym | vol
-----| ------
-DELL| 274055
-GOOG| 207724
-IBM | 400192
-MSFT| 330837
-NOK | 215976
-..
-q)count trades lj voltrades2
-1000
-q)count trades ij voltrades2
-788
-q)trades ij voltrades2
-time                          sym  src price size vol
---------------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
-2020.12.26D08:02:40.066000000 ORCL N   32.22 4295 337317
-2020.12.26D08:03:00.934000000 YHOO N   35.49 5339 320482
-2020.12.26D08:03:29.198000000 ORCL L   32.25 2629 337317
-..
-q)trades lj voltrades
-time                          sym  src price size vol
---------------------------------------------------------
-2020.12.26D08:00:13.099000000 IBM  N   43.52 326  400192
-2020.12.26D08:00:39.491000000 CSCO L   35.45 2382 295679
-2020.12.26D08:01:46.279000000 AAPL O   25.34 211  272375
-2020.12.26D08:02:09.670000000 AAPL L   25.37 8077 272375
-2020.12.26D08:02:31.911000000 ORCL L   32.25 5730 337317
-..
-</code></pre>
 <h2 id="union-join-uj">Union Join <code>uj</code></h2>
-<pre><code>q) // setup
-q)\l 2_where_clause_fakedb.q
-q)makedb[10000;1000]
-q)tables[]
-`depth`quotes`trades
-q)count trades
-1000
-q)count quotes
-10000
-</code></pre>
-<ul>
-<li>can be keyed and unkeyed as well</li>
-<li><strong>unkeyed</strong> - it will return a super set of all rows and all columns of both tables - missing values are filled with nulls</li>
-</ul>
-<pre><code>q)t1:5#trades
-q)t2:5#quotes
-q)t1
-time                          sym  src price size
--------------------------------------------------
-2020.12.26D08:00:17.350000000 CSCO N   35.46 2367
-2020.12.26D08:00:30.245000000 DELL N   29.05 27
-2020.12.26D08:01:40.842000000 AAPL L   25.37 2797
-2020.12.26D08:02:11.579000000 CSCO L   35.46 1714
-2020.12.26D08:02:12.246000000 YHOO N   35.5  166
-q)t2
-time                          sym  src bid   ask   bsize asize
---------------------------------------------------------------
-2020.12.26D08:00:02.809000000 MSFT L   36.08 36.09 8000  7500
-2020.12.26D08:00:09.282000000 MSFT O   36.06 36.09 5500  8000
-2020.12.26D08:00:10.075000000 IBM  N   43.52 43.53 2500  4000
-2020.12.26D08:00:10.646000000 YHOO L   35.49 35.5  7500  4500
-2020.12.26D08:00:11.107000000 DELL N   29.05 29.09 2000  6000
-q)t1 uj t2
-time                          sym  src price size bid   ask   bsize asize
--------------------------------------------------------------------------
-2020.12.26D08:00:17.350000000 CSCO N   35.46 2367
-2020.12.26D08:00:30.245000000 DELL N   29.05 27
-2020.12.26D08:01:40.842000000 AAPL L   25.37 2797
-2020.12.26D08:02:11.579000000 CSCO L   35.46 1714
-2020.12.26D08:02:12.246000000 YHOO N   35.5  166
-2020.12.26D08:00:02.809000000 MSFT L              36.08 36.09 8000  7500
-2020.12.26D08:00:09.282000000 MSFT O              36.06 36.09 5500  8000
-2020.12.26D08:00:10.075000000 IBM  N              43.52 43.53 2500  4000
-2020.12.26D08:00:10.646000000 YHOO L              35.49 35.5  7500  4500
-2020.12.26D08:00:11.107000000 DELL N              29.05 29.09 2000  6000
-</code></pre>
-<ul>
-<li><strong>keyed</strong> - rows from the left keyed table are updated with matches from right keyed table - if no match is found, then null data is added</li>
-<li>can be useful which are keyed by time</li>
-<li>example - we have table which has average mid price bucketed by 5 minute buckets</li>
-</ul>
-<pre><code>q)tq: select avg .5*bid+ask by 5 xbar time.minute from quotes
-q)tt: select avg price by 5 xbar time.minute from trades where sym=`IBM
-q)tq
-minute| x
-------| --------
-08:00 | 33.93856
-08:05 | 35.3704
-08:10 | 35.56701
-08:15 | 34.212
-08:20 | 33.9723
-08:25 | 35.0075
-08:30 | 34.20413
-08:35 | 34.81067
-08:40 | 35.19892
-08:45 | 33.94478
-08:50 | 35.65367
-08:55 | 33.19094
-09:00 | 35.1866
-09:05 | 34.21341
-09:10 | 34.51582
-09:15 | 34.58091
-09:20 | 34.29382
-09:25 | 33.81271
-09:30 | 33.77884
-09:35 | 34.51159
-..
-q)tt
-minute| price
-------| --------
-08:00 | 43.56333
-08:10 | 43.55
-08:15 | 43.54
-08:20 | 43.56
-08:30 | 43.7
-08:35 | 43.62
-08:40 | 43.63
-08:50 | 43.56
-09:05 | 43.515
-09:15 | 43.43
-09:25 | 43.42
-09:30 | 43.49333
-09:35 | 43.5
-09:40 | 43.495
-09:45 | 43.49
-09:50 | 43.52
-09:55 | 43.585
-10:10 | 43.57
-10:15 | 43.57
-10:25 | 43.515
-..
-q)tq uj tt
-minute| x        price
-------| -----------------
-08:00 | 33.93856 43.56333
-08:05 | 35.3704
-08:10 | 35.56701 43.55
-08:15 | 34.212   43.54
-08:20 | 33.9723  43.56
-08:25 | 35.0075
-08:30 | 34.20413 43.7
-08:35 | 34.81067 43.62
-08:40 | 35.19892 43.63
-08:45 | 33.94478
-08:50 | 35.65367 43.56
-08:55 | 33.19094
-09:00 | 35.1866
-09:05 | 34.21341 43.515
-09:10 | 34.51582
-09:15 | 34.58091 43.43
-09:20 | 34.29382
-09:25 | 33.81271 43.42
-09:30 | 33.77884 43.49333
-09:35 | 34.51159 43.5
-..
-</code></pre>
-<ul>
-<li>we can fill the nulls with prev avg price if there are not trades during the bucket window</li>
-</ul>
-<pre><code>q)fills tq uj tt
-minute| x        price
-------| -----------------
-08:00 | 33.93856 43.56333
-08:05 | 35.3704  43.56333
-08:10 | 35.56701 43.55
-08:15 | 34.212   43.54
-08:20 | 33.9723  43.56
-08:25 | 35.0075  43.56
-08:30 | 34.20413 43.7
-08:35 | 34.81067 43.62
-08:40 | 35.19892 43.63
-08:45 | 33.94478 43.63
-08:50 | 35.65367 43.56
-08:55 | 33.19094 43.56
-09:00 | 35.1866  43.56
-09:05 | 34.21341 43.515
-09:10 | 34.51582 43.515
-09:15 | 34.58091 43.43
-09:20 | 34.29382 43.43
-09:25 | 33.81271 43.42
-09:30 | 33.77884 43.49333
-09:35 | 34.51159 43.5
-..
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q) // setup
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>q)\l 2_where_clause_fakedb.q
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>q)makedb[10000;1000]
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>q)tables[]
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>`depth`quotes`trades
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>q)count trades
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>1000
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>q)count quotes
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>10000
+</code></pre></div>
+* can be keyed and unkeyed as well
+* <strong>unkeyed</strong> - it will return a super set of all rows and all columns of both tables - missing values are filled with nulls
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)t1:5#trades
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>q)t2:5#quotes
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>q)t1
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>time                          sym  src price size
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>-------------------------------------------------
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>2020.12.26D08:00:17.350000000 CSCO N   35.46 2367
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>2020.12.26D08:00:30.245000000 DELL N   29.05 27
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>2020.12.26D08:01:40.842000000 AAPL L   25.37 2797
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>2020.12.26D08:02:11.579000000 CSCO L   35.46 1714
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>2020.12.26D08:02:12.246000000 YHOO N   35.5  166
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>q)t2
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>time                          sym  src bid   ask   bsize asize
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>--------------------------------------------------------------
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>2020.12.26D08:00:02.809000000 MSFT L   36.08 36.09 8000  7500
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>2020.12.26D08:00:09.282000000 MSFT O   36.06 36.09 5500  8000
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>2020.12.26D08:00:10.075000000 IBM  N   43.52 43.53 2500  4000
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>2020.12.26D08:00:10.646000000 YHOO L   35.49 35.5  7500  4500
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>2020.12.26D08:00:11.107000000 DELL N   29.05 29.09 2000  6000
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>q)t1 uj t2
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>time                          sym  src price size bid   ask   bsize asize
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>-------------------------------------------------------------------------
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>2020.12.26D08:00:17.350000000 CSCO N   35.46 2367
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>2020.12.26D08:00:30.245000000 DELL N   29.05 27
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>2020.12.26D08:01:40.842000000 AAPL L   25.37 2797
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>2020.12.26D08:02:11.579000000 CSCO L   35.46 1714
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>2020.12.26D08:02:12.246000000 YHOO N   35.5  166
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>2020.12.26D08:00:02.809000000 MSFT L              36.08 36.09 8000  7500
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>2020.12.26D08:00:09.282000000 MSFT O              36.06 36.09 5500  8000
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>2020.12.26D08:00:10.075000000 IBM  N              43.52 43.53 2500  4000
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>2020.12.26D08:00:10.646000000 YHOO L              35.49 35.5  7500  4500
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>2020.12.26D08:00:11.107000000 DELL N              29.05 29.09 2000  6000
+</code></pre></div>
+* <strong>keyed</strong> - rows from the left keyed table are updated with matches from right keyed table - if no match is found, then null data is added
+* can be useful which are keyed by time
+* example - we have table which has average mid price bucketed by 5 minute buckets
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)tq: select avg .5*bid+ask by 5 xbar time.minute from quotes
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>q)tt: select avg price by 5 xbar time.minute from trades where sym=`IBM
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>q)tq
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>minute| x
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>------| --------
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>08:00 | 33.93856
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>08:05 | 35.3704
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>08:10 | 35.56701
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>08:15 | 34.212
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>08:20 | 33.9723
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>08:25 | 35.0075
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>08:30 | 34.20413
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>08:35 | 34.81067
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>08:40 | 35.19892
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>08:45 | 33.94478
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>08:50 | 35.65367
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>08:55 | 33.19094
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>09:00 | 35.1866
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>09:05 | 34.21341
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>09:10 | 34.51582
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>09:15 | 34.58091
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>09:20 | 34.29382
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>09:25 | 33.81271
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>09:30 | 33.77884
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>09:35 | 34.51159
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>..
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>q)tt
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>minute| price
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>------| --------
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>08:00 | 43.56333
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>08:10 | 43.55
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>08:15 | 43.54
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>08:20 | 43.56
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>08:30 | 43.7
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>08:35 | 43.62
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>08:40 | 43.63
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>08:50 | 43.56
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>09:05 | 43.515
+<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a>09:15 | 43.43
+<a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a>09:25 | 43.42
+<a id="__codelineno-15-41" name="__codelineno-15-41" href="#__codelineno-15-41"></a>09:30 | 43.49333
+<a id="__codelineno-15-42" name="__codelineno-15-42" href="#__codelineno-15-42"></a>09:35 | 43.5
+<a id="__codelineno-15-43" name="__codelineno-15-43" href="#__codelineno-15-43"></a>09:40 | 43.495
+<a id="__codelineno-15-44" name="__codelineno-15-44" href="#__codelineno-15-44"></a>09:45 | 43.49
+<a id="__codelineno-15-45" name="__codelineno-15-45" href="#__codelineno-15-45"></a>09:50 | 43.52
+<a id="__codelineno-15-46" name="__codelineno-15-46" href="#__codelineno-15-46"></a>09:55 | 43.585
+<a id="__codelineno-15-47" name="__codelineno-15-47" href="#__codelineno-15-47"></a>10:10 | 43.57
+<a id="__codelineno-15-48" name="__codelineno-15-48" href="#__codelineno-15-48"></a>10:15 | 43.57
+<a id="__codelineno-15-49" name="__codelineno-15-49" href="#__codelineno-15-49"></a>10:25 | 43.515
+<a id="__codelineno-15-50" name="__codelineno-15-50" href="#__codelineno-15-50"></a>..
+<a id="__codelineno-15-51" name="__codelineno-15-51" href="#__codelineno-15-51"></a>q)tq uj tt
+<a id="__codelineno-15-52" name="__codelineno-15-52" href="#__codelineno-15-52"></a>minute| x        price
+<a id="__codelineno-15-53" name="__codelineno-15-53" href="#__codelineno-15-53"></a>------| -----------------
+<a id="__codelineno-15-54" name="__codelineno-15-54" href="#__codelineno-15-54"></a>08:00 | 33.93856 43.56333
+<a id="__codelineno-15-55" name="__codelineno-15-55" href="#__codelineno-15-55"></a>08:05 | 35.3704
+<a id="__codelineno-15-56" name="__codelineno-15-56" href="#__codelineno-15-56"></a>08:10 | 35.56701 43.55
+<a id="__codelineno-15-57" name="__codelineno-15-57" href="#__codelineno-15-57"></a>08:15 | 34.212   43.54
+<a id="__codelineno-15-58" name="__codelineno-15-58" href="#__codelineno-15-58"></a>08:20 | 33.9723  43.56
+<a id="__codelineno-15-59" name="__codelineno-15-59" href="#__codelineno-15-59"></a>08:25 | 35.0075
+<a id="__codelineno-15-60" name="__codelineno-15-60" href="#__codelineno-15-60"></a>08:30 | 34.20413 43.7
+<a id="__codelineno-15-61" name="__codelineno-15-61" href="#__codelineno-15-61"></a>08:35 | 34.81067 43.62
+<a id="__codelineno-15-62" name="__codelineno-15-62" href="#__codelineno-15-62"></a>08:40 | 35.19892 43.63
+<a id="__codelineno-15-63" name="__codelineno-15-63" href="#__codelineno-15-63"></a>08:45 | 33.94478
+<a id="__codelineno-15-64" name="__codelineno-15-64" href="#__codelineno-15-64"></a>08:50 | 35.65367 43.56
+<a id="__codelineno-15-65" name="__codelineno-15-65" href="#__codelineno-15-65"></a>08:55 | 33.19094
+<a id="__codelineno-15-66" name="__codelineno-15-66" href="#__codelineno-15-66"></a>09:00 | 35.1866
+<a id="__codelineno-15-67" name="__codelineno-15-67" href="#__codelineno-15-67"></a>09:05 | 34.21341 43.515
+<a id="__codelineno-15-68" name="__codelineno-15-68" href="#__codelineno-15-68"></a>09:10 | 34.51582
+<a id="__codelineno-15-69" name="__codelineno-15-69" href="#__codelineno-15-69"></a>09:15 | 34.58091 43.43
+<a id="__codelineno-15-70" name="__codelineno-15-70" href="#__codelineno-15-70"></a>09:20 | 34.29382
+<a id="__codelineno-15-71" name="__codelineno-15-71" href="#__codelineno-15-71"></a>09:25 | 33.81271 43.42
+<a id="__codelineno-15-72" name="__codelineno-15-72" href="#__codelineno-15-72"></a>09:30 | 33.77884 43.49333
+<a id="__codelineno-15-73" name="__codelineno-15-73" href="#__codelineno-15-73"></a>09:35 | 34.51159 43.5
+<a id="__codelineno-15-74" name="__codelineno-15-74" href="#__codelineno-15-74"></a>..
+</code></pre></div>
+* we can fill the nulls with prev avg price if there are not trades during the bucket window
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q)fills tq uj tt
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>minute| x        price
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>------| -----------------
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>08:00 | 33.93856 43.56333
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>08:05 | 35.3704  43.56333
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>08:10 | 35.56701 43.55
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>08:15 | 34.212   43.54
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>08:20 | 33.9723  43.56
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>08:25 | 35.0075  43.56
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>08:30 | 34.20413 43.7
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>08:35 | 34.81067 43.62
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>08:40 | 35.19892 43.63
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>08:45 | 33.94478 43.63
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>08:50 | 35.65367 43.56
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>08:55 | 33.19094 43.56
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>09:00 | 35.1866  43.56
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>09:05 | 34.21341 43.515
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>09:10 | 34.51582 43.515
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>09:15 | 34.58091 43.43
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>09:20 | 34.29382 43.43
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>09:25 | 33.81271 43.42
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>09:30 | 33.77884 43.49333
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>09:35 | 34.51159 43.5
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>..
+</code></pre></div></p>
 
               
             </article>

@@ -1173,19 +1173,19 @@
 <p>when inside a process we can use <code>\p</code> to see the port number, by default if port number is not declared it <code>0i</code></p>
 </li>
 </ul>
-<pre><code class="language-q">user@host:~ $ q
-q)\p 1234
-q)\p 
-1234i
-
-user@host:~ $ q -p 1234
-q)\p 
-1234i
-
-user@host:~ $ q
-q)\p
-0i
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>user@host:~ $ q
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)\p 1234
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>q)\p 
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>1234i
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>user@host:~ $ q -p 1234
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>q)\p 
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>1234i
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>user@host:~ $ q
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>q)\p
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>0i
+</code></pre></div>
 <ul>
 <li>let's create 2 q processes:</li>
 <li>server - one which is serving queries</li>
@@ -1195,46 +1195,43 @@ q)\p
 <li>
 <p>we can open a connection from client to server using function <code>hopen</code></p>
 </li>
-<li>we can also see which socket this handle is assigned to by checking value of <code>h</code></li>
+<li>we can also see which socket this handle is assigned to by checking value of <code>h</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)// server
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)\p 
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>1234i
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)// server
-q)\p 
-1234i
-</code></pre>
-<pre><code class="language-q">q)// client
-q)h:hopen 1234
-q)h
-3i
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)// client
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>q)h:hopen 1234
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>q)h
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>3i
+</code></pre></div>
 <ul>
-<li>we can use another version of hopen command by specifyign host and port number - <code>hopen ``:host:port</code></li>
-</ul>
-<pre><code class="language-q">q)// client 
-q)h1: `:localhost:1234
-q)h1
-3i
-q)h1:`::1234 // if we dont provide host, it defaults to localhost
-q)h1
-4i
-
-</code></pre>
-<ul>
+<li>we can use another version of hopen command by specifyign host and port number - <code>hopen ``:host:port</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)// client 
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>q)h1: `:localhost:1234
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>q)h1
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>3i
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>q)h1:`::1234 // if we dont provide host, it defaults to localhost
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>q)h1
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>4i
+</code></pre></div></li>
 <li>we can see all the handles open on client process by checking dictionary <code>.z.W</code></li>
 </ul>
-<pre><code class="language-q">q)//client
-q).z.W
-q).z.W
-3|
-4|
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)//client
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>q).z.W
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>q).z.W
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>3|
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>4|
+</code></pre></div>
 <ul>
 <li>to close a connection we use function <code>hclose</code></li>
 <li>we can also give handle number as an argument to <code>hclose</code> function to close a handle - handle number can be checked from <code>.z.W</code> command</li>
 </ul>
-<pre><code>q)//client
-q)hclose h1
-q)hclose 4i
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)//client
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>q)hclose h1
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>q)hclose 4i
+</code></pre></div>
 <h2 id="message-handler-functions">Message Handler Functions</h2>
 <ul>
 <li>we can reset any of the message handler function to their original definition by using <code>\x function_name</code> or <code>\x .z.pw</code></li>
@@ -1245,19 +1242,19 @@ q)hclose 4i
 <li>arguments to <code>.z.pw</code> function are username and password</li>
 <li>can be reset to default using <code>\x .z.pw</code></li>
 </ul>
-<pre><code class="language-q">// server
-q)permittedusers:`abc`xyz`pqr
-q).z.pw:{[u;p] (u in permittedusers) and (p~&quot;pass&quot;)}
-</code></pre>
-<pre><code class="language-q">//client
-q)h:hopen `::1234
-'access
-  [0]  h:hopen `::1234
-         ^
-q)h:hopen `::1234:abc:pass
-q).z.W
-7|
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>// server
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>q)permittedusers:`abc`xyz`pqr
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>q).z.pw:{[u;p] (u in permittedusers) and (p~&quot;pass&quot;)}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>//client
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>q)h:hopen `::1234
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>&#39;access
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  [0]  h:hopen `::1234
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>         ^
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>q)h:hopen `::1234:abc:pass
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>q).z.W
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>7|
+</code></pre></div>
 <h3 id="zpo"><code>.z.po</code></h3>
 <ul>
 <li>this is executed whenever a handle is opened and after <code>.z.pw</code> has executed successfully</li>
@@ -1267,73 +1264,73 @@ q).z.W
 <li><code>.z.p</code> - current timestamp</li>
 <li><code>.z.u</code> - user opening handle</li>
 </ul>
-<pre><code class="language-q">// server
-q).z.po:{[x] show(.z.a;.z.p;.z.u;x)}
-{[x] show(.z.a;.z.p;.z.u;x)}
-q)2130706433i
-2022.02.21D03:38:51.578467000
-`abc
-10i
-</code></pre>
-<pre><code class="language-q">//client
-q)h2:hopen `::1234:abc:pass
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>// server
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>q).z.po:{[x] show(.z.a;.z.p;.z.u;x)}
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>{[x] show(.z.a;.z.p;.z.u;x)}
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>q)2130706433i
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>2022.02.21D03:38:51.578467000
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>`abc
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>10i
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>//client
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>q)h2:hopen `::1234:abc:pass
+</code></pre></div>
 <h3 id="zpc"><code>.z.pc</code></h3>
 <ul>
 <li>we can use <code>.z.pc</code> to be executed whenever a handle is closed to server</li>
 </ul>
-<pre><code class="language-q">//server
-q).z.pc:{[x] show(.z.h;.z.p;x)}
-q)`ykr-mbam1.local
-2022.02.21D03:42:57.717442000
-10i
-</code></pre>
-<pre><code class="language-q">//client
-q)hclose h2
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>//server
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>q).z.pc:{[x] show(.z.h;.z.p;x)}
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>q)`ykr-mbam1.local
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>2022.02.21D03:42:57.717442000
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>10i
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>//client
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>q)hclose h2
+</code></pre></div>
 <h2 id="timeout">Timeout</h2>
 <ul>
 <li>we can also define timeout in millisecods when opening a handle</li>
 </ul>
-<pre><code class="language-q">// server
-q)system &quot;sleep 60&quot;
-</code></pre>
-<pre><code class="language-q">// client
-q)h2:hopen (`::1234:abc:pass;10)
-'timeout
-  [0]  h2:hopen (`::1234:abc:pass;10)
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>// server
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>q)system &quot;sleep 60&quot;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>// client
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>q)h2:hopen (`::1234:abc:pass;10)
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>&#39;timeout
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>  [0]  h2:hopen (`::1234:abc:pass;10)
+</code></pre></div>
 <h2 id="restricting-user-access-on-start-up">Restricting user access on start-up</h2>
 <ul>
 <li>we can define username and password combination in a file and specify it using <code>-u filepath</code> when strating q session</li>
 <li>Only username password combination in the file will be allowed when opening handle</li>
 </ul>
-<pre><code class="language-q">// server
-
-ranayk@ykr-mbam1: $ cat users.txt
-abc:pass1
-xyz:pass2
-qwe:pass3
-
-ranayk@ykr-mbam1: $ q -p 1234 -u users.txt
-KDB+ 4.0 2021.04.26 Copyright (C) 1993-2021 Kx Systems
-m64/ 8(16)core 8192MB ranayk ykr-mbam1.local 127.0.0.1 EXPIRE 2022.05.30 yankeekiloromeo@gmail.com KOD #4176402
-
-q)
-</code></pre>
-<pre><code class="language-q">//client
-q)h2:hopen `::1234:abc:pass
-'access
-  [0]  h2:hopen `::1234:abc:pass
-          ^
-q)h2:hopen `::1234:abc:pass1
-q)h2:hopen `::1234:xyz:pass1
-'access
-  [0]  h2:hopen `::1234:xyz:pass1
-          ^
-q)h2:hopen `::1234:xyz:pass2
-q)
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>// server
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>ranayk@ykr-mbam1: $ cat users.txt
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>abc:pass1
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>xyz:pass2
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>qwe:pass3
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>ranayk@ykr-mbam1: $ q -p 1234 -u users.txt
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>KDB+ 4.0 2021.04.26 Copyright (C) 1993-2021 Kx Systems
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>m64/ 8(16)core 8192MB ranayk ykr-mbam1.local 127.0.0.1 EXPIRE 2022.05.30 yankeekiloromeo@gmail.com KOD #4176402
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>q)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>//client
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>q)h2:hopen `::1234:abc:pass
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>&#39;access
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  [0]  h2:hopen `::1234:abc:pass
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>          ^
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>q)h2:hopen `::1234:abc:pass1
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>q)h2:hopen `::1234:xyz:pass1
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>&#39;access
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>  [0]  h2:hopen `::1234:xyz:pass1
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>          ^
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>q)h2:hopen `::1234:xyz:pass2
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>q)
+</code></pre></div>
 
               
             </article>

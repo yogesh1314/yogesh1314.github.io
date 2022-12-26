@@ -1222,148 +1222,136 @@
 </ul>
 <h2 id="each"><code>each</code> <code>'</code></h2>
 <ul>
-<li>used to apply a function to each individual element of a list</li>
+<li>used to apply a function to each individual element of a list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q) //function to count number of divisors of a number
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q) divisors:{count where 0=x mod 1+til x}
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>q) //works fine with atomic values
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>q)divisors 5
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>2
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>q)divisors 10
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>4
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>q)divisors 20
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>6
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>q) //doesn&#39;t work with list
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>q)l
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>12 10 1 90 73 90 43 90 84 63 93 54 38 97 88 58 68 45 2 39
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>q)divisors l
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>&#39;type
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>  [2]  (.q.til)
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>  [1]  divisors:{count where 0=x mod 1+til x}
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>q) //we use each to execute divisors function over each element of list
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>q)divisors each l
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>6 4 1 12 2 12 2 12 12 6 4 8 4 2 8 4 6 6 2 4
+</code></pre></div></li>
+<li>also used for nested lists
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)(2 3 4 5; 9 8; 9 8 3 4 56)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2 3 4 5
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>9 8
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>9 8 3 4 56
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>q)count (2 3 4 5; 9 8; 9 8 3 4 56)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>3
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>q)count each (2 3 4 5; 9 8; 9 8 3 4 56)
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>4 2 5
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>q)reverse  each (2 3 4 5; 9 8; 9 8 3 4 56)
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>5 4 3 2
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>8 9
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>56 4 3 8 9
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>q)reverse  (2 3 4 5; 9 8; 9 8 3 4 56)
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>9 8 3 4 56
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>9 8
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>2 3 4 5
+</code></pre></div></li>
 </ul>
-<pre><code>q) //function to count number of divisors of a number
-q) divisors:{count where 0=x mod 1+til x}
-q) //works fine with atomic values
-q)divisors 5
-2
-q)divisors 10
-4
-q)divisors 20
-6
-q) //doesn't work with list
-q)l
-12 10 1 90 73 90 43 90 84 63 93 54 38 97 88 58 68 45 2 39
-q)divisors l
-'type
-  [2]  (.q.til)
-
-  [1]  divisors:{count where 0=x mod 1+til x}
-q) //we use each to execute divisors function over each element of list
-q)divisors each l
-6 4 1 12 2 12 2 12 12 6 4 8 4 2 8 4 6 6 2 4
-</code></pre>
-<ul>
-<li>also used for nested lists</li>
-</ul>
-<pre><code>q)(2 3 4 5; 9 8; 9 8 3 4 56)
-2 3 4 5
-9 8
-9 8 3 4 56
-q)count (2 3 4 5; 9 8; 9 8 3 4 56)
-3
-q)count each (2 3 4 5; 9 8; 9 8 3 4 56)
-4 2 5
-q)reverse  each (2 3 4 5; 9 8; 9 8 3 4 56)
-5 4 3 2
-8 9
-56 4 3 8 9
-q)reverse  (2 3 4 5; 9 8; 9 8 3 4 56)
-9 8 3 4 56
-9 8
-2 3 4 5
-</code></pre>
 <h2 id="each-both">each-both <code>,'</code></h2>
 <ul>
 <li>it is polyadic form of <code>each</code></li>
-<li>often used for applying diadic function element wise to a pair of lists</li>
+<li>often used for applying diadic function element wise to a pair of lists
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)l1
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>45 84 97 45 38
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>q)l2
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>12 45 88 63 2
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>q)l1,&#39;l2
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>45 12
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>84 45
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>97 88
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>45 63
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>38 2
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>q)l1,l2
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>45 84 97 45 38 12 45 88 63 2
+</code></pre></div></li>
+<li>each-both can also be applied to higher valency functions
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q){x,y,z}&#39;[1 2 3;&quot;abc&quot;;1.1 2.2 3.3]
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>1 &quot;a&quot; 1.1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>2 &quot;b&quot; 2.2
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>3 &quot;c&quot; 3.3
+</code></pre></div></li>
 </ul>
-<pre><code>q)l1
-45 84 97 45 38
-q)l2
-12 45 88 63 2
-q)l1,'l2
-45 12
-84 45
-97 88
-45 63
-38 2
-q)l1,l2
-45 84 97 45 38 12 45 88 63 2
-</code></pre>
-<ul>
-<li>each-both can also be applied to higher valency functions</li>
-</ul>
-<pre><code>q){x,y,z}'[1 2 3;&quot;abc&quot;;1.1 2.2 3.3]
-1 &quot;a&quot; 1.1
-2 &quot;b&quot; 2.2
-3 &quot;c&quot; 3.3
-</code></pre>
 <h2 id="each-right">each-right <code>/:</code></h2>
 <ul>
 <li>used with diadic function where we want to use a list as right-hand argument</li>
 <li>join each right hand arguments to left hand argument</li>
-<li>iterate over right</li>
+<li>iterate over right
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)l:1 2 3
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>q)l,/:10 20 30
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>1 2 3 10
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>1 2 3 20
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>1 2 3 30
+</code></pre></div></li>
 </ul>
-<pre><code>q)l:1 2 3
-q)l,/:10 20 30
-1 2 3 10
-1 2 3 20
-1 2 3 30
-</code></pre>
 <h2 id="each-left">each-left <code>\:</code></h2>
 <ul>
 <li>used with diadic function where we want to use a list as right-hand argument</li>
 <li>join each left hand argument to right hand argument</li>
-<li>iterate over left</li>
+<li>iterate over left
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)l:1 2 3
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>q)l,\:10 20 30
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>1 10 20 30
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>2 10 20 30
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>3 10 20 30
+</code></pre></div></li>
+<li>many inbuilt operator already works on list and atom in same manner - thus if we get desired result with such operators we shouldn't be using adverbs with them
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)10 + 1 2 3
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>11 12 13
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>q)10 +/: 1 2 3
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>11 12 13
+</code></pre></div></li>
 </ul>
-<pre><code>q)l:1 2 3
-q)l,\:10 20 30
-1 10 20 30
-2 10 20 30
-3 10 20 30
-</code></pre>
-<ul>
-<li>many inbuilt operator already works on list and atom in same manner - thus if we get desired result with such operators we shouldn't be using adverbs with them</li>
-</ul>
-<pre><code>q)10 + 1 2 3
-11 12 13
-q)10 +/: 1 2 3
-11 12 13
-</code></pre>
 <h2 id="each-prior">each-prior <code>':</code></h2>
 <ul>
-<li>used to apply a diadic function to a list element and its predecessor in the list</li>
+<li>used to apply a diadic function to a list element and its predecessor in the list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)// sum each prior - running sum
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>q)l
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>1 2 3
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>q)+&#39;:[l]
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>1 3 5
+</code></pre></div></li>
+<li>can also be used to show each element of list alongside its predecessor
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q){x,y}&#39;:[l]
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>1
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>2 1
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>3 2
+</code></pre></div></li>
+<li>we can also use optional first parameter - which will be used as first <code>y</code> argument in the function
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q){x,y}&#39;:[0;l]
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>1 0
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>2 1
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>3 2
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>q){x,y}&#39;:[10;l]
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>1 10
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>2 1
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>3 2
+</code></pre></div></li>
+<li><code>deltas</code> is <code>-':</code> minus each prior
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)deltas
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>-&#39;:
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>q)deltas l
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>1 1 1
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>q)-&#39;:[l]
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>1 1 1
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>q)
+</code></pre></div></li>
 </ul>
-<pre><code>q)// sum each prior - running sum
-q)l
-1 2 3
-q)+':[l]
-1 3 5
-</code></pre>
-<ul>
-<li>can also be used to show each element of list alongside its predecessor</li>
-</ul>
-<pre><code>q){x,y}':[l]
-1
-2 1
-3 2
-</code></pre>
-<ul>
-<li>we can also use optional first parameter - which will be used as first <code>y</code> argument in the function</li>
-</ul>
-<pre><code>q){x,y}':[0;l]
-1 0
-2 1
-3 2
-q){x,y}':[10;l]
-1 10
-2 1
-3 2
-</code></pre>
-<ul>
-<li><code>deltas</code> is <code>-':</code> minus each prior</li>
-</ul>
-<pre><code>q)deltas
--':
-q)deltas l
-1 1 1
-q)-':[l]
-1 1 1
-q)
-</code></pre>
 <h2 id="scan-over">scan <code>\</code> , over <code>/</code></h2>
 <ul>
 <li>little complicated</li>
@@ -1372,124 +1360,112 @@ q)
 </ul>
 <h3 id="monadic-function-f">monadic function - <code>f</code></h3>
 <ul>
-<li><code>f\[n;x]</code> - returns <code>f{x}</code>, <code>f{f{x}}</code> and so on <code>n</code> times</li>
-</ul>
-<pre><code>q){x+7}\[10;0] // add 7, 10 times, starting with 0
-0 7 14 21 28 35 42 49 56 63 70
-q){x+7}\[10;5] // add 7, 10 times, starting with 5
-5 12 19 26 33 40 47 54 61 68 75
-q){x+7}/[10;5] // add 7, 10 times, starting with 5, over-only shows end result
-75
-</code></pre>
-<ul>
-<li>we can also use while clause instead of integer <code>n</code></li>
-</ul>
-<pre><code>q){x+7}\[{x&lt;100};5] // add 7, while result &lt;100, starting with 5
-5 12 19 26 33 40 47 54 61 68 75 82 89 96 103
-</code></pre>
-<ul>
+<li><code>f\[n;x]</code> - returns <code>f{x}</code>, <code>f{f{x}}</code> and so on <code>n</code> times
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q){x+7}\[10;0] // add 7, 10 times, starting with 0
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>0 7 14 21 28 35 42 49 56 63 70
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>q){x+7}\[10;5] // add 7, 10 times, starting with 5
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>5 12 19 26 33 40 47 54 61 68 75
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>q){x+7}/[10;5] // add 7, 10 times, starting with 5, over-only shows end result
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>75
+</code></pre></div></li>
+<li>we can also use while clause instead of integer <code>n</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q){x+7}\[{x&lt;100};5] // add 7, while result &lt;100, starting with 5
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>5 12 19 26 33 40 47 54 61 68 75 82 89 96 103
+</code></pre></div></li>
 <li><code>f/[x]</code> - if <code>n</code> is not provided, iterate till output is same as previous result, or till last 2 results are same</li>
-<li><code>f\[x]</code> - iterate(scan) and <code>f/[x]</code> - converge(over)</li>
+<li><code>f\[x]</code> - iterate(scan) and <code>f/[x]</code> - converge(over)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q){x%10}/[5]
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>0f
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>q)
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>q){x%10}\[5]
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>5
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>0.5
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>0.05
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>0.005
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>0.0005
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>5e-005
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>5e-006
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>5e-007
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>5e-008
+</code></pre></div></li>
 </ul>
-<pre><code>q){x%10}/[5]
-0f
-q)
-q){x%10}\[5]
-5
-0.5
-0.05
-0.005
-0.0005
-5e-005
-5e-006
-5e-007
-5e-008
-</code></pre>
 <h3 id="dyadic-function-f">dyadic function - <code>f</code></h3>
 <ul>
 <li>function takes 2 arguments</li>
 <li><code>f\[a b c d] = a; f[a;b] f[f[a;b];c] ...</code></li>
-<li>or we can also provide initial number x - <code>f\[x;a b c d] = 100+a; 100+f[a;b]; 100+f[f[a;b];c] ..</code></li>
+<li>or we can also provide initial number x - <code>f\[x;a b c d] = 100+a; 100+f[a;b]; 100+f[f[a;b];c] ..</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)til 20
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>q)+\[til 20]
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>0 1 3 6 10 15 21 28 36 45 55 66 78 91 105 120 136 153 171 190
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>q)+\[100;til 20]
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>100 101 103 106 110 115 121 128 136 145 155 166 178 191 205 220 236 253 271 290
+</code></pre></div></li>
 </ul>
-<pre><code>q)til 20
-0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
-q)+\[til 20]
-0 1 3 6 10 15 21 28 36 45 55 66 78 91 105 120 136 153 171 190
-q)+\[100;til 20]
-100 101 103 106 110 115 121 128 136 145 155 166 178 191 205 220 236 253 271 290
-</code></pre>
 <h3 id="exercise">Exercise</h3>
 <ul>
 <li>calculate depreciation of an asset over time</li>
 <li>function : <code>depr:{[c;r] c*1-r%100}</code></li>
-<li>depreciation in 1 year</li>
+<li>depreciation in 1 year
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)depr[1000;10] // starting cost=1000, rate=10%
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>900f
+</code></pre></div></li>
+<li>depreciation in 5 years or <code>x</code> years
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q)depr[;10]\[5;1000] // starting cost=1000, rate=10%, over 5 years, using monadic version by keeping rate constant
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>1000
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>900f
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>810f
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>729f
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>656.1
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>590.49
+</code></pre></div></li>
+<li>check with different rate
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>q)depr\[1000;3 5 6 8 10] // cost=1000, rates=3 5 6 8 10%
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>970 921.5 866.21 796.9132 717.2219
+</code></pre></div></li>
+<li>different rate, different cost, 1 year
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>q)depr\[1000 2000 5000 10000;3 5 6 8 10] // cost=1000 2000 5000 10000, rates=3 5 6 8 10%
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>970      1940     4850     9700
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>921.5    1843     4607.5   9215
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>866.21   1732.42  4331.05  8662.1
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>796.9132 1593.826 3984.566 7969.132
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>717.2219 1434.444 3586.109 7172.219
+</code></pre></div></li>
 </ul>
-<pre><code>q)depr[1000;10] // starting cost=1000, rate=10%
-900f
-</code></pre>
-<ol>
-<li>depreciation in 5 years or <code>x</code> years</li>
-</ol>
-<pre><code>q)depr[;10]\[5;1000] // starting cost=1000, rate=10%, over 5 years, using monadic version by keeping rate constant
-1000
-900f
-810f
-729f
-656.1
-590.49
-</code></pre>
-<ol>
-<li>check with different rate</li>
-</ol>
-<pre><code>q)depr\[1000;3 5 6 8 10] // cost=1000, rates=3 5 6 8 10%
-970 921.5 866.21 796.9132 717.2219
-</code></pre>
-<ol>
-<li>different rate, different cost, 1 year</li>
-</ol>
-<pre><code>q)depr\[1000 2000 5000 10000;3 5 6 8 10] // cost=1000 2000 5000 10000, rates=3 5 6 8 10%
-970      1940     4850     9700
-921.5    1843     4607.5   9215
-866.21   1732.42  4331.05  8662.1
-796.9132 1593.826 3984.566 7969.132
-717.2219 1434.444 3586.109 7172.219
-</code></pre>
 <h2 id="exercise_1">Exercise:</h2>
 <ul>
-<li>Question:</li>
+<li>Question:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Suppose we are given a vector of numbers (xx) and a step size (s). Write a function that will take x and s as arguments, and output a result vector. The result vector is constructed using the following procedure:
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>   1. The xx value sets the mid-point of the step (e.g. if xx is 1 and s is 3, then the values -1,0,1,2 and 3 are included in that step range)
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>   2. If the next xx value is within the current step range, then the step mid-point does not change (e.g. if xx is -1, then the step mid-point is still 1)
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>   3. If the next xx value falls outside the current step range, the step mid-point is reset to that xx value (e.g. if xx is 4, then the new step mid-point is 4)
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>   4. The current step mid-point is stored each time in the result vector
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>Here are two examples to clarify the procedure:
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>     xx:1 -1 3 0 1 1 5 6 2 10
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>     s:3
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>     result:1 1 1 1 1 1 5 5 2 10
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>     and
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>     xx:2 3 4 3 20 7 8 31
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>     s:6
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>     result:2 2 2 2 20 7 7 31
+</code></pre></div></li>
+<li>Answer:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>We will need to introduce 3 parameters:
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>   1. x - the step size (this will take the value s)
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>   2. y - the current step mid-point
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>   3. z - the next value in the xx vector (we will see later how this may be achieved with an adverb)
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>If z is within the current step range, it will satisfy: y - x &lt; z &lt; y + x ; this can be rearranged to give: x &gt; abs ( z - y)
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>So, if x&gt;abs(z-y) is true, then the step mid-point does not change, and the value of y should be saved to the result vector.
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>Alternatively, if x&gt;abs(z-y) is false, then the step mid-point will change to the value of z, and so z should be saved to the result vector.
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>The previous two comments can be expressed as an if-else statement:
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a> $[x&gt;abs z - y; y; z]   /the value returned, will be the step mid-point
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>Let&#39;s digress back to the scan function e.g.
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>  q){x+y}\[1 2 3 4]
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>  1 3 6 10
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>The value returned by the above function is used as the next x value, and the next y value is taken from the next item in the list. This is exactly what we need to do in our problem. Thus, the solution is given by:
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a> {$[x&gt;abs z - y; y; z]}[s]\[xx]
+</code></pre></div></li>
 </ul>
-<pre><code>Suppose we are given a vector of numbers (xx) and a step size (s). Write a function that will take x and s as arguments, and output a result vector. The result vector is constructed using the following procedure:
-   1. The xx value sets the mid-point of the step (e.g. if xx is 1 and s is 3, then the values -1,0,1,2 and 3 are included in that step range)
-   2. If the next xx value is within the current step range, then the step mid-point does not change (e.g. if xx is -1, then the step mid-point is still 1)
-   3. If the next xx value falls outside the current step range, the step mid-point is reset to that xx value (e.g. if xx is 4, then the new step mid-point is 4)
-   4. The current step mid-point is stored each time in the result vector
-Here are two examples to clarify the procedure:
-     xx:1 -1 3 0 1 1 5 6 2 10
-     s:3
-     result:1 1 1 1 1 1 5 5 2 10
-     and
-     xx:2 3 4 3 20 7 8 31
-     s:6
-     result:2 2 2 2 20 7 7 31
-</code></pre>
-<ul>
-<li>Answer:</li>
-</ul>
-<pre><code>We will need to introduce 3 parameters:
-   1. x - the step size (this will take the value s)
-   2. y - the current step mid-point
-   3. z - the next value in the xx vector (we will see later how this may be achieved with an adverb)
-If z is within the current step range, it will satisfy: y - x &lt; z &lt; y + x ; this can be rearranged to give: x &gt; abs ( z - y)
-So, if x&gt;abs(z-y) is true, then the step mid-point does not change, and the value of y should be saved to the result vector.
-Alternatively, if x&gt;abs(z-y) is false, then the step mid-point will change to the value of z, and so z should be saved to the result vector.
-The previous two comments can be expressed as an if-else statement:
- $[x&gt;abs z - y; y; z]   /the value returned, will be the step mid-point
-Let's digress back to the scan function e.g.
-  q){x+y}\[1 2 3 4]
-  1 3 6 10
-The value returned by the above function is used as the next x value, and the next y value is taken from the next item in the list. This is exactly what we need to do in our problem. Thus, the solution is given by:
- {$[x&gt;abs z - y; y; z]}[s]\[xx]
-</code></pre>
 
               
             </article>

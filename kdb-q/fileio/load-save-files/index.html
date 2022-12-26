@@ -1126,114 +1126,110 @@
 <h2 id="writing-to-csv-file">Writing to csv file</h2>
 <ul>
 <li>Given an in-memory table we can write it to disk as <code>.csv</code> file</li>
-<li><code>save</code> can be used if we want filename be same as tablename in memory </li>
+<li><code>save</code> can be used if we want filename be same as tablename in memory 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)tab:([]sym:`a`b`c`d; prc: 1 2 3 4;cmt: &quot;ABCD&quot;; dt: 2022.10.01 2022.10.02 2022.10.03 2022.10.04)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)tab
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sym prc cmt dt
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>----------------------
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>a   1   A   2022.10.01
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>b   2   B   2022.10.02
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>c   3   C   2022.10.03
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>d   4   D   2022.10.04
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>q)tab2:([]col1: `q`w`e; col2: 10 20 30)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>q)tab2
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>col1 col2
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>---------
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>q    10
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>w    20
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>e    30
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>q)save `:tab.csv
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>`:tab.csv
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>q)save `:tab2.csv
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>`:tab2.csv
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)tab:([]sym:`a`b`c`d; prc: 1 2 3 4;cmt: &quot;ABCD&quot;; dt: 2022.10.01 2022.10.02 2022.10.03 2022.10.04)
-q)tab
-sym prc cmt dt
-----------------------
-a   1   A   2022.10.01
-b   2   B   2022.10.02
-c   3   C   2022.10.03
-d   4   D   2022.10.04
-q)tab2:([]col1: `q`w`e; col2: 10 20 30)
-q)tab2
-col1 col2
----------
-q    10
-w    20
-e    30
-q)save `:tab.csv
-`:tab.csv
-q)save `:tab2.csv
-`:tab2.csv
-</code></pre>
 <h2 id="loading-csv">Loading csv</h2>
 <ul>
 <li>command to load file is <code>0:</code> </li>
 <li>right hand argument is handle to csv file</li>
-<li>left hand argument is list with first item listing type of columns in string type format and second argument is deliminator for csv it is <code>","</code> - enlisting deliminator means we have column headers in our file and they will be column name when read as table</li>
+<li>left hand argument is list with first item listing type of columns in string type format and second argument is deliminator for csv it is <code>","</code> - enlisting deliminator means we have column headers in our file and they will be column name when read as table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)tab:(&quot;SICD&quot;;enlist&quot;,&quot;)0: `:tab.csv
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)tab
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sym prc cmt dt
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>----------------------
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>a   1   A   2022.10.01
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>b   2   B   2022.10.02
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>c   3   C   2022.10.03
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>d   4   D   2022.10.04
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>q)tab2:(&quot;SI&quot;;enlist&quot;,&quot;)0: `:tab2.csv
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>q)tab2
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>col1 col2
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>---------
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>q    10
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>w    20
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>e    30
+</code></pre></div></li>
+<li>we can leave out a column if we dont want to read it into memory by keeping type as blank
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)(&quot;SICD&quot;;enlist &quot;,&quot;)0: `:tab.csv
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sym prc cmt dt
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>----------------------
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>a   1   A   2022.10.01
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>b   2   B   2022.10.02
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>c   3   C   2022.10.03
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>d   4   D   2022.10.04
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>q)(&quot;SIC &quot;;enlist &quot;,&quot;)0: `:tab.csv //leave out last column
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>sym prc cmt
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>-----------
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>a   1   A
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>b   2   B
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>c   3   C
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>d   4   D
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>q)(&quot;S CD&quot;;enlist &quot;,&quot;)0: `:tab.csv //leave out one of middle column
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>sym cmt dt
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>------------------
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>a   A   2022.10.01
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>b   B   2022.10.02
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>c   C   2022.10.03
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>d   D   2022.10.04
+</code></pre></div></li>
+<li>we can also read data without headers
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)(&quot;SICD&quot;;&quot;,&quot;)0: `:tab.csv
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sym a          b          c          d
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    1          2          3          4
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    A          B          C          D
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    2022.10.01 2022.10.02 2022.10.03 2022.10.04
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>q)flip `col1`col2`col3`col4!1_&#39;(&quot;SICD&quot;;&quot;,&quot;)0: `:tab.csv
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>col1 col2 col3 col4
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>-------------------------
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>a    1    A    2022.10.01
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>b    2    B    2022.10.02
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>c    3    C    2022.10.03
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>d    4    D    2022.10.04
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)tab:(&quot;SICD&quot;;enlist&quot;,&quot;)0: `:tab.csv
-q)tab
-sym prc cmt dt
-----------------------
-a   1   A   2022.10.01
-b   2   B   2022.10.02
-c   3   C   2022.10.03
-d   4   D   2022.10.04
-q)tab2:(&quot;SI&quot;;enlist&quot;,&quot;)0: `:tab2.csv
-q)tab2
-col1 col2
----------
-q    10
-w    20
-e    30
-</code></pre>
-<ul>
-<li>we can leave out a column if we dont want to read it into memory by keeping type as blank</li>
-</ul>
-<pre><code class="language-q">q)(&quot;SICD&quot;;enlist &quot;,&quot;)0: `:tab.csv
-sym prc cmt dt
-----------------------
-a   1   A   2022.10.01
-b   2   B   2022.10.02
-c   3   C   2022.10.03
-d   4   D   2022.10.04
-q)(&quot;SIC &quot;;enlist &quot;,&quot;)0: `:tab.csv //leave out last column
-sym prc cmt
------------
-a   1   A
-b   2   B
-c   3   C
-d   4   D
-q)(&quot;S CD&quot;;enlist &quot;,&quot;)0: `:tab.csv //leave out one of middle column
-sym cmt dt
-------------------
-a   A   2022.10.01
-b   B   2022.10.02
-c   C   2022.10.03
-d   D   2022.10.04
-</code></pre>
-<ul>
-<li>we can also read data without headers</li>
-</ul>
-<pre><code class="language-q">q)(&quot;SICD&quot;;&quot;,&quot;)0: `:tab.csv
-sym a          b          c          d
-    1          2          3          4
-    A          B          C          D
-    2022.10.01 2022.10.02 2022.10.03 2022.10.04
-q)flip `col1`col2`col3`col4!1_'(&quot;SICD&quot;;&quot;,&quot;)0: `:tab.csv
-col1 col2 col3 col4
--------------------------
-a    1    A    2022.10.01
-b    2    B    2022.10.02
-c    3    C    2022.10.03
-d    4    D    2022.10.04
-</code></pre>
 <h2 id="read0"><code>read0</code></h2>
 <ul>
 <li>we can read file in string format using <code>read0</code></li>
-<li>can be used with csv or txt files as well</li>
+<li>can be used with csv or txt files as well
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)read0 `:tab.csv
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&quot;sym,prc,cmt,dt&quot;
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>&quot;a,1,A,2022-10-01&quot;
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>&quot;b,2,B,2022-10-02&quot;
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>&quot;c,3,C,2022-10-03&quot;
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>&quot;d,4,D,2022-10-04&quot;
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>q)read0 `:tab.txt
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>&quot; 1 a 3 b 4&quot;
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>&quot; 2 b 5 c 6&quot;
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>&quot; 3 d 4 e 5&quot;
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)read0 `:tab.csv
-&quot;sym,prc,cmt,dt&quot;
-&quot;a,1,A,2022-10-01&quot;
-&quot;b,2,B,2022-10-02&quot;
-&quot;c,3,C,2022-10-03&quot;
-&quot;d,4,D,2022-10-04&quot;
-q)read0 `:tab.txt
-&quot; 1 a 3 b 4&quot;
-&quot; 2 b 5 c 6&quot;
-&quot; 3 d 4 e 5&quot;
-</code></pre>
 <h2 id="read1"><code>read1</code></h2>
 <ul>
-<li>we can also read file as binary</li>
+<li>we can also read file as binary
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)read1 `:tab.txt
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>0x203120612033206220340a203220622035206320360a203320642034206520350a
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)read1 `:tab.txt
-0x203120612033206220340a203220622035206320360a203320642034206520350a
-</code></pre>
 
               
             </article>

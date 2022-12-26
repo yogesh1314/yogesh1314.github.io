@@ -1163,240 +1163,224 @@
 <p>select [columns]</p>
 </li>
 <li>
-<p>example table:</p>
+<p>example table:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)sales:([]fruit:10?`apple`banana`orange;grocer:10?`ram`krishna`laxman;price:10?10;qty:10?100)    / sales table is defined
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)sales
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>fruit  grocer  price qty
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>------------------------
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>orange krishna 6     12
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>apple  laxman  6     10
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>apple  krishna 1     1
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>orange laxman  8     90
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>apple  krishna 5     73
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>banana ram     4     90
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>apple  ram     9     43
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>apple  krishna 2     90
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>apple  laxman  7     84
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>orange krishna 0     63
+</code></pre></div></p>
 </li>
-</ul>
-<pre><code>q)sales:([]fruit:10?`apple`banana`orange;grocer:10?`ram`krishna`laxman;price:10?10;qty:10?100)    / sales table is defined
-q)sales
-fruit  grocer  price qty
-------------------------
-orange krishna 6     12
-apple  laxman  6     10
-apple  krishna 1     1
-orange laxman  8     90
-apple  krishna 5     73
-banana ram     4     90
-apple  ram     9     43
-apple  krishna 2     90
-apple  laxman  7     84
-orange krishna 0     63
-</code></pre>
-<ol>
 <li><code>select from table_name</code></li>
 <li>in select if no columns are queried - it will select all columns from the table</li>
-<li>in its basic format - <code>from</code> is only required condition, all other(by, where, select) are optional</li>
-</ol>
-<pre><code>q)select from sales
-fruit  grocer  price qty
-------------------------
-orange krishna 6     12
-apple  laxman  6     10
-apple  krishna 1     1
-orange laxman  8     90
-apple  krishna 5     73
-banana ram     4     90
-apple  ram     9     43
-apple  krishna 2     90
-apple  laxman  7     84
-orange krishna 0     63
-</code></pre>
-<ol>
+<li>in its basic format - <code>from</code> is only required condition, all other(by, where, select) are optional
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)select from sales
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>fruit  grocer  price qty
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>------------------------
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>orange krishna 6     12
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>apple  laxman  6     10
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>apple  krishna 1     1
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>orange laxman  8     90
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>apple  krishna 5     73
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>banana ram     4     90
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>apple  ram     9     43
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>apple  krishna 2     90
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>apple  laxman  7     84
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>orange krishna 0     63
+</code></pre></div></li>
 <li><code>select column/s from table_name</code></li>
 <li>select columns separated by <code>,</code></li>
-<li>even if single column is asked return type is table</li>
-</ol>
-<pre><code>q)select fruit, price from sales
-fruit  price
-------------
-orange 6
-apple  6
-apple  1
-orange 8
-apple  5
-banana 4
-apple  9
-apple  2
-apple  7
-orange 0
-q)select fruit from sales
-fruit
-------
-orange
-apple
-apple
-orange
-apple
-banana
-apple
-apple
-apple
-orange
-q)type select fruit from sales
-98h
-</code></pre>
-<ol>
-<li><code>select column/s from table_name where condition/s</code></li>
-</ol>
-<pre><code>q)select fruit, price from sales where fruit=`apple
-fruit price
------------
-apple 6
-apple 1
-apple 5
-apple 9
-apple 2
-apple 7       
-</code></pre>
-<ol>
+<li>even if single column is asked return type is table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)select fruit, price from sales
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fruit  price
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>------------
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>orange 6
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>apple  6
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>apple  1
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>orange 8
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>apple  5
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>banana 4
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>apple  9
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>apple  2
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>apple  7
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>orange 0
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>q)select fruit from sales
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>fruit
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>------
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>orange
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>apple
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>apple
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>orange
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>apple
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>banana
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>apple
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>apple
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>apple
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>orange
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>q)type select fruit from sales
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>98h
+</code></pre></div></li>
+<li><code>select column/s from table_name where condition/s</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)select fruit, price from sales where fruit=`apple
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>fruit price
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>-----------
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>apple 6
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>apple 1
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>apple 5
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>apple 9
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>apple 2
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>apple 7       
+</code></pre></div></li>
 <li><code>select column/s by column/s from table_name</code></li>
-<li>grouping data by column/s</li>
-</ol>
-<pre><code>q)select fruit, price by grocer from sales
-grocer | fruit                            price
--------| ------------------------------------------
-krishna| `orange`apple`apple`apple`orange 6 1 5 2 0
-laxman | `apple`orange`apple              6 8 7
-ram    | `banana`apple                    4 9
-</code></pre>
-<ul>
-<li>we can apply aggregation to grouped data - <code>select aggregate_function column/s by column/s from table_name</code></li>
-</ul>
-<pre><code>q)select sum price by grocer from sales
-grocer | price
--------| -----
-krishna| 14
-laxman | 21
-ram    | 13
-q)select notional: sum price*qty by grocer from sales
-grocer | notional
--------| --------
-krishna| 618
-laxman | 1368
-ram    | 747
-</code></pre>
-<ul>
-<li>if we don't query any select columns then all the columns are grouped by <code>by</code> column/s and <code>last</code> aggregate_function is applied by default</li>
-</ul>
-<pre><code>q)select by grocer from sales
-grocer | fruit  price qty
--------| ----------------
-krishna| orange 0     63
-laxman | apple  7     84
-ram    | apple  9     43
-</code></pre>
-<ol>
-<li><code>select[+/- n] from table_name</code></li>
-<li>returns n rows from start</li>
-</ol>
-<pre><code>q)select[3] from sales
-fruit  grocer  price qty
-------------------------
-orange krishna 6     12
-apple  laxman  6     10
-apple  krishna 1     1
-</code></pre>
-<ul>
-<li>if n &lt; 0; returns n rows from end of table</li>
-</ul>
-<pre><code>q)select[-3] from sales
-fruit  grocer  price qty
-------------------------
-apple  krishna 2     90
-apple  laxman  7     84
-orange krishna 0     63
-</code></pre>
-<ul>
-<li>same can be applied to result set after the select is performed <code>n sublist select from table_name</code></li>
-</ul>
-<pre><code>q)3 sublist select from sales
-fruit  grocer  price qty
-------------------------
-orange krishna 6     12
-apple  laxman  6     10
-apple  krishna 1     1
-</code></pre>
-<ol>
-<li><code>select[m n] from table_name</code></li>
-<li>returns <code>n</code> rows starting from index <code>m</code></li>
-</ol>
-<pre><code>q)select[3 4] from sales
-fruit  grocer  price qty
-------------------------
-orange laxman  8     90
-apple  krishna 5     73
-banana ram     4     90
-apple  ram     9     43
-</code></pre>
-<ul>
-<li>same can be applied to result set after select is performed <code>m n sublist select from table_name</code></li>
-</ul>
-<pre><code>q)3 4 sublist select from sales
-fruit  grocer  price qty
-------------------------
-orange laxman  8     90
-apple  krishna 5     73
-banana ram     4     90
-apple  ram     9     43
-</code></pre>
-<ol>
-<li><code>select[ column/s] from table_name</code></li>
+<li>grouping data by column/s
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)select fruit, price by grocer from sales
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>grocer | fruit                            price
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>-------| ------------------------------------------
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>krishna| `orange`apple`apple`apple`orange 6 1 5 2 0
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>laxman | `apple`orange`apple              6 8 7
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>ram    | `banana`apple                    4 9
+</code></pre></div></li>
+<li>we can apply aggregation to grouped data - <code>select aggregate_function column/s by column/s from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)select sum price by grocer from sales
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>grocer | price
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>-------| -----
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>krishna| 14
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>laxman | 21
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>ram    | 13
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>q)select notional: sum price*qty by grocer from sales
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>grocer | notional
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>-------| --------
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>krishna| 618
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>laxman | 1368
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>ram    | 747
+</code></pre></div></li>
+<li>
+<p>if we don't query any select columns then all the columns are grouped by <code>by</code> column/s and <code>last</code> aggregate_function is applied by default
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)select by grocer from sales
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>grocer | fruit  price qty
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>-------| ----------------
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>krishna| orange 0     63
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>laxman | apple  7     84
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>ram    | apple  9     43
+</code></pre></div></p>
+</li>
+<li>
+<p><code>select[+/- n] from table_name</code></p>
+</li>
+<li>returns n rows from start
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)select[3] from sales
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>fruit  grocer  price qty
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>------------------------
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>orange krishna 6     12
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>apple  laxman  6     10
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>apple  krishna 1     1
+</code></pre></div></li>
+<li>if n &lt; 0; returns n rows from end of table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)select[-3] from sales
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>fruit  grocer  price qty
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>------------------------
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>apple  krishna 2     90
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>apple  laxman  7     84
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>orange krishna 0     63
+</code></pre></div></li>
+<li>
+<p>same can be applied to result set after the select is performed <code>n sublist select from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)3 sublist select from sales
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>fruit  grocer  price qty
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>------------------------
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>orange krishna 6     12
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>apple  laxman  6     10
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>apple  krishna 1     1
+</code></pre></div></p>
+</li>
+<li>
+<p><code>select[m n] from table_name</code></p>
+</li>
+<li>returns <code>n</code> rows starting from index <code>m</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)select[3 4] from sales
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>fruit  grocer  price qty
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>------------------------
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>orange laxman  8     90
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>apple  krishna 5     73
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>banana ram     4     90
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>apple  ram     9     43
+</code></pre></div></li>
+<li>
+<p>same can be applied to result set after select is performed <code>m n sublist select from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q)3 4 sublist select from sales
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>fruit  grocer  price qty
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>------------------------
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>orange laxman  8     90
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>apple  krishna 5     73
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>banana ram     4     90
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>apple  ram     9     43
+</code></pre></div></p>
+</li>
+<li>
+<p><code>select[ column/s] from table_name</code></p>
+</li>
 <li><code>&lt;</code> means ascending order</li>
-<li><code>&gt;</code> means descending order</li>
-</ol>
-<pre><code>q)select[&gt;grocer] from sales
-fruit  grocer  price qty
-------------------------
-banana ram     4     90
-apple  ram     9     43
-apple  laxman  6     10
-orange laxman  8     90
-apple  laxman  7     84
-orange krishna 6     12
-apple  krishna 1     1
-apple  krishna 5     73
-apple  krishna 2     90
-orange krishna 0     63
-</code></pre>
-<ul>
-<li>same can be done using functions <code>xasc</code> and <code>xdesc</code> to sort the result table into ascending or descending order respectively - <code>column/s xasc/xdesc select from table_name</code></li>
+<li><code>&gt;</code> means descending order
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q)select[&gt;grocer] from sales
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>fruit  grocer  price qty
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>------------------------
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>banana ram     4     90
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>apple  ram     9     43
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>apple  laxman  6     10
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>orange laxman  8     90
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>apple  laxman  7     84
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>orange krishna 6     12
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>apple  krishna 1     1
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>apple  krishna 5     73
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>apple  krishna 2     90
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>orange krishna 0     63
+</code></pre></div></li>
+<li>same can be done using functions <code>xasc</code> and <code>xdesc</code> to sort the result table into ascending or descending order respectively - <code>column/s xasc/xdesc select from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q)`grocer xasc select from sales
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>fruit  grocer  price qty
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>------------------------
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>orange krishna 6     12
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>apple  krishna 1     1
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>apple  krishna 5     73
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>apple  krishna 2     90
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>orange krishna 0     63
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>apple  laxman  6     10
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>orange laxman  8     90
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>apple  laxman  7     84
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>banana ram     4     90
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>apple  ram     9     43
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>q)`grocer xdesc select from sales
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>fruit  grocer  price qty
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>------------------------
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>banana ram     4     90
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>apple  ram     9     43
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>apple  laxman  6     10
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>orange laxman  8     90
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>apple  laxman  7     84
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>orange krishna 6     12
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>apple  krishna 1     1
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>apple  krishna 5     73
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>apple  krishna 2     90
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>orange krishna 0     63
+</code></pre></div></li>
+<li>all above points can also be combined
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)select[3;&lt;price] fruit, price from sales where fruit in `apple
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>fruit price
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>-----------
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>apple 1
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>apple 2
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>apple 5
+</code></pre></div></li>
 </ul>
-<pre><code>q)`grocer xasc select from sales
-fruit  grocer  price qty
-------------------------
-orange krishna 6     12
-apple  krishna 1     1
-apple  krishna 5     73
-apple  krishna 2     90
-orange krishna 0     63
-apple  laxman  6     10
-orange laxman  8     90
-apple  laxman  7     84
-banana ram     4     90
-apple  ram     9     43
-q)`grocer xdesc select from sales
-fruit  grocer  price qty
-------------------------
-banana ram     4     90
-apple  ram     9     43
-apple  laxman  6     10
-orange laxman  8     90
-apple  laxman  7     84
-orange krishna 6     12
-apple  krishna 1     1
-apple  krishna 5     73
-apple  krishna 2     90
-orange krishna 0     63
-</code></pre>
-<ul>
-<li>all above points can also be combined</li>
-</ul>
-<pre><code>q)select[3;&lt;price] fruit, price from sales where fruit in `apple
-fruit price
------------
-apple 1
-apple 2
-apple 5
-</code></pre>
 <h2 id="exec">Exec</h2>
 <ul>
 <li>general form : <code>exec column/s by column/s from table_name where condition/s</code></li>
@@ -1405,328 +1389,306 @@ apple 5
 <p>exec can only be applied to in-memory tables</p>
 </li>
 <li>
-<p><code>exec column/s from table_name</code></p>
+<p><code>exec column/s from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)exec fruit from sales
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>`orange`apple`apple`orange`apple`banana`apple`apple`apple`orange
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>q)type exec fruit from sales
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>11h
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>q)exec fruit,price from sales
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>fruit| orange apple apple orange apple banana apple apple apple orange
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>price| 6      6     1     8      5     4      9     2     7     0
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>q)type exec fruit,price from sales
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>99h
+</code></pre></div></p>
 </li>
-</ul>
-<pre><code>q)exec fruit from sales
-`orange`apple`apple`orange`apple`banana`apple`apple`apple`orange
-q)type exec fruit from sales
-11h
-q)exec fruit,price from sales
-fruit| orange apple apple orange apple banana apple apple apple orange
-price| 6      6     1     8      5     4      9     2     7     0
-q)type exec fruit,price from sales
-99h
-</code></pre>
-<ol>
 <li><code>exec column/s!column/s from table_name</code></li>
 <li>return type is dictionary</li>
-<li>keys are column/s before <code>!</code> and values are ones after it</li>
-</ol>
-<pre><code>q)exec fruit!price from sales
-orange| 6
-apple | 6
-apple | 1
-orange| 8
-apple | 5
-banana| 4
-apple | 9
-apple | 2
-apple | 7
-orange| 0
-</code></pre>
-<ol>
-<li><code>exec column/s!column/s by column/s from table_name</code></li>
-</ol>
-<pre><code>q)exec fruit!price by grocer from sales
-krishna| `orange`apple`apple`apple`orange!6 1 5 2 0
-laxman | `apple`orange`apple!6 8 7
-ram    | `banana`apple!4 9
-</code></pre>
+<li>keys are column/s before <code>!</code> and values are ones after it
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q)exec fruit!price from sales
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>orange| 6
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>apple | 6
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>apple | 1
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>orange| 8
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>apple | 5
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>banana| 4
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>apple | 9
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>apple | 2
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>apple | 7
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>orange| 0
+</code></pre></div></li>
+<li><code>exec column/s!column/s by column/s from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>q)exec fruit!price by grocer from sales
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>krishna| `orange`apple`apple`apple`orange!6 1 5 2 0
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>laxman | `apple`orange`apple!6 8 7
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>ram    | `banana`apple!4 9
+</code></pre></div></li>
+</ul>
 <h2 id="update">Update</h2>
 <ul>
 <li>update allows us to add/modify columns from table</li>
 <li>general form: <code>update column_name/s: aggr column_name/s by column/s from table_name where condition/s</code></li>
-<li><code>update new_column_name:aggr[column1;column2] from table_name</code></li>
+<li><code>update new_column_name:aggr[column1;column2] from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>q)update notional:price*qty from sales
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>fruit  grocer  price qty notional
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>---------------------------------
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>orange krishna 6     12  72
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>apple  laxman  6     10  60
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>apple  krishna 1     1   1
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>orange laxman  8     90  720
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>apple  krishna 5     73  365
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>banana ram     4     90  360
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>apple  ram     9     43  387
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>apple  krishna 2     90  180
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>apple  laxman  7     84  588
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>orange krishna 0     63  0
+</code></pre></div></li>
+<li>update by default won't make changes to table, we can make changes into table by referring to table_name in update query as symbol - <code>update x:y from ``table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>q)update notional:price*qty from sales
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>fruit  grocer  price qty notional
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>---------------------------------
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>orange krishna 6     12  72
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>apple  laxman  6     10  60
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>apple  krishna 1     1   1
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>orange laxman  8     90  720
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>apple  krishna 5     73  365
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>banana ram     4     90  360
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>apple  ram     9     43  387
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>apple  krishna 2     90  180
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>apple  laxman  7     84  588
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>orange krishna 0     63  0
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>q)sales
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>fruit  grocer  price qty
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>------------------------
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>orange krishna 6     12
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>apple  laxman  6     10
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>apple  krishna 1     1
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>orange laxman  8     90
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>apple  krishna 5     73
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>banana ram     4     90
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>apple  ram     9     43
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>apple  krishna 2     90
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>apple  laxman  7     84
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a>orange krishna 0     63
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>q)update notional:price*qty from `sales
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a>`sales
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>q)sales
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a>fruit  grocer  price qty notional
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a>---------------------------------
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a>orange krishna 6     12  72
+<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a>apple  laxman  6     10  60
+<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a>apple  krishna 1     1   1
+<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a>orange laxman  8     90  720
+<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a>apple  krishna 5     73  365
+<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a>banana ram     4     90  360
+<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a>apple  ram     9     43  387
+<a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a>apple  krishna 2     90  180
+<a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a>apple  laxman  7     84  588
+<a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a>orange krishna 0     63  0
+</code></pre></div></li>
 </ul>
-<pre><code>q)update notional:price*qty from sales
-fruit  grocer  price qty notional
----------------------------------
-orange krishna 6     12  72
-apple  laxman  6     10  60
-apple  krishna 1     1   1
-orange laxman  8     90  720
-apple  krishna 5     73  365
-banana ram     4     90  360
-apple  ram     9     43  387
-apple  krishna 2     90  180
-apple  laxman  7     84  588
-orange krishna 0     63  0
-</code></pre>
-<ul>
-<li>update by default won't make changes to table, we can make changes into table by referring to table_name in update query as symbol - <code>update x:y from ``table_name</code></li>
-</ul>
-<pre><code>q)update notional:price*qty from sales
-fruit  grocer  price qty notional
----------------------------------
-orange krishna 6     12  72
-apple  laxman  6     10  60
-apple  krishna 1     1   1
-orange laxman  8     90  720
-apple  krishna 5     73  365
-banana ram     4     90  360
-apple  ram     9     43  387
-apple  krishna 2     90  180
-apple  laxman  7     84  588
-orange krishna 0     63  0
-q)sales
-fruit  grocer  price qty
-------------------------
-orange krishna 6     12
-apple  laxman  6     10
-apple  krishna 1     1
-orange laxman  8     90
-apple  krishna 5     73
-banana ram     4     90
-apple  ram     9     43
-apple  krishna 2     90
-apple  laxman  7     84
-orange krishna 0     63
-q)update notional:price*qty from `sales
-`sales
-q)sales
-fruit  grocer  price qty notional
----------------------------------
-orange krishna 6     12  72
-apple  laxman  6     10  60
-apple  krishna 1     1   1
-orange laxman  8     90  720
-apple  krishna 5     73  365
-banana ram     4     90  360
-apple  ram     9     43  387
-apple  krishna 2     90  180
-apple  laxman  7     84  588
-orange krishna 0     63  0
-</code></pre>
 <h2 id="delete">Delete</h2>
 <ul>
 <li>used to delete columns from table</li>
 <li>general form is same as update/select</li>
-<li><code>delete column/s from table_name</code></li>
-</ul>
-<pre><code>q)delete price from sales
-fruit  grocer  qty notional
----------------------------
-orange krishna 12  72
-apple  laxman  10  60
-apple  krishna 1   1
-orange laxman  90  720
-apple  krishna 73  365
-banana ram     90  360
-apple  ram     43  387
-apple  krishna 90  180
-apple  laxman  84  588
-orange krishna 63  0
-</code></pre>
-<ol>
-<li><code>delete from table_name where condition/s</code></li>
-</ol>
-<pre><code>q)delete from sales where fruit=`apple
-fruit  grocer  qty notional
----------------------------
-orange krishna 12  72
-orange laxman  90  720
-banana ram     90  360
-orange krishna 63  0
-</code></pre>
-<ul>
+<li><code>delete column/s from table_name</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>q)delete price from sales
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>fruit  grocer  qty notional
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>---------------------------
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>orange krishna 12  72
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>apple  laxman  10  60
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>apple  krishna 1   1
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>orange laxman  90  720
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>apple  krishna 73  365
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>banana ram     90  360
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>apple  ram     43  387
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>apple  krishna 90  180
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>apple  laxman  84  588
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>orange krishna 63  0
+</code></pre></div></li>
+<li><code>delete from table_name where condition/s</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>q)delete from sales where fruit=`apple
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>fruit  grocer  qty notional
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>---------------------------
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>orange krishna 12  72
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>orange laxman  90  720
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>banana ram     90  360
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>orange krishna 63  0
+</code></pre></div></li>
 <li>we need to provide table_name as symbol to make changes permanent</li>
 </ul>
-<pre><code>q)delete notional from sales
-fruit  grocer  qty
-------------------
-orange krishna 12
-apple  laxman  10
-apple  krishna 1
-orange laxman  90
-apple  krishna 73
-banana ram     90
-apple  ram     43
-apple  krishna 90
-apple  laxman  84
-orange krishna 63
-q)sales
-fruit  grocer  qty notional
----------------------------
-orange krishna 12  72
-apple  laxman  10  60
-apple  krishna 1   1
-orange laxman  90  720
-apple  krishna 73  365
-banana ram     90  360
-apple  ram     43  387
-apple  krishna 90  180
-apple  laxman  84  588
-orange krishna 63  0
-q)delete notional from `sales
-`sales
-q)sales
-fruit  grocer  qty
-------------------
-orange krishna 12
-apple  laxman  10
-apple  krishna 1
-orange laxman  90
-apple  krishna 73
-banana ram     90
-apple  ram     43
-apple  krishna 90
-apple  laxman  84
-orange krishna 63
-</code></pre>
-<ul>
-<li>we can also use <code>delete</code> to remove entities from our workspace</li>
-</ul>
-<pre><code>q)tables[]
-,`sales
-q)delete sales from `.
-`.
-q)tables[]
-`symbol$()
-q)sales
-'sales
-  [0]  sales
-       ^
-q)
-</code></pre>
-<ul>
-<li>we can also delete everything from current workspace using <code>delete</code></li>
-</ul>
-<pre><code>q)delete from `.
-`.
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>q)delete notional from sales
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>fruit  grocer  qty
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>------------------
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>orange krishna 12
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>apple  laxman  10
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>apple  krishna 1
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>orange laxman  90
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>apple  krishna 73
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>banana ram     90
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>apple  ram     43
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>apple  krishna 90
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>apple  laxman  84
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>orange krishna 63
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>q)sales
+<a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>fruit  grocer  qty notional
+<a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>---------------------------
+<a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>orange krishna 12  72
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a>apple  laxman  10  60
+<a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a>apple  krishna 1   1
+<a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a>orange laxman  90  720
+<a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a>apple  krishna 73  365
+<a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a>banana ram     90  360
+<a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a>apple  ram     43  387
+<a id="__codelineno-22-24" name="__codelineno-22-24" href="#__codelineno-22-24"></a>apple  krishna 90  180
+<a id="__codelineno-22-25" name="__codelineno-22-25" href="#__codelineno-22-25"></a>apple  laxman  84  588
+<a id="__codelineno-22-26" name="__codelineno-22-26" href="#__codelineno-22-26"></a>orange krishna 63  0
+<a id="__codelineno-22-27" name="__codelineno-22-27" href="#__codelineno-22-27"></a>q)delete notional from `sales
+<a id="__codelineno-22-28" name="__codelineno-22-28" href="#__codelineno-22-28"></a>`sales
+<a id="__codelineno-22-29" name="__codelineno-22-29" href="#__codelineno-22-29"></a>q)sales
+<a id="__codelineno-22-30" name="__codelineno-22-30" href="#__codelineno-22-30"></a>fruit  grocer  qty
+<a id="__codelineno-22-31" name="__codelineno-22-31" href="#__codelineno-22-31"></a>------------------
+<a id="__codelineno-22-32" name="__codelineno-22-32" href="#__codelineno-22-32"></a>orange krishna 12
+<a id="__codelineno-22-33" name="__codelineno-22-33" href="#__codelineno-22-33"></a>apple  laxman  10
+<a id="__codelineno-22-34" name="__codelineno-22-34" href="#__codelineno-22-34"></a>apple  krishna 1
+<a id="__codelineno-22-35" name="__codelineno-22-35" href="#__codelineno-22-35"></a>orange laxman  90
+<a id="__codelineno-22-36" name="__codelineno-22-36" href="#__codelineno-22-36"></a>apple  krishna 73
+<a id="__codelineno-22-37" name="__codelineno-22-37" href="#__codelineno-22-37"></a>banana ram     90
+<a id="__codelineno-22-38" name="__codelineno-22-38" href="#__codelineno-22-38"></a>apple  ram     43
+<a id="__codelineno-22-39" name="__codelineno-22-39" href="#__codelineno-22-39"></a>apple  krishna 90
+<a id="__codelineno-22-40" name="__codelineno-22-40" href="#__codelineno-22-40"></a>apple  laxman  84
+<a id="__codelineno-22-41" name="__codelineno-22-41" href="#__codelineno-22-41"></a>orange krishna 63
+</code></pre></div>
+* we can also use <code>delete</code> to remove entities from our workspace
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>q)tables[]
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>,`sales
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>q)delete sales from `.
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>`.
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>q)tables[]
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>`symbol$()
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>q)sales
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>&#39;sales
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>  [0]  sales
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>       ^
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>q)
+</code></pre></div>
+* we can also delete everything from current workspace using <code>delete</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>q)delete from `.
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>`.
+</code></pre></div></p>
 <h2 id="insert">Insert</h2>
 <ul>
 <li>general form <code>table_name_as_symbol insert (values;as;column;types)</code></li>
-<li>returned is the index number where rows are added into the table</li>
-</ul>
-<pre><code>q)cars:([]brand:`symbol$();model:`symbol$();purchasedate:`date$())
-q)cars
-brand model purchasedate
-------------------------
-q)`cars insert (`bmw;`z4;2020.01.01)
-,0
-q)cars
-brand model purchasedate
-------------------------
-bmw   z4    2020.01.01
-</code></pre>
-<ul>
-<li>more than 1 record can be added with values as list of lists</li>
-</ul>
-<pre><code>q)`cars insert (`tata`mahindra;`nexon`xuv500;2020.12.01 2020.10.02)
-1 2
-q)cars
-brand    model  purchasedate
-----------------------------
-bmw      z4     2020.01.01
-tata     nexon  2020.12.01
-mahindra xuv500 2020.10.02
-</code></pre>
-<ul>
+<li>returned is the index number where rows are added into the table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>q)cars:([]brand:`symbol$();model:`symbol$();purchasedate:`date$())
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>q)cars
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>brand model purchasedate
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>------------------------
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>q)`cars insert (`bmw;`z4;2020.01.01)
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>,0
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>q)cars
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>brand model purchasedate
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>------------------------
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>bmw   z4    2020.01.01
+</code></pre></div></li>
+<li>more than 1 record can be added with values as list of lists
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>q)`cars insert (`tata`mahindra;`nexon`xuv500;2020.12.01 2020.10.02)
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>1 2
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>q)cars
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>brand    model  purchasedate
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>----------------------------
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>bmw      z4     2020.01.01
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>tata     nexon  2020.12.01
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>mahindra xuv500 2020.10.02
+</code></pre></div></li>
 <li>we can also insert entire table, provided schema matches</li>
-<li>same can be done using <code>,:</code> adverb</li>
+<li>same can be done using <code>,:</code> adverb
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>q)`cars insert cars
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>3 4 5
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>q)cars
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>brand    model  purchasedate
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>----------------------------
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>bmw      z4     2020.01.01
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>tata     nexon  2020.12.01
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>mahindra xuv500 2020.10.02
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>bmw      z4     2020.01.01
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>tata     nexon  2020.12.01
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>mahindra xuv500 2020.10.02
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>q)cars,:cars
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>q)cars
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>brand    model  purchasedate
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>----------------------------
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>bmw      z4     2020.01.01
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>tata     nexon  2020.12.01
+<a id="__codelineno-27-18" name="__codelineno-27-18" href="#__codelineno-27-18"></a>mahindra xuv500 2020.10.02
+<a id="__codelineno-27-19" name="__codelineno-27-19" href="#__codelineno-27-19"></a>bmw      z4     2020.01.01
+<a id="__codelineno-27-20" name="__codelineno-27-20" href="#__codelineno-27-20"></a>tata     nexon  2020.12.01
+<a id="__codelineno-27-21" name="__codelineno-27-21" href="#__codelineno-27-21"></a>mahindra xuv500 2020.10.02
+<a id="__codelineno-27-22" name="__codelineno-27-22" href="#__codelineno-27-22"></a>bmw      z4     2020.01.01
+<a id="__codelineno-27-23" name="__codelineno-27-23" href="#__codelineno-27-23"></a>tata     nexon  2020.12.01
+<a id="__codelineno-27-24" name="__codelineno-27-24" href="#__codelineno-27-24"></a>mahindra xuv500 2020.10.02
+<a id="__codelineno-27-25" name="__codelineno-27-25" href="#__codelineno-27-25"></a>bmw      z4     2020.01.01
+<a id="__codelineno-27-26" name="__codelineno-27-26" href="#__codelineno-27-26"></a>tata     nexon  2020.12.01
+<a id="__codelineno-27-27" name="__codelineno-27-27" href="#__codelineno-27-27"></a>mahindra xuv500 2020.10.02
+</code></pre></div></li>
 </ul>
-<pre><code>q)`cars insert cars
-3 4 5
-q)cars
-brand    model  purchasedate
-----------------------------
-bmw      z4     2020.01.01
-tata     nexon  2020.12.01
-mahindra xuv500 2020.10.02
-bmw      z4     2020.01.01
-tata     nexon  2020.12.01
-mahindra xuv500 2020.10.02
-q)cars,:cars
-q)cars
-brand    model  purchasedate
-----------------------------
-bmw      z4     2020.01.01
-tata     nexon  2020.12.01
-mahindra xuv500 2020.10.02
-bmw      z4     2020.01.01
-tata     nexon  2020.12.01
-mahindra xuv500 2020.10.02
-bmw      z4     2020.01.01
-tata     nexon  2020.12.01
-mahindra xuv500 2020.10.02
-bmw      z4     2020.01.01
-tata     nexon  2020.12.01
-mahindra xuv500 2020.10.02
-</code></pre>
 <h2 id="upsert">Upsert</h2>
 <ul>
 <li>can be used for both - keyed and unkeyed tables</li>
-<li>it will modify a row if it already exists and add if it doesn't</li>
+<li>it will modify a row if it already exists and add if it doesn't
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>q)fruitprice:([fruit:`apple`banana] price:100 20; quantity:20 400)
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>q)fruitprice
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>fruit | price quantity
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>------| --------------
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>apple | 100   20
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>banana| 20    400
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>q)`fruitprice upsert (`apple;150;30)
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>`fruitprice
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>q)fruitprice
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>fruit | price quantity
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>------| --------------
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>apple | 150   30
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>banana| 20    400
+</code></pre></div></li>
+<li>in order to add more than 1 row, we need to upsert a table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>q)`fruitprice upsert (`apple`orange;150 30;30 50)
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>&#39;length
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>  [0]  `fruitprice upsert (`apple`orange;150 30;30 50)
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>                   ^
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>q)`fruitprice upsert ([fruit:`apple`orange];price: 150 30;quantity: 30 50)
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>`fruitprice
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>q)fruitprice
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>fruit | price quantity
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>------| --------------
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a>apple | 150   30
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a>banana| 20    400
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>orange| 30    50
+</code></pre></div></li>
+<li>upsert will work if order of columns are different or column values are missing
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>q)fruitprice
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>fruit | price quantity
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>------| --------------
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>apple | 150   30
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>banana| 20    400
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>orange| 30    50
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>q)`fruitprice upsert (fruit:`apple;price: 200 ;quantity: 20)
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>`fruitprice
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>q)fruitprice
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>fruit | price quantity
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>------| --------------
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>apple | 200   20
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>banana| 20    400
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>orange| 30    50
+<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a>q)`fruitprice upsert ([]price:175 40;fruit:`apple`kiwi)
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a>`fruitprice
+<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a>q)fruitprice
+<a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a>fruit | price quantity
+<a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a>------| --------------
+<a id="__codelineno-30-20" name="__codelineno-30-20" href="#__codelineno-30-20"></a>apple | 175   20
+<a id="__codelineno-30-21" name="__codelineno-30-21" href="#__codelineno-30-21"></a>banana| 20    400
+<a id="__codelineno-30-22" name="__codelineno-30-22" href="#__codelineno-30-22"></a>orange| 30    50
+<a id="__codelineno-30-23" name="__codelineno-30-23" href="#__codelineno-30-23"></a>kiwi  | 40
+</code></pre></div></li>
 </ul>
-<pre><code>q)fruitprice:([fruit:`apple`banana] price:100 20; quantity:20 400)
-q)fruitprice
-fruit | price quantity
-------| --------------
-apple | 100   20
-banana| 20    400
-q)`fruitprice upsert (`apple;150;30)
-`fruitprice
-q)fruitprice
-fruit | price quantity
-------| --------------
-apple | 150   30
-banana| 20    400
-</code></pre>
-<ul>
-<li>in order to add more than 1 row, we need to upsert a table</li>
-</ul>
-<pre><code>q)`fruitprice upsert (`apple`orange;150 30;30 50)
-'length
-  [0]  `fruitprice upsert (`apple`orange;150 30;30 50)
-                   ^
-q)`fruitprice upsert ([fruit:`apple`orange];price: 150 30;quantity: 30 50)
-`fruitprice
-q)fruitprice
-fruit | price quantity
-------| --------------
-apple | 150   30
-banana| 20    400
-orange| 30    50
-</code></pre>
-<ul>
-<li>upsert will work if order of columns are different or column values are missing</li>
-</ul>
-<pre><code>q)fruitprice
-fruit | price quantity
-------| --------------
-apple | 150   30
-banana| 20    400
-orange| 30    50
-q)`fruitprice upsert (fruit:`apple;price: 200 ;quantity: 20)
-`fruitprice
-q)fruitprice
-fruit | price quantity
-------| --------------
-apple | 200   20
-banana| 20    400
-orange| 30    50
-q)`fruitprice upsert ([]price:175 40;fruit:`apple`kiwi)
-`fruitprice
-q)fruitprice
-fruit | price quantity
-------| --------------
-apple | 175   20
-banana| 20    400
-orange| 30    50
-kiwi  | 40
-</code></pre>
 
               
             </article>

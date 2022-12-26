@@ -1141,25 +1141,25 @@
 <li>if <code>condition</code> is true execute all expressions till <code>expressionN</code>.</li>
 <li><code>0</code> is <strong>false</strong>, non zero values positive or negative are <strong>true</strong>.</li>
 </ul>
-<pre><code class="language-q">q)a:b:c:0
-q)if[a&gt;0;b:10;c:20]
-q)b
-0
-q)c
-0
-q)a:2
-q)if[a&gt;0;b:10;c:20]
-q)b
-10
-q)c
-20
-q)if[-20; show &quot;executed&quot;]
-&quot;executed&quot;
-q)if[20; show &quot;executed&quot;]
-&quot;executed&quot;
-q)if[0; show &quot;executed&quot;]
-q)
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)a:b:c:0
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)if[a&gt;0;b:10;c:20]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>q)b
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>0
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>q)c
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>0
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>q)a:2
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>q)if[a&gt;0;b:10;c:20]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>q)b
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>10
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>q)c
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>20
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>q)if[-20; show &quot;executed&quot;]
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>&quot;executed&quot;
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>q)if[20; show &quot;executed&quot;]
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>&quot;executed&quot;
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>q)if[0; show &quot;executed&quot;]
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>q)
+</code></pre></div>
 <h2 id="if-else-statement"><code>$</code> if-else statement</h2>
 <ul>
 <li><code>$</code> is used for if-else</li>
@@ -1168,20 +1168,20 @@ q)
 ** here <code>falseExprN</code> will be executed when every <code>condition1..N</code> are false</li>
 <li>once a true condition is found, no execution is followed</li>
 </ul>
-<pre><code class="language-q">q)$[a&lt;2; 1; a&lt;4; 2; a&lt;6; 3; a&lt;8; 4; 20]
-2
-q)a
-2
-q)r:$[a=2;10;20]
-q)r
-10
-q)$[a&lt;10; [b:99;c:100]; [b:100;c:101]]
-100
-q)b
-99
-q)c
-100
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)$[a&lt;2; 1; a&lt;4; 2; a&lt;6; 3; a&lt;8; 4; 20]
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q)a
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>2
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>q)r:$[a=2;10;20]
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>q)r
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>10
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>q)$[a&lt;10; [b:99;c:100]; [b:100;c:101]]
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>100
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>q)b
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>99
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>q)c
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>100
+</code></pre></div>
 <h2 id="vector-conditional"><code>?</code> vector conditional</h2>
 <ul>
 <li>syntax <code>?[vector condition; trueExpr; falseExpr]</code></li>
@@ -1190,28 +1190,28 @@ q)c
 <li>we need to be careful with type promotion:
 ** if <code>trueExpr</code> or <code>falseExpr</code> are of different type than original list, whole returned list will be converted to <code>trueExpr</code> or <code>falseExpr</code> type</li>
 </ul>
-<pre><code class="language-q">q)p:10?10
-q)p
-4 5 4 2 7 8 5 6 4 1                   
-q)?[p&lt;5;p;0]                         / where true, return p, else return 0
-4 0 4 2 0 0 0 0 4 1                 
-q)?[p&lt;5;p;-1f]
-4 -1 4 2 -1 -1 -1 -1 4 1f            / whole list converted to float type
-q)?[p&lt;5;p;0Nd]
-2000.01.05 0N 2000.01.05 2000.01.03 0N 0N 0N 0N 2000.01.05 2000.01.02
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)p:10?10
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>q)p
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>4 5 4 2 7 8 5 6 4 1                   
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>q)?[p&lt;5;p;0]                         / where true, return p, else return 0
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>4 0 4 2 0 0 0 0 4 1                 
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>q)?[p&lt;5;p;-1f]
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>4 -1 4 2 -1 -1 -1 -1 4 1f            / whole list converted to float type
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>q)?[p&lt;5;p;0Nd]
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>2000.01.05 0N 2000.01.05 2000.01.03 0N 0N 0N 0N 2000.01.05 2000.01.02
+</code></pre></div>
 <h2 id="while-loop"><code>while</code> loop</h2>
 <ul>
 <li>this is not generally used, same operation can be done using adverbs</li>
 <li>try to think of solution in vectorised form to use adverbs than <code>while</code></li>
 <li>syntax: <code>while[condition; expression/s]</code></li>
 </ul>
-<pre><code class="language-q">q)a
-2
-q)while[a&gt;0; show a; a-:1]
-2
-1
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)a
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>2
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>q)while[a&gt;0; show a; a-:1]
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>2
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>1
+</code></pre></div>
 <h2 id="do-loop"><code>do</code> loop</h2>
 <ul>
 <li>syntax: <code>do[numberOfIterations; expression/s]</code></li>
@@ -1221,27 +1221,27 @@ q)while[a&gt;0; show a; a-:1]
 </strong> though same can be done using <code>\t:N expr</code> - this is not supported in 2.8 version
 ** useful when we want to see how our expression would scale for thousand or million rows</li>
 </ul>
-<pre><code class="language-q">q)i:0
-q)do[10;show i; i+:1]
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-q)a:1000?100f
-q)b:1000?100f
-q)\t a xexp b
-0
-q)\t do[1000; a xexp b]
-64
-q)\t:1000 a xexp b
-62
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)i:0
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>q)do[10;show i; i+:1]
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>0
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>1
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>2
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>3
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>4
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>5
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>6
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>7
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>8
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>9
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>q)a:1000?100f
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>q)b:1000?100f
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>q)\t a xexp b
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>0
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>q)\t do[1000; a xexp b]
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>64
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>q)\t:1000 a xexp b
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>62
+</code></pre></div>
 
               
             </article>

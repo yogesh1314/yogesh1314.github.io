@@ -1121,106 +1121,101 @@
 
 
 <h1 id="asof-and-window-join">asof and window join</h1>
-<pre><code>q) // setup
-q)\l 2_where_clause_fakedb.q
-q)makedb[50000;10000]
-q)tables[]
-`depth`quotes`trades
-q)count quotes
-50000
-q)count trades
-10000
-</code></pre>
-<ul>
-<li>there are many more quotes than trades</li>
-<li>we want to find quotes just before the trade took place for each sym</li>
-</ul>
-<pre><code></code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q) // setup
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)\l 2_where_clause_fakedb.q
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>q)makedb[50000;10000]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>q)tables[]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>`depth`quotes`trades
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>q)count quotes
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>50000
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>q)count trades
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>10000
+</code></pre></div>
+* there are many more quotes than trades
+* we want to find quotes just before the trade took place for each sym
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>
+</code></pre></div></p>
 <h2 id="as-of-join-aj-aj0">As of Join <code>aj</code> <code>aj0</code></h2>
 <ul>
 <li>format : <code>aj[c1..cn;table1;table2]</code></li>
 <li><code>cn</code> : column on which as-of-join is performed, most recent time from t2 which is asof(&lt;=) time in table1</li>
 <li><code>c1..cn-1</code> : columns are matched exactly in table1 and table2</li>
-<li><code>aj</code> will have all columns from <code>table1</code> and values of columns <code>c1..cn</code> are from <code>table1</code> and value from <code>table2</code> will have matching values</li>
-</ul>
-<pre><code>q)select from aj[`sym`time;trades;quotes] where sym=`AAPL
-time                          sym  src price size bid   ask   bsize asize
--------------------------------------------------------------------------
-2020.12.26D08:00:03.057000000 AAPL L   25.33 4527 25.33 25.37 9000  3000
-2020.12.26D08:00:12.190000000 AAPL O   25.38 1889 25.35 25.38 4000  7000
-2020.12.26D08:01:22.084000000 AAPL L   25.37 5413 25.35 25.37 6000  5500
-2020.12.26D08:02:12.686000000 AAPL O   25.33 1841 25.32 25.33 4000  5000
-2020.12.26D08:02:59.207000000 AAPL N   25.32 957  25.32 25.36 1500  6500
-2020.12.26D08:03:04.870000000 AAPL N   25.34 991  25.32 25.34 3000  1000
-2020.12.26D08:03:05.194000000 AAPL N   25.34 454  25.32 25.34 3000  1000
-2020.12.26D08:03:50.205000000 AAPL N   25.34 176  25.31 25.34 1500  2000
-2020.12.26D08:03:52.988000000 AAPL N   25.34 491  25.31 25.34 1500  2000
-2020.12.26D08:04:00.136000000 AAPL L   25.35 4392 25.32 25.35 1000  5500
-2020.12.26D08:04:14.266000000 AAPL N   25.32 530  25.32 25.33 5500  9000
-2020.12.26D08:05:16.333000000 AAPL L   25.35 1118 25.33 25.35 7000  6000
-2020.12.26D08:06:36.068000000 AAPL L   25.33 1321 25.33 25.33 5500  6000
-2020.12.26D08:06:46.472000000 AAPL L   25.33 1973 25.33 25.35 2500  8500
-2020.12.26D08:07:40.059000000 AAPL O   25.36 4447 25.36 25.4  10000 500
-2020.12.26D08:08:01.875000000 AAPL N   25.37 4330 25.37 25.42 7500  10000
-2020.12.26D08:08:07.323000000 AAPL N   25.42 3511 25.37 25.42 7500  10000
-2020.12.26D08:08:11.894000000 AAPL N   25.37 4588 25.37 25.42 7500  10000
-2020.12.26D08:08:16.016000000 AAPL N   25.37 3810 25.37 25.42 7500  10000
-2020.12.26D08:08:25.522000000 AAPL N   25.37 2264 25.37 25.42 7500  10000
-..
-q)select from quotes where sym=`AAPL
-time                          sym  src bid   ask   bsize asize
---------------------------------------------------------------
-2020.12.26D08:00:02.705000000 AAPL N   25.32 25.37 6500  1000
-2020.12.26D08:00:02.882000000 AAPL L   25.33 25.37 9000  3000
-2020.12.26D08:00:04.111000000 AAPL L   25.33 25.37 9500  7000
-2020.12.26D08:00:05.040000000 AAPL L   25.35 25.37 2500  9500
-2020.12.26D08:00:09.235000000 AAPL N   25.35 25.37 4000  6500
-2020.12.26D08:00:10.576000000 AAPL O   25.35 25.38 4000  7000
-2020.12.26D08:00:16.432000000 AAPL O   25.35 25.39 3000  10000
-2020.12.26D08:00:25.528000000 AAPL N   25.35 25.37 3000  4000
-2020.12.26D08:00:26.237000000 AAPL N   25.34 25.37 6000  9000
-2020.12.26D08:00:32.058000000 AAPL L   25.35 25.38 3000  4000
-2020.12.26D08:00:47.294000000 AAPL L   25.34 25.36 9500  2500
-2020.12.26D08:01:06.551000000 AAPL N   25.35 25.38 4500  2500
-2020.12.26D08:01:08.708000000 AAPL N   25.32 25.37 9000  7500
-2020.12.26D08:01:16.411000000 AAPL L   25.35 25.37 6000  5500
-2020.12.26D08:01:25.050000000 AAPL L   25.34 25.37 500   5500
-2020.12.26D08:01:33.147000000 AAPL N   25.35 25.36 6500  5000
-2020.12.26D08:01:46.838000000 AAPL L   25.34 25.37 2500  4500
-2020.12.26D08:01:47.149000000 AAPL L   25.32 25.35 3000  5500
-2020.12.26D08:01:48.825000000 AAPL N   25.33 25.36 500   7000
-2020.12.26D08:01:59.163000000 AAPL L   25.35 25.36 5000  500
-..
-</code></pre>
-<ul>
-<li>query performance will matter a lot if join columns<code>c1..cn</code> has grouped(<code>g#</code>) attribute set for in-memory tables and parted(<code>p#</code>) attribute set for on-disk tables</li>
-</ul>
-<pre><code>q)\t aj[`sym`time;trades;quotes]
-12
-q)meta quotes
-c    | t f a
------| -----
-time | p
-sym  | s   g
-src  | s   g
-bid  | f
-ask  | f
-bsize| i
-asize| i
-q)meta trades
-c    | t f a
------| -----
-time | p
-sym  | s   g
-src  | s   g
-price| f
-size | i
-q)update `#sym from `quotes
-`quotes
-q)\t aj[`sym`time;trades;quotes]
-5805
-</code></pre>
-<ul>
+<li><code>aj</code> will have all columns from <code>table1</code> and values of columns <code>c1..cn</code> are from <code>table1</code> and value from <code>table2</code> will have matching values
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)select from aj[`sym`time;trades;quotes] where sym=`AAPL
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>time                          sym  src price size bid   ask   bsize asize
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>-------------------------------------------------------------------------
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>2020.12.26D08:00:03.057000000 AAPL L   25.33 4527 25.33 25.37 9000  3000
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>2020.12.26D08:00:12.190000000 AAPL O   25.38 1889 25.35 25.38 4000  7000
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>2020.12.26D08:01:22.084000000 AAPL L   25.37 5413 25.35 25.37 6000  5500
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>2020.12.26D08:02:12.686000000 AAPL O   25.33 1841 25.32 25.33 4000  5000
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>2020.12.26D08:02:59.207000000 AAPL N   25.32 957  25.32 25.36 1500  6500
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>2020.12.26D08:03:04.870000000 AAPL N   25.34 991  25.32 25.34 3000  1000
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>2020.12.26D08:03:05.194000000 AAPL N   25.34 454  25.32 25.34 3000  1000
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>2020.12.26D08:03:50.205000000 AAPL N   25.34 176  25.31 25.34 1500  2000
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>2020.12.26D08:03:52.988000000 AAPL N   25.34 491  25.31 25.34 1500  2000
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>2020.12.26D08:04:00.136000000 AAPL L   25.35 4392 25.32 25.35 1000  5500
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>2020.12.26D08:04:14.266000000 AAPL N   25.32 530  25.32 25.33 5500  9000
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>2020.12.26D08:05:16.333000000 AAPL L   25.35 1118 25.33 25.35 7000  6000
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>2020.12.26D08:06:36.068000000 AAPL L   25.33 1321 25.33 25.33 5500  6000
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>2020.12.26D08:06:46.472000000 AAPL L   25.33 1973 25.33 25.35 2500  8500
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>2020.12.26D08:07:40.059000000 AAPL O   25.36 4447 25.36 25.4  10000 500
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>2020.12.26D08:08:01.875000000 AAPL N   25.37 4330 25.37 25.42 7500  10000
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>2020.12.26D08:08:07.323000000 AAPL N   25.42 3511 25.37 25.42 7500  10000
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>2020.12.26D08:08:11.894000000 AAPL N   25.37 4588 25.37 25.42 7500  10000
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>2020.12.26D08:08:16.016000000 AAPL N   25.37 3810 25.37 25.42 7500  10000
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>2020.12.26D08:08:25.522000000 AAPL N   25.37 2264 25.37 25.42 7500  10000
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>..
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>q)select from quotes where sym=`AAPL
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>time                          sym  src bid   ask   bsize asize
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>--------------------------------------------------------------
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>2020.12.26D08:00:02.705000000 AAPL N   25.32 25.37 6500  1000
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>2020.12.26D08:00:02.882000000 AAPL L   25.33 25.37 9000  3000
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>2020.12.26D08:00:04.111000000 AAPL L   25.33 25.37 9500  7000
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>2020.12.26D08:00:05.040000000 AAPL L   25.35 25.37 2500  9500
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>2020.12.26D08:00:09.235000000 AAPL N   25.35 25.37 4000  6500
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>2020.12.26D08:00:10.576000000 AAPL O   25.35 25.38 4000  7000
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>2020.12.26D08:00:16.432000000 AAPL O   25.35 25.39 3000  10000
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>2020.12.26D08:00:25.528000000 AAPL N   25.35 25.37 3000  4000
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>2020.12.26D08:00:26.237000000 AAPL N   25.34 25.37 6000  9000
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>2020.12.26D08:00:32.058000000 AAPL L   25.35 25.38 3000  4000
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>2020.12.26D08:00:47.294000000 AAPL L   25.34 25.36 9500  2500
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>2020.12.26D08:01:06.551000000 AAPL N   25.35 25.38 4500  2500
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>2020.12.26D08:01:08.708000000 AAPL N   25.32 25.37 9000  7500
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>2020.12.26D08:01:16.411000000 AAPL L   25.35 25.37 6000  5500
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>2020.12.26D08:01:25.050000000 AAPL L   25.34 25.37 500   5500
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>2020.12.26D08:01:33.147000000 AAPL N   25.35 25.36 6500  5000
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>2020.12.26D08:01:46.838000000 AAPL L   25.34 25.37 2500  4500
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>2020.12.26D08:01:47.149000000 AAPL L   25.32 25.35 3000  5500
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>2020.12.26D08:01:48.825000000 AAPL N   25.33 25.36 500   7000
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>2020.12.26D08:01:59.163000000 AAPL L   25.35 25.36 5000  500
+<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>..
+</code></pre></div></li>
+<li>query performance will matter a lot if join columns<code>c1..cn</code> has grouped(<code>g#</code>) attribute set for in-memory tables and parted(<code>p#</code>) attribute set for on-disk tables
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)\t aj[`sym`time;trades;quotes]
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>12
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>q)meta quotes
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>c    | t f a
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>-----| -----
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>time | p
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>sym  | s   g
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>src  | s   g
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>bid  | f
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>ask  | f
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>bsize| i
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>asize| i
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>q)meta trades
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>c    | t f a
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>-----| -----
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>time | p
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>sym  | s   g
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>src  | s   g
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>price| f
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>size | i
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>q)update `#sym from `quotes
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>`quotes
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>q)\t aj[`sym`time;trades;quotes]
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>5805
+</code></pre></div></li>
 <li><code>aj0</code> will used if in result table we want to show values for column <code>cn</code> from <code>table2</code></li>
 </ul>
 <h3 id="aj-in-hdb"><code>aj</code> in <strong>hdb</strong></h3>
@@ -1239,39 +1234,39 @@ q)\t aj[`sym`time;trades;quotes]
 <li><code>f0</code>, <code>f1</code> are aggregate function applied to values in q columns <code>c0</code> and <code>c1</code> over the intervals</li>
 <li>returns for each record in <code>t</code>, a record with additional columns <code>c0</code> and <code>c1</code>, which are the results of the aggregation functions applied to values over the matching intervals in <code>w</code>.</li>
 <li><code>aj</code> is a special case of <code>wj</code> or <code>wj</code> is generalized form of <code>aj</code></li>
-<li>exact match columns <code>c</code> needs to have attribute <code>#p</code> or <code>#g</code> applied to them, other wise query would be much slower and also might give wrong results as well</li>
+<li>exact match columns <code>c</code> needs to have attribute <code>#p</code> or <code>#g</code> applied to them, other wise query would be much slower and also might give wrong results as well
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)w: -1000 1000+\:trades.time
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>q)w
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>08:00:02.057 08:00:03.230 08:00:10.150 08:00:11.190 08:00:11.531 08:00:14.312..
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>08:00:04.057 08:00:05.230 08:00:12.150 08:00:13.190 08:00:13.531 08:00:16.312..
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>q)\t wj[w; `sym`time;trades;(quotes; (max;`bid);(min;`ask))]
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>61
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>q)wj[w; `sym`time;trades;(quotes; (max;`bid);(min;`ask))]
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>time         sym  src price size bid   ask
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>--------------------------------------------
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>08:00:03.057 AAPL L   25.33 4527 25.33 25.37
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>08:00:04.230 YHOO N   35.49 1457 35.49 35.52
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>08:00:11.150 DELL L   29.08 6788 43.53 25.38
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>08:00:12.190 AAPL O   25.38 1889 25.35 25.38
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>08:00:12.531 MSFT L   36.08 4974 36.08 36.11
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>08:00:15.312 ORCL O   32.2  668  43.53 25.37
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>08:00:24.269 ORCL L   32.23 1116 32.19 32.23
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>08:00:29.856 MSFT L   36.13 766  36.1  36.13
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>08:00:33.033 ORCL L   32.23 1749 43.54 25.37
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>08:00:33.126 ORCL L   32.19 1394 43.54 25.37
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>08:00:40.441 MSFT L   36.12 1151 36.12 36.13
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>08:00:46.699 IBM  N   43.57 1958 43.55 43.57
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>08:00:49.597 CSCO L   35.46 2164 35.46 35.49
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>08:00:51.534 CSCO L   35.46 2762 35.46 35.49
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>08:00:56.880 YHOO N   35.52 227  35.49 35.52
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>08:00:57.649 MSFT L   36.13 2028 36.08 36.13
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>08:00:58.363 CSCO O   35.49 2273 35.45 35.49
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>08:01:00.037 DELL L   29.06 3260 29.04 29.06
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>08:01:04.382 NOK  O   31.79 3765 31.79 31.83
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>08:01:06.810 IBM  N   43.55 4224 43.55 25.36
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)w: -1000 1000+\:trades.time
-q)w
-08:00:02.057 08:00:03.230 08:00:10.150 08:00:11.190 08:00:11.531 08:00:14.312..
-08:00:04.057 08:00:05.230 08:00:12.150 08:00:13.190 08:00:13.531 08:00:16.312..
-q)\t wj[w; `sym`time;trades;(quotes; (max;`bid);(min;`ask))]
-61
-q)wj[w; `sym`time;trades;(quotes; (max;`bid);(min;`ask))]
-time         sym  src price size bid   ask
---------------------------------------------
-08:00:03.057 AAPL L   25.33 4527 25.33 25.37
-08:00:04.230 YHOO N   35.49 1457 35.49 35.52
-08:00:11.150 DELL L   29.08 6788 43.53 25.38
-08:00:12.190 AAPL O   25.38 1889 25.35 25.38
-08:00:12.531 MSFT L   36.08 4974 36.08 36.11
-08:00:15.312 ORCL O   32.2  668  43.53 25.37
-08:00:24.269 ORCL L   32.23 1116 32.19 32.23
-08:00:29.856 MSFT L   36.13 766  36.1  36.13
-08:00:33.033 ORCL L   32.23 1749 43.54 25.37
-08:00:33.126 ORCL L   32.19 1394 43.54 25.37
-08:00:40.441 MSFT L   36.12 1151 36.12 36.13
-08:00:46.699 IBM  N   43.57 1958 43.55 43.57
-08:00:49.597 CSCO L   35.46 2164 35.46 35.49
-08:00:51.534 CSCO L   35.46 2762 35.46 35.49
-08:00:56.880 YHOO N   35.52 227  35.49 35.52
-08:00:57.649 MSFT L   36.13 2028 36.08 36.13
-08:00:58.363 CSCO O   35.49 2273 35.45 35.49
-08:01:00.037 DELL L   29.06 3260 29.04 29.06
-08:01:04.382 NOK  O   31.79 3765 31.79 31.83
-08:01:06.810 IBM  N   43.55 4224 43.55 25.36
-..
-</code></pre>
 
               
             </article>

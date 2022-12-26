@@ -1101,92 +1101,92 @@
 <li>Count of keys must be equal to count of values</li>
 <li>Data type is 99</li>
 </ul>
-<pre><code class="language-q">q) l1:`q`w`e
-q) l2:`a`s`d
-q) l3:`z`x`c
-q) d1:(`A`B`C)!(l1;l2;l3)
-q) d1
-A| q w e
-B| a s d
-C| z x c
-q) type dict
-99h
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q) l1:`q`w`e
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q) l2:`a`s`d
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>q) l3:`z`x`c
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>q) d1:(`A`B`C)!(l1;l2;l3)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>q) d1
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>A| q w e
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>B| a s d
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>C| z x c
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>q) type dict
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>99h
+</code></pre></div>
 <h2 id="accessing-values-in-a-dictionary">Accessing values in a dictionary</h2>
 <ul>
 <li>access is done using key or list of keys with dictionary name</li>
 </ul>
-<pre><code class="language-q">q) d1`A
-`q`w`e
-q) d1`A`B
-q w e
-a s d
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q) d1`A
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>`q`w`e
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q) d1`A`B
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>q w e
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>a s d
+</code></pre></div>
 <ul>
 <li>function <code>key</code> or <code>cols</code> can be used to view keys of dictionary</li>
 <li>function <code>value</code> can be used to view values of dictionary</li>
 </ul>
-<pre><code class="language-q">q) key d1
-`A`B`C
-q) cols d1
-`A`B`C
-q) value d1
-q w e
-a s d
-z x c
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q) key d1
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>`A`B`C
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>q) cols d1
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>`A`B`C
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>q) value d1
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>q w e
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>a s d
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>z x c
+</code></pre></div>
 <ul>
 <li>keys in dictionary <strong>need not be unique</strong></li>
 <li>trying to get value for repeating key will return value of first match for the key</li>
 </ul>
-<pre><code class="language-q">q) d3:(`q`q`w`e`q)!til 5
-q) d3
-q| 0
-q| 1
-w| 2
-e| 3
-q| 4
-q) d3`q
-0
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q) d3:(`q`q`w`e`q)!til 5
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>q) d3
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>q| 0
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>q| 1
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>w| 2
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>e| 3
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>q| 4
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>q) d3`q
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>0
+</code></pre></div>
 <ul>
 <li>dictionary can have nested lists or any q entity as values</li>
 </ul>
-<pre><code class="language-q">q) d4: (`q`w`e)!(((1 2 3);4 5); 1010b; 1 2 3f)
-q) d4
-q| (1 2 3;4 5)
-w| 1010b
-e| 1 2 3f
-q) d4`q
-1 2 3
-4 5
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q) d4: (`q`w`e)!(((1 2 3);4 5); 1010b; 1 2 3f)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>q) d4
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>q| (1 2 3;4 5)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>w| 1010b
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>e| 1 2 3f
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>q) d4`q
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>1 2 3
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>4 5
+</code></pre></div>
 <h2 id="adding-or-modifying-values-to-dictionary">Adding or modifying values to dictionary</h2>
 <ul>
 <li>we can add new values using join <code>,</code> operator</li>
 <li>we can modify values using key as index and assign new value</li>
 </ul>
-<pre><code class="language-q">q)d1,(`P`Q)!(23 56;78 97f)  / changes wont reflect in dictionary
-A| `q`w`e
-B| `a`s`d
-C| `z`x`c
-P| 23 56
-Q| 78 97f
-q)d1,:(`P`Q)!(23 56;78 97f) / compounded assignment to make change in place
-q)d1
-A| `q`w`e
-B| `a`s`d
-C| `z`x`c
-P| 23 56
-Q| 78 97f
-q)d1[`P]: 100 102           / new value assigned
-q)d1
-A| `q`w`e
-B| `a`s`d
-C| `z`x`c
-P| 100 102
-Q| 78 97f
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)d1,(`P`Q)!(23 56;78 97f)  / changes wont reflect in dictionary
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>A| `q`w`e
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>B| `a`s`d
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>C| `z`x`c
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>P| 23 56
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Q| 78 97f
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>q)d1,:(`P`Q)!(23 56;78 97f) / compounded assignment to make change in place
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>q)d1
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>A| `q`w`e
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>B| `a`s`d
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>C| `z`x`c
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>P| 23 56
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>Q| 78 97f
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>q)d1[`P]: 100 102           / new value assigned
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>q)d1
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>A| `q`w`e
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>B| `a`s`d
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>C| `z`x`c
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>P| 100 102
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>Q| 78 97f
+</code></pre></div>
 
               
             </article>

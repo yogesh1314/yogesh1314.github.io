@@ -1039,30 +1039,28 @@
 <li>lets open a q process and define port as <code>1234</code></li>
 <li>and define some variables</li>
 </ul>
-<pre><code class="language-q">q)\p 1234
-q)\p
-1234i
-q)a:24
-q)b:9 0 8 9
-q)a
-24
-q)b
-9 0 8 9
-q)t:([]sym:`a`b`c;prc: 10.23 23.45 78.44;size: 99 55 22)
-q)t
-sym prc   size
---------------
-a   10.23 99
-b   23.45 55
-c   78.44 22
-q)f:{x*x}
-q)f
-{x*x}
-</code></pre>
-<ul>
-<li>now if we open browser with address <code>http://localhost:[portnumber]/</code></li>
-<li>it will show variables list on 1 side and its value on other side</li>
-</ul>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)\p 1234
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)\p
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>1234i
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>q)a:24
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>q)b:9 0 8 9
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>q)a
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>24
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>q)b
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>9 0 8 9
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>q)t:([]sym:`a`b`c;prc: 10.23 23.45 78.44;size: 99 55 22)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>q)t
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>sym prc   size
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>--------------
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>a   10.23 99
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>b   23.45 55
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>c   78.44 22
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>q)f:{x*x}
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>q)f
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>{x*x}
+</code></pre></div>
+* now if we open browser with address <code>http://localhost:[portnumber]/</code>
+* it will show variables list on 1 side and its value on other side</p>
 <p><img alt="Browser" src="../first.png" title="browser" /></p>
 <ul>
 <li>we can execute simple commands using <code>?</code> after url</li>

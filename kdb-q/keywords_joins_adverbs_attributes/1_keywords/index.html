@@ -1438,253 +1438,245 @@
 
 <h1 id="keywords">Keywords</h1>
 <h2 id="table-modification-keywords">Table modification Keywords</h2>
-<pre><code>q)//setup
-q)\l 2_where_clause_fakedb.q
-USAGE: makedb[NUM QUOTES;NUM TRADES] eg makedb[100000;10000]
-
-makedb1[NUM QUOTES;NUM TRADES;DATE;RANDOMISED COUNT FACTOR] eg makedb1[100000;10000;.z.d;.3]
-
-makehdb[HDBDIR;NUM DAYS;APPROXIMATE NUM QUOTES PER DAY; APPROXIMATE NUM TRADES PER DAY] eg makehdb[`:hdb; 5; 100000; 10000]
-
-makecsv[CSVDIR;NUM DAYS;NUM QUOTES;NUM TRADES]
-
-q)makedb[10000;1000]
-q)tables[]
-`depth`quotes`trades
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)//setup
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)\l 2_where_clause_fakedb.q
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>USAGE: makedb[NUM QUOTES;NUM TRADES] eg makedb[100000;10000]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>makedb1[NUM QUOTES;NUM TRADES;DATE;RANDOMISED COUNT FACTOR] eg makedb1[100000;10000;.z.d;.3]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>makehdb[HDBDIR;NUM DAYS;APPROXIMATE NUM QUOTES PER DAY; APPROXIMATE NUM TRADES PER DAY] eg makehdb[`:hdb; 5; 100000; 10000]
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>makecsv[CSVDIR;NUM DAYS;NUM QUOTES;NUM TRADES]
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>q)makedb[10000;1000]
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>q)tables[]
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>`depth`quotes`trades
+</code></pre></div>
 <h3 id="cols"><code>cols</code></h3>
 <ul>
-<li>used to view columns of the table and also to view keys of the dictionary</li>
+<li>used to view columns of the table and also to view keys of the dictionary
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)cols trades
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>`time`sym`src`price`size
+</code></pre></div></li>
 </ul>
-<pre><code>q)cols trades
-`time`sym`src`price`size
-</code></pre>
 <h3 id="xasc-xdesc"><code>xasc</code> / <code>xdesc</code></h3>
 <ul>
-<li>used to sort the table by columns specified</li>
+<li>used to sort the table by columns specified
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)`price xasc  trades
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>time                          sym  src price size
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>-------------------------------------------------
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>2020.12.26D08:34:34.754000000 AAPL O   25.12 1535
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>2020.12.26D08:34:01.151000000 AAPL L   25.14 5290
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>2020.12.26D08:35:52.188000000 AAPL N   25.15 3413
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>2020.12.26D08:42:18.951000000 AAPL L   25.16 1902
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>2020.12.26D08:33:35.987000000 AAPL L   25.18 4579
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>..
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>q)`price xdesc trades
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>time                          sym src price size
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>------------------------------------------------
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>2020.12.26D16:17:13.172000000 IBM L   43.88 2560
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>2020.12.26D15:29:24.817000000 IBM L   43.84 369
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>2020.12.26D16:12:52.607000000 IBM N   43.83 4454
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>2020.12.26D16:21:07.666000000 IBM O   43.82 3918
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>2020.12.26D16:13:22.181000000 IBM L   43.81 4869
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>..
+</code></pre></div></li>
+<li>more than 1 column can also be specified - it will first sort by first column, and if values are same for first then sort by next column
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)`price`size xdesc trades
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>time                          sym src price size
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>------------------------------------------------
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>2020.12.26D16:17:13.172000000 IBM L   43.88 2560
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>2020.12.26D15:29:24.817000000 IBM L   43.84 369
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>2020.12.26D16:12:52.607000000 IBM N   43.83 4454
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>2020.12.26D16:21:07.666000000 IBM O   43.82 3918
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>2020.12.26D16:13:22.181000000 IBM L   43.81 4869
+</code></pre></div></li>
 </ul>
-<pre><code>q)`price xasc  trades
-time                          sym  src price size
--------------------------------------------------
-2020.12.26D08:34:34.754000000 AAPL O   25.12 1535
-2020.12.26D08:34:01.151000000 AAPL L   25.14 5290
-2020.12.26D08:35:52.188000000 AAPL N   25.15 3413
-2020.12.26D08:42:18.951000000 AAPL L   25.16 1902
-2020.12.26D08:33:35.987000000 AAPL L   25.18 4579
-..
-q)`price xdesc trades
-time                          sym src price size
-------------------------------------------------
-2020.12.26D16:17:13.172000000 IBM L   43.88 2560
-2020.12.26D15:29:24.817000000 IBM L   43.84 369
-2020.12.26D16:12:52.607000000 IBM N   43.83 4454
-2020.12.26D16:21:07.666000000 IBM O   43.82 3918
-2020.12.26D16:13:22.181000000 IBM L   43.81 4869
-..
-</code></pre>
-<ul>
-<li>more than 1 column can also be specified - it will first sort by first column, and if values are same for first then sort by next column</li>
-</ul>
-<pre><code>q)`price`size xdesc trades
-time                          sym src price size
-------------------------------------------------
-2020.12.26D16:17:13.172000000 IBM L   43.88 2560
-2020.12.26D15:29:24.817000000 IBM L   43.84 369
-2020.12.26D16:12:52.607000000 IBM N   43.83 4454
-2020.12.26D16:21:07.666000000 IBM O   43.82 3918
-2020.12.26D16:13:22.181000000 IBM L   43.81 4869
-</code></pre>
 <h3 id="xcol"><code>xcol</code></h3>
 <ul>
 <li>used to rename columns of table</li>
 <li>it will only change column name from <strong>left to right</strong></li>
-<li>it will rename with first column as first name provided by symbol list on left and so on..</li>
+<li>it will rename with first column as first name provided by symbol list on left and so on..
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)`Time`Sym xcol trades
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Time                          Sym  src price size
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>-------------------------------------------------
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>2020.12.26D08:00:17.350000000 CSCO N   35.46 2367
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>2020.12.26D08:00:30.245000000 DELL N   29.05 27
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>2020.12.26D08:01:40.842000000 AAPL L   25.37 2797
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>2020.12.26D08:02:11.579000000 CSCO L   35.46 1714
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>2020.12.26D08:02:12.246000000 YHOO N   35.5  166
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)`Time`Sym xcol trades
-Time                          Sym  src price size
--------------------------------------------------
-2020.12.26D08:00:17.350000000 CSCO N   35.46 2367
-2020.12.26D08:00:30.245000000 DELL N   29.05 27
-2020.12.26D08:01:40.842000000 AAPL L   25.37 2797
-2020.12.26D08:02:11.579000000 CSCO L   35.46 1714
-2020.12.26D08:02:12.246000000 YHOO N   35.5  166
-..
-</code></pre>
 <h3 id="xcols"><code>xcols</code></h3>
 <ul>
 <li>reorder columns of the table</li>
 <li>it doesn't have to complete list</li>
 <li>it moves the specified columns to the left of the table</li>
-<li>column names need to be valid column names</li>
+<li>column names need to be valid column names
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)`price`size xcols trades
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>price size time                          sym  src
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>-------------------------------------------------
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>35.46 2367 2020.12.26D08:00:17.350000000 CSCO N
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>29.05 27   2020.12.26D08:00:30.245000000 DELL N
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>25.37 2797 2020.12.26D08:01:40.842000000 AAPL L
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>35.46 1714 2020.12.26D08:02:11.579000000 CSCO L
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>35.5  166  2020.12.26D08:02:12.246000000 YHOO N
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>..
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>q)`price`size`polo xcols trades
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>&#39;polo
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>  [0]  `price`size`polo xcols trades
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>                        ^
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>q))\
+</code></pre></div></li>
 </ul>
-<pre><code>q)`price`size xcols trades
-price size time                          sym  src
--------------------------------------------------
-35.46 2367 2020.12.26D08:00:17.350000000 CSCO N
-29.05 27   2020.12.26D08:00:30.245000000 DELL N
-25.37 2797 2020.12.26D08:01:40.842000000 AAPL L
-35.46 1714 2020.12.26D08:02:11.579000000 CSCO L
-35.5  166  2020.12.26D08:02:12.246000000 YHOO N
-..
-q)`price`size`polo xcols trades
-'polo
-  [0]  `price`size`polo xcols trades
-                        ^
-q))\
-</code></pre>
 <h3 id="xkey"><code>xkey</code></h3>
 <ul>
 <li>used to make specified columns as key of table</li>
 <li>can be multiple columns as well</li>
-<li>to key table in-place provid table name as symbol</li>
+<li>to key table in-place provid table name as symbol
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)`price`src xkey trades
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>price src| time                          sym  size
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>---------| ---------------------------------------
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>35.46 N  | 2020.12.26D08:00:17.350000000 CSCO 2367
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>29.05 N  | 2020.12.26D08:00:30.245000000 DELL 27
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>25.37 L  | 2020.12.26D08:01:40.842000000 AAPL 2797
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>35.46 L  | 2020.12.26D08:02:11.579000000 CSCO 1714
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>35.5  N  | 2020.12.26D08:02:12.246000000 YHOO 166
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>..
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>q)`price`src xkey `trades
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>`trades
+</code></pre></div></li>
 </ul>
-<pre><code>q)`price`src xkey trades
-price src| time                          sym  size
----------| ---------------------------------------
-35.46 N  | 2020.12.26D08:00:17.350000000 CSCO 2367
-29.05 N  | 2020.12.26D08:00:30.245000000 DELL 27
-25.37 L  | 2020.12.26D08:01:40.842000000 AAPL 2797
-35.46 L  | 2020.12.26D08:02:11.579000000 CSCO 1714
-35.5  N  | 2020.12.26D08:02:12.246000000 YHOO 166
-..
-q)`price`src xkey `trades
-`trades
-</code></pre>
 <h3 id="keys"><code>keys</code></h3>
 <ul>
-<li>can be used to see keys of table</li>
+<li>can be used to see keys of table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)keys trades
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>`price`src
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>q)keys quotes
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>`symbol$()
+</code></pre></div></li>
 </ul>
-<pre><code>q)keys trades
-`price`src
-q)keys quotes
-`symbol$()
-</code></pre>
 <h3 id="key"><code>key</code></h3>
 <ul>
-<li>to view full keyed columns of the table</li>
+<li>to view full keyed columns of the table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)key trades
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>price src
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>---------
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>35.46 N
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>29.05 N
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>25.37 L
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>35.46 L
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>35.5  N
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>..
+</code></pre></div></li>
+<li>can also be used to get list of keys of the dictionary
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)d:`ab`bv!1 2
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>q)d
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>ab| 1
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>bv| 2
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>q)key d
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>`ab`bv
+</code></pre></div></li>
 </ul>
-<pre><code>q)key trades
-price src
----------
-35.46 N
-29.05 N
-25.37 L
-35.46 L
-35.5  N
-..
-</code></pre>
-<ul>
-<li>can also be used to get list of keys of the dictionary</li>
-</ul>
-<pre><code>q)d:`ab`bv!1 2
-q)d
-ab| 1
-bv| 2
-q)key d
-`ab`bv
-</code></pre>
 <h3 id="xgroup"><code>xgroup</code></h3>
 <ul>
-<li>used to group by column/s of a table</li>
-</ul>
-<pre><code>q)`src xgroup quotes
-src| time                                                                    ..
----| ------------------------------------------------------------------------..
-L  | 2020.12.26D08:00:02.809000000 2020.12.26D08:00:10.646000000 2020.12.26D0..
-O  | 2020.12.26D08:00:09.282000000 2020.12.26D08:00:20.104000000 2020.12.26D0..
-N  | 2020.12.26D08:00:10.075000000 2020.12.26D08:00:11.107000000 2020.12.26D0..
-</code></pre>
-<ul>
+<li>used to group by column/s of a table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)`src xgroup quotes
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>src| time                                                                    ..
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>---| ------------------------------------------------------------------------..
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>L  | 2020.12.26D08:00:02.809000000 2020.12.26D08:00:10.646000000 2020.12.26D0..
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>O  | 2020.12.26D08:00:09.282000000 2020.12.26D08:00:20.104000000 2020.12.26D0..
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>N  | 2020.12.26D08:00:10.075000000 2020.12.26D08:00:11.107000000 2020.12.26D0..
+</code></pre></div></li>
 <li><code>ungroup</code> can be used to flatten grouped table</li>
 </ul>
 <h2 id="statistical-keywords">Statistical Keywords</h2>
 <h3 id="first-last-max-min-sum-avg"><code>first</code>, <code>last</code>, <code>max</code>, <code>min</code>, <code>sum</code>, <code>avg</code></h3>
 <ul>
-<li>used to find first, last, maximum, minimum, total and average of list/columns of table</li>
+<li>used to find first, last, maximum, minimum, total and average of list/columns of table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q)select max price, min price, first price, last price, sum price, avg price from trades
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>price price1 price2 price3 price4   price5
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>--------------------------------------------
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>43.88 25.12  35.46  29.16  34679.26 34.67926
+</code></pre></div></li>
 </ul>
-<pre><code>q)select max price, min price, first price, last price, sum price, avg price from trades
-price price1 price2 price3 price4   price5
---------------------------------------------
-43.88 25.12  35.46  29.16  34679.26 34.67926
-</code></pre>
 <h3 id="sums-maxs-mins-avgs"><code>sums</code>, <code>maxs</code>, <code>mins</code>, <code>avgs</code></h3>
 <ul>
-<li>used to specify running total, running maximum, running minimum and running average from list/column of table</li>
+<li>used to specify running total, running maximum, running minimum and running average from list/column of table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q)select sums price, maxs price, mins price from trades
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>price  price1 price2
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>--------------------
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>35.46  35.46  35.46
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>64.51  35.46  29.05
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>89.88  35.46  25.37
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>125.34 35.46  25.37
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>160.84 35.5   25.37
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)select sums price, maxs price, mins price from trades
-price  price1 price2
---------------------
-35.46  35.46  35.46
-64.51  35.46  29.05
-89.88  35.46  25.37
-125.34 35.46  25.37
-160.84 35.5   25.37
-..
-</code></pre>
 <h3 id="msum-mmax-mmin-mavg"><code>msum</code>, <code>mmax</code>, <code>mmin</code>, <code>mavg</code></h3>
 <ul>
 <li>used for moving total, moving maximum, moving minimum, moving average from list/column of table</li>
-<li>moving windows size is defined as left argument</li>
+<li>moving windows size is defined as left argument
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q)select 2 msum price, 2 mmax price, 2 mmin price, 2 mavg price from trades
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>price price1 price2 price3
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>--------------------------
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>35.46 35.46  35.46  35.46
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>64.51 35.46  29.05  32.255
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>54.42 29.05  25.37  27.21
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>60.83 35.46  25.37  30.415
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>70.96 35.5   35.46  35.48
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)select 2 msum price, 2 mmax price, 2 mmin price, 2 mavg price from trades
-price price1 price2 price3
---------------------------
-35.46 35.46  35.46  35.46
-64.51 35.46  29.05  32.255
-54.42 29.05  25.37  27.21
-60.83 35.46  25.37  30.415
-70.96 35.5   35.46  35.48
-..
-</code></pre>
 <h2 id="other-useful-keywords">Other useful keywords</h2>
-<pre><code>q)//setup
-q)t:0!select from trades where sym=`GOOG
-q)t
-price src time                          sym  size
--------------------------------------------------
-41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
-41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150
-41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133
-41.31 L   2020.12.26D08:18:04.621000000 GOOG 2623
-41.28 N   2020.12.26D08:29:30.642000000 GOOG 825
-..
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)//setup
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>q)t:0!select from trades where sym=`GOOG
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>q)t
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>price src time                          sym  size
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>-------------------------------------------------
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>41.31 L   2020.12.26D08:18:04.621000000 GOOG 2623
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>41.28 N   2020.12.26D08:29:30.642000000 GOOG 825
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>..
+</code></pre></div>
 <h3 id="differ"><code>differ</code></h3>
 <ul>
 <li>returns true <code>1b</code> if every element is different from previous element of the list/column of table</li>
-<li>always returns <code>1b</code> for first element</li>
+<li>always returns <code>1b</code> for first element
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)differ t`price
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>11101011111110111111111011111110111110111111111111011011111101111111111111011..
+</code></pre></div></li>
+<li>can be used to find where price did changed
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q)select from t where differ price
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>price src time                          sym  size
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>-------------------------------------------------
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>41.28 N   2020.12.26D08:29:30.642000000 GOOG 825
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>41.24 N   2020.12.26D08:42:37.510000000 GOOG 4959
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)differ t`price
-11101011111110111111111011111110111110111111111111011011111101111111111111011..
-</code></pre>
-<ul>
-<li>can be used to find where price did changed</li>
-</ul>
-<pre><code>q)select from t where differ price
-price src time                          sym  size
--------------------------------------------------
-41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
-41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150
-41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133
-41.28 N   2020.12.26D08:29:30.642000000 GOOG 825
-41.24 N   2020.12.26D08:42:37.510000000 GOOG 4959
-..
-</code></pre>
 <h3 id="deltas"><code>deltas</code></h3>
 <ul>
 <li>shows different between current and previous values of the list</li>
-<li>can be used to select trades where price has increased</li>
+<li>can be used to select trades where price has increased
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>q)select from t where (deltas price)&gt;0
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>price src time                          sym  size
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>-------------------------------------------------
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>41.29 L   2020.12.26D08:47:15.737000000 GOOG 7592
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>41.32 O   2020.12.26D08:49:33.238000000 GOOG 3863
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>41.21 L   2020.12.26D09:08:34.960000000 GOOG 1534
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)select from t where (deltas price)&gt;0
-price src time                          sym  size
--------------------------------------------------
-41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
-41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150
-41.29 L   2020.12.26D08:47:15.737000000 GOOG 7592
-41.32 O   2020.12.26D08:49:33.238000000 GOOG 3863
-41.21 L   2020.12.26D09:08:34.960000000 GOOG 1534
-..
-</code></pre>
 <h3 id="next"><code>next</code></h3>
 <ul>
 <li>it moves the elements of the list 1 space to the left and filling the empty space with null</li>
@@ -1692,126 +1684,122 @@ price src time                          sym  size
 <h3 id="prev"><code>prev</code></h3>
 <ul>
 <li>it moves the elements of the list 1 space to the right and filling the empty space with null</li>
-<li>can be used to find duration between trades</li>
+<li>can be used to find duration between trades
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>q)update duration:time-prev time from t
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>price src time                          sym  size duration
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>----------------------------------------------------------------------
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150 0D00:00:47.147000000
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133 0D00:06:24.544000000
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>41.31 L   2020.12.26D08:18:04.621000000 GOOG 2623 0D00:00:15.473000000
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>41.28 N   2020.12.26D08:29:30.642000000 GOOG 825  0D00:11:26.021000000
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)update duration:time-prev time from t
-price src time                          sym  size duration
-----------------------------------------------------------------------
-41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902
-41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150 0D00:00:47.147000000
-41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133 0D00:06:24.544000000
-41.31 L   2020.12.26D08:18:04.621000000 GOOG 2623 0D00:00:15.473000000
-41.28 N   2020.12.26D08:29:30.642000000 GOOG 825  0D00:11:26.021000000
-..
-</code></pre>
 <h3 id="xprev"><code>xprev</code></h3>
 <ul>
 <li>shifts the elements of the list specified numbers to the right</li>
-<li><code>xnext</code> keyword doesn't exist we can replicate the effect by specifying <code>-n</code> as argument to <code>xprev</code></li>
+<li><code>xnext</code> keyword doesn't exist we can replicate the effect by specifying <code>-n</code> as argument to <code>xprev</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>q)t`time
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>2020.12.26D08:10:37.457000000 2020.12.26D08:11:24.604000000 2020.12.26D08:17:..
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>q)2 xprev t`time
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>0N 0N 2020.12.26D08:10:37.457000000 2020.12.26D08:11:24.604000000 2020.12.26D..
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>q)-2 xprev t`time // works as xnext
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>2020.12.26D08:17:49.148000000 2020.12.26D08:18:04.621000000 2020.12.26D08:29:..
+</code></pre></div></li>
 </ul>
-<pre><code>q)t`time
-2020.12.26D08:10:37.457000000 2020.12.26D08:11:24.604000000 2020.12.26D08:17:..
-q)2 xprev t`time
-0N 0N 2020.12.26D08:10:37.457000000 2020.12.26D08:11:24.604000000 2020.12.26D..
-q)-2 xprev t`time // works as xnext
-2020.12.26D08:17:49.148000000 2020.12.26D08:18:04.621000000 2020.12.26D08:29:..
-</code></pre>
 <h3 id="-coalease-fill-nulls"><code>^</code> - <code>coalease</code> - <code>fill nulls</code></h3>
 <ul>
 <li>used to fill <code>0N</code> nulls in the list with specified atom or list items</li>
-<li>it type promote the element if filling element is of type greater than existing list</li>
+<li>it type promote the element if filling element is of type greater than existing list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>q)3 ^ 1 2 3 0N 0N
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>1 2 3 3 3
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>q)3f ^ 1 2 3 0N 0N
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>1 2 3 3 3f
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>q)type 1 2 3 0N 0N
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>7h
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>q)type 3f ^ 1 2 3 0N 0N
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>9h
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>q)4 5 6 7 8f ^ 1 2 3 0N 0N   // also works if list of same length is provided as filling argument
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>1 2 3 7 8f
+</code></pre></div></li>
 </ul>
-<pre><code>q)3 ^ 1 2 3 0N 0N
-1 2 3 3 3
-q)3f ^ 1 2 3 0N 0N
-1 2 3 3 3f
-q)type 1 2 3 0N 0N
-7h
-q)type 3f ^ 1 2 3 0N 0N
-9h
-q)4 5 6 7 8f ^ 1 2 3 0N 0N   // also works if list of same length is provided as filling argument
-1 2 3 7 8f
-</code></pre>
 <h3 id="fills"><code>fills</code></h3>
 <ul>
-<li>it fills the nulls in the list with first non null element in the left</li>
+<li>it fills the nulls in the list with first non null element in the left
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>q)fills  1 2 3 0N 0N 9 0N 8 0N 0N
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>1 2 3 3 3 9 9 8 8 8
+</code></pre></div></li>
 </ul>
-<pre><code>q)fills  1 2 3 0N 0N 9 0N 8 0N 0N
-1 2 3 3 3 9 9 8 8 8
-</code></pre>
 <h3 id="iascidesc"><code>iasc/idesc</code></h3>
 <ul>
-<li>it returns index of the elements to sort the list in ascending or descending order</li>
+<li>it returns index of the elements to sort the list in ascending or descending order
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>q)l: 90 8928 4345 258972 2349827
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>q)idesc l
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>4 3 1 2 0
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>q)iasc l
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>0 2 1 3 4
+</code></pre></div></li>
+<li>it can be used to order a list w.r.t another list  of same size
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>q)m:(1 2 4 3; 6 4 5; 2 6 3 7 5; 2 5 )
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>q)m
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>1 2 4 3
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>6 4 5
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>2 6 3 7 5
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>2 5
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>q)count each m
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>4 3 5 2
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>q)m iasc count each m
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>2 5
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>6 4 5
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>1 2 4 3
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>2 6 3 7 5
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>q)iasc count each m
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>3 1 0 2
+</code></pre></div></li>
 </ul>
-<pre><code>q)l: 90 8928 4345 258972 2349827
-q)idesc l
-4 3 1 2 0
-q)iasc l
-0 2 1 3 4
-</code></pre>
-<ul>
-<li>it can be used to order a list w.r.t another list  of same size</li>
-</ul>
-<pre><code>q)m:(1 2 4 3; 6 4 5; 2 6 3 7 5; 2 5 )
-q)m
-1 2 4 3
-6 4 5
-2 6 3 7 5
-2 5
-q)count each m
-4 3 5 2
-q)m iasc count each m
-2 5
-6 4 5
-1 2 4 3
-2 6 3 7 5
-q)iasc count each m
-3 1 0 2
-</code></pre>
 <h3 id="rank"><code>rank</code></h3>
 <ul>
 <li>returns the positions would appear if it were sorted in sorted order</li>
-<li>equivalent to using <code>iasc</code> twice on a list</li>
+<li>equivalent to using <code>iasc</code> twice on a list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>q)l
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>90 8928 4345 258972 2349827
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>q)rank l
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>0 2 1 3 4
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>q)iasc iasc l
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>0 2 1 3 4
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>q)iasc l
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>0 2 1 3 4
+</code></pre></div></li>
+<li>can be used to rank the prices of trades
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>q)update prcrank:rank price from t
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>price src time                          sym  size prcrank
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>---------------------------------------------------------
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902 111
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150 124
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133 116
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>41.31 L   2020.12.26D08:18:04.621000000 GOOG 2623 117
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>41.28 N   2020.12.26D08:29:30.642000000 GOOG 825  109
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>..
+</code></pre></div></li>
 </ul>
-<pre><code>q)l
-90 8928 4345 258972 2349827
-q)rank l
-0 2 1 3 4
-q)iasc iasc l
-0 2 1 3 4
-q)iasc l
-0 2 1 3 4
-</code></pre>
-<ul>
-<li>can be used to rank the prices of trades</li>
-</ul>
-<pre><code>q)update prcrank:rank price from t
-price src time                          sym  size prcrank
----------------------------------------------------------
-41.29 L   2020.12.26D08:10:37.457000000 GOOG 1902 111
-41.33 N   2020.12.26D08:11:24.604000000 GOOG 3150 124
-41.31 L   2020.12.26D08:17:49.148000000 GOOG 2133 116
-41.31 L   2020.12.26D08:18:04.621000000 GOOG 2623 117
-41.28 N   2020.12.26D08:29:30.642000000 GOOG 825  109
-..
-</code></pre>
 <h3 id="xrank"><code>xrank</code></h3>
 <ul>
 <li>used to bucket the list into specified number of bucket</li>
-<li>and result values specify which bucket each element of the list will fit into</li>
+<li>and result values specify which bucket each element of the list will fit into
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>q)l
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>90 8928 4345 258972 2349827
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>q)2 xrank l
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>0 0 0 1 1
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>q)1 xrank l
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>0 0 0 0 0
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>q)3 xrank l
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>0 1 0 1 2
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>q)4 xrank l
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>0 1 0 2 3
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>q)
+</code></pre></div></li>
 </ul>
-<pre><code>q)l
-90 8928 4345 258972 2349827
-q)2 xrank l
-0 0 0 1 1
-q)1 xrank l
-0 0 0 0 0
-q)3 xrank l
-0 1 0 1 2
-q)4 xrank l
-0 1 0 2 3
-q)
-</code></pre>
 
               
             </article>

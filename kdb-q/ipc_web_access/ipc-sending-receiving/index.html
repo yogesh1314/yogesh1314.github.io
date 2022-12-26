@@ -1110,134 +1110,122 @@
 
 <h1 id="ipc-sending-and-receiving">IPC - Sending and Receiving</h1>
 <ul>
-<li>server at port 1234 and client with handle opened to server</li>
+<li>server at port 1234 and client with handle opened to server
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)// server
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)\p 
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>1234i
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)// server
-q)\p 
-1234i
-</code></pre>
-<pre><code class="language-q">q)// client
-q)h:hopen 1234
-q)h
-3i
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)// client
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)h:hopen 1234
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q)h
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>3i
+</code></pre></div>
 <h2 id="sync-send-and-receive">Sync Send and Receive</h2>
 <ul>
 <li>Synchronous message: client sends the message and blocks the handle until servers sends a response</li>
-<li>To send a message we can use "string" format along with handle h</li>
+<li>To send a message we can use "string" format along with handle h
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>//client
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>q)h&quot;2+2&quot;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>4i
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>q)h&quot;g:23&quot;
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>q)
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">//client
-q)h&quot;2+2&quot;
-4i
-q)h&quot;g:23&quot;
-q)
-</code></pre>
-<pre><code class="language-q">//server
-q)g
-23
-</code></pre>
-<ul>
-<li>Messages can also be send in functional form - <code>handle(function;arg1;arg2;..;arg n)</code></li>
-</ul>
-<pre><code class="language-q">//client
-q)h(+;2;2)
-4i
-q)h(set;`abc;245)
-`abc
-</code></pre>
-<pre><code class="language-q">//server
-q)abc
-234
-</code></pre>
-<ul>
-<li>For assigning value in functional form we use variable name as symbol or we can use function name as string</li>
-<li>We can also execute functions defined in server side from client</li>
-</ul>
-<pre><code class="language-q">//server
-q)f:{x*x}
-q)f
-{x*x}
-</code></pre>
-<pre><code class="language-q">//client
-q)h(`f;2)
-4
-q)h(&quot;f&quot;;2)
-4
-</code></pre>
-<ul>
-<li>we can also send client side function to server along with arguments and get the results with server running the execution </li>
-</ul>
-<pre><code class="language-q">//client
-q)f2:{x-y}
-q)h(f2;45;23)
-22
-</code></pre>
-<pre><code class="language-q">//server
-q)f2
-'f2
-  [0]  f2
-       ^
-</code></pre>
-<ul>
-<li>we can get data from server using <code>get</code> function or using variable name directly which exists in server</li>
-</ul>
-<pre><code class="language-q">//server
-q)list: 1 2 3 4 5
-</code></pre>
-<pre><code class="language-q">//client
-q)h(get;`list)
-1 2 3 4 5
-q)h(get;&quot;list&quot;)
-1 2 3 4 5
-q)h&quot;list&quot;
-1 2 3 4 5
-q)h(&quot;list&quot;)
-1 2 3 4 5
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>//server
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>q)g
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>23
+</code></pre></div>
+* Messages can also be send in functional form - <code>handle(function;arg1;arg2;..;arg n)</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>//client
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>q)h(+;2;2)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>4i
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>q)h(set;`abc;245)
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>`abc
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>//server
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>q)abc
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>234
+</code></pre></div>
+* For assigning value in functional form we use variable name as symbol or we can use function name as string
+* We can also execute functions defined in server side from client
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>//server
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>q)f:{x*x}
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>q)f
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>{x*x}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>//client
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>q)h(`f;2)
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>4
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>q)h(&quot;f&quot;;2)
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>4
+</code></pre></div>
+* we can also send client side function to server along with arguments and get the results with server running the execution 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>//client
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>q)f2:{x-y}
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>q)h(f2;45;23)
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>22
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>//server
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>q)f2
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>&#39;f2
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  [0]  f2
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>       ^
+</code></pre></div>
+* we can get data from server using <code>get</code> function or using variable name directly which exists in server
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>//server
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>q)list: 1 2 3 4 5
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>//client
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>q)h(get;`list)
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>1 2 3 4 5
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>q)h(get;&quot;list&quot;)
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>1 2 3 4 5
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>q)h&quot;list&quot;
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>1 2 3 4 5
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>q)h(&quot;list&quot;)
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>1 2 3 4 5
+</code></pre></div></p>
 <h2 id="zpg"><code>.z.pg</code></h2>
 <ul>
 <li>message handler function for handling synchronous messages</li>
-<li>executes everytime process/server receives synchronous message</li>
+<li>executes everytime process/server receives synchronous message
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>//server
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>q).z.pg:{0N!value x}
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>q)13
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>//client
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>q)h&quot;2+3+8&quot;
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>q)13
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">//server
-q).z.pg:{0N!value x}
-q)13
-</code></pre>
-<pre><code class="language-q">//client
-q)h&quot;2+3+8&quot;
-q)13
-</code></pre>
 <h2 id="async-send-and-receive">Async Send and Receive</h2>
 <ul>
 <li>client doesn't wait for server to send the response, it continues its execution</li>
 <li>to send a async message we use negative handle</li>
 <li>Sending async messages does not send the message immediately. It serializes x, and queues it for sending at a later time - either when the main loop spins, or a blocking request is issued on that handle</li>
-<li><code>.z.ps</code> async message handler</li>
-</ul>
-<pre><code class="language-q">//client
-q)(neg h)&quot;2*5&quot;
-q)(neg h)(+;2;5)
-q)(neg h)&quot;mko:908&quot;
-q)h&quot;&quot; // to ensure async messages queue is processed
-q)(neg h)[] //used to flush the queue
-</code></pre>
-<pre><code class="language-q">//server
-q)mko
-908
-</code></pre>
-<ul>
+<li><code>.z.ps</code> async message handler
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>//client
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>q)(neg h)&quot;2*5&quot;
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>q)(neg h)(+;2;5)
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>q)(neg h)&quot;mko:908&quot;
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>q)h&quot;&quot; // to ensure async messages queue is processed
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>q)(neg h)[] //used to flush the queue
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>//server
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>q)mko
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>908
+</code></pre></div></li>
 <li>To confirm async messages are received and processed, chase with sync message <code>q)h""</code></li>
-<li>To block until all pending outgoing messages have been written into the handle</li>
+<li>To block until all pending outgoing messages have been written into the handle
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q)(neg h)[] //or 
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>q)(neg h)(::)
+</code></pre></div></li>
+<li>if we want to ensure an async message really has been sent as soon as possible, use: 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>q)(neg h)&quot;x&quot;;
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>q)(neg h)[];
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)(neg h)[] //or 
-q)(neg h)(::)
-</code></pre>
-<ul>
-<li>if we want to ensure an async message really has been sent as soon as possible, use: </li>
-</ul>
-<pre><code class="language-q">q)(neg h)&quot;x&quot;;
-q)(neg h)[];
-</code></pre>
 
               
             </article>

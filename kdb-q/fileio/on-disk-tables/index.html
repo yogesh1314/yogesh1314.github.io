@@ -1312,56 +1312,50 @@
 </ul>
 <h3 id="save-flat-table">Save flat table</h3>
 <ul>
-<li>Lets create a table in-memory </li>
-</ul>
-<pre><code class="language-q">q)price:([]fruit: `banana`grapes`orange; qty: 10 15 13; prc: 10.78 40.88 30.87)
-q)price
-fruit  qty prc
-----------------
-banana 10  10.78
-grapes 15  40.88
-orange 13  30.87
-</code></pre>
-<ul>
+<li>Lets create a table in-memory 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)price:([]fruit: `banana`grapes`orange; qty: 10 15 13; prc: 10.78 40.88 30.87)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)price
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>fruit  qty prc
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>----------------
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>banana 10  10.78
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>grapes 15  40.88
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>orange 13  30.87
+</code></pre></div></li>
 <li>we can save the table to disk using <code>handle_to_file set table_name</code> </li>
-<li>here <code>handle_to_file</code> can be relative if saving in current directory or full path if saving in another directory provided write permissions are valid</li>
+<li>here <code>handle_to_file</code> can be relative if saving in current directory or full path if saving in another directory provided write permissions are valid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)`:pricetab set price
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>`:pricetab
+</code></pre></div></li>
+<li>or we can use <code>save</code> in case we want to keep filename same as tablename 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)save `:price
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>`:price
+</code></pre></div></li>
+<li>after saving to disk we can see there are two flat files in the working directory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)system&quot;ls -lh&quot;
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&quot;total 16&quot;
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)`:pricetab set price
-`:pricetab
-</code></pre>
-<ul>
-<li>or we can use <code>save</code> in case we want to keep filename same as tablename </li>
-</ul>
-<pre><code class="language-q">q)save `:price
-`:price
-</code></pre>
-<ul>
-<li>after saving to disk we can see there are two flat files in the working directory</li>
-</ul>
-<pre><code>q)system&quot;ls -lh&quot;
-&quot;total 16&quot;
-&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
-&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
-</code></pre>
 <h3 id="load-flat-table">Load flat table</h3>
 <ul>
-<li>to read these flat files we can use function <code>get</code> or <code>load</code></li>
+<li>to read these flat files we can use function <code>get</code> or <code>load</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)get `:price
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>fruit  qty prc
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>----------------
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>banana 10  10.78
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>grapes 15  40.88
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>orange 13  30.87
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>q)load `:pricetab
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>`pricetab
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>q)pricetab
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>fruit  qty prc
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>----------------
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>banana 10  10.78
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>grapes 15  40.88
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>orange 13  30.87
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)get `:price
-fruit  qty prc
-----------------
-banana 10  10.78
-grapes 15  40.88
-orange 13  30.87
-q)load `:pricetab
-`pricetab
-q)pricetab
-fruit  qty prc
-----------------
-banana 10  10.78
-grapes 15  40.88
-orange 13  30.87
-</code></pre>
 <h2 id="splayed-table">Splayed table</h2>
 <ul>
 <li>In splayed table a directory is created with name same as table name and having files for each columns and also a <code>.d</code> file which contains the order of the columns </li>
@@ -1369,36 +1363,33 @@ orange 13  30.87
 </ul>
 <h3 id="save-splayed-tables">Save splayed tables</h3>
 <ul>
-<li>let's create a new table called <code>prices2</code> which we can save as splayed table</li>
+<li>let's create a new table called <code>prices2</code> which we can save as splayed table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)prices2:([]cars:&quot;ABC&quot;; price: 500 1100 1500 ; qty: 1000 350 20)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>q)prices2
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>cars price qty
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>---------------
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>A    500   1000
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>B    1100  350
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>C    1500  20
+</code></pre></div></li>
+<li>we can save splayed table using <code>set</code> but adding <code>/</code> at the end of file handle
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)`:splayedprice2/ set prices2
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>`:splayedprice2/
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>q)system&quot;ls -lh&quot;
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>&quot;total 16&quot;
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 22:43 splayedprice2&quot;
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>q)system&quot;ls -alh splayedprice2&quot;
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>&quot;total 32&quot;
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 22:43 .&quot;
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>&quot;drwxr-xr-x  5 ranayk  staff   160B Oct  4 22:43 ..&quot;
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>&quot;-rw-r--r--  1 ranayk  staff    23B Oct  4 22:43 .d&quot;
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 22:43 cars&quot;
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 22:43 price&quot;
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 22:43 qty&quot;
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)prices2:([]cars:&quot;ABC&quot;; price: 500 1100 1500 ; qty: 1000 350 20)
-q)prices2
-cars price qty
----------------
-A    500   1000
-B    1100  350
-C    1500  20
-</code></pre>
-<ul>
-<li>we can save splayed table using <code>set</code> but adding <code>/</code> at the end of file handle</li>
-</ul>
-<pre><code class="language-q">q)`:splayedprice2/ set prices2
-`:splayedprice2/
-q)system&quot;ls -lh&quot;
-&quot;total 16&quot;
-&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
-&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 22:43 splayedprice2&quot;
-q)system&quot;ls -alh splayedprice2&quot;
-&quot;total 32&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 22:43 .&quot;
-&quot;drwxr-xr-x  5 ranayk  staff   160B Oct  4 22:43 ..&quot;
-&quot;-rw-r--r--  1 ranayk  staff    23B Oct  4 22:43 .d&quot;
-&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 22:43 cars&quot;
-&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 22:43 price&quot;
-&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 22:43 qty&quot;
-
-</code></pre>
 <h3 id="load-splayed-tables">Load splayed tables</h3>
 <ul>
 <li>when we load the splayed table into the memory it is mapped to the memory not loaded into the memory - we can see this by checking <code>mmap</code> value from result of <code>.Q.w[]</code> function</li>
@@ -1411,105 +1402,97 @@ wmax| 0
 mmap| 0
 mphy| 8589934592
 syms| 663
-symw| 28351</li>
+symw| 28351
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>* we can load the splayed table using `get`
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>* after loading the table into memory we can re-examine the `mmap` value from `.Q.w[]` output
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>```q
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>q)prices2
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>cars price qty
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>---------------
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>A    500   1000
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>B    1100  350
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>C    1500  20
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>q).Q.w[]
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>used| 358336
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>heap| 67108864
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>peak| 67108864
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>wmax| 0
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>mmap| 99
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>mphy| 8589934592
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>syms| 669
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>symw| 28547
+</code></pre></div></li>
 </ul>
-<pre><code>* we can load the splayed table using `get`
-* after loading the table into memory we can re-examine the `mmap` value from `.Q.w[]` output
-```q
-q)prices2
-cars price qty
----------------
-A    500   1000
-B    1100  350
-C    1500  20
-q).Q.w[]
-used| 358336
-heap| 67108864
-peak| 67108864
-wmax| 0
-mmap| 99
-mphy| 8589934592
-syms| 669
-symw| 28547
-</code></pre>
 <h3 id="edit-splayed-table-on-disk">Edit splayed table on disk</h3>
 <ul>
-<li>we can re-order the table's columns by editing <code>.d</code> file</li>
-</ul>
-<pre><code class="language-q">q)get `:splayedprice2/.d
-`cars`price`qty
-q)`:splayedprice2/.d set `qty`price`cars
-`:splayedprice2/.d
-q)load `:splayedprice2
-`splayedprice2
-q)splayedprice2
-qty  price cars
----------------
-1000 500   A
-350  1100  B
-20   1500  C
-</code></pre>
-<ul>
+<li>we can re-order the table's columns by editing <code>.d</code> file
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)get `:splayedprice2/.d
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>`cars`price`qty
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>q)`:splayedprice2/.d set `qty`price`cars
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>`:splayedprice2/.d
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>q)load `:splayedprice2
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>`splayedprice2
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>q)splayedprice2
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>qty  price cars
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>---------------
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>1000 500   A
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>350  1100  B
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>20   1500  C
+</code></pre></div></li>
 <li>we can add the columns to splayed table on disk </li>
-<li>and we need to edit the <code>.d</code> file as well</li>
+<li>and we need to edit the <code>.d</code> file as well
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)`:splayedprice2/date set 2022.10.01 2022.10.02 2022.10.03
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>`:splayedprice2/date
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>q)`:splayedprice2/.d set (get `:splayedprice2/.d),`date
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>`:splayedprice2/.d
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>q)load `:splayedprice2
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>`splayedprice2
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>q)splayedprice2
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>qty  price cars date
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>--------------------------
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>1000 500   A    2022.10.01
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>350  1100  B    2022.10.02
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>20   1500  C    2022.10.03
+</code></pre></div></li>
+<li>similarly we can delete the column from splayed table on disk using <code>hdel</code> and here as well we need to edit <code>.d</code> file
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)hdel `:splayedprice2/date
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>`:splayedprice2/date
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>q)(get `:splayedprice2/.d) except `date
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>`qty`price`cars
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>q)`:splayedprice2/.d set (get `:splayedprice2/.d) except `date
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>`:splayedprice2/.d
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>q)load `:splayedprice2
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>`splayedprice2
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>q)splayedprice2
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>qty  price cars
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>---------------
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>1000 500   A
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>350  1100  B
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>20   1500  C
+</code></pre></div></li>
+<li>we can also add a new row to splayed table on disk using <code>upsert</code> function
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q)`:splayedprice2/ upsert (1500;70;&quot;D&quot;)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>`:splayedprice2/
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>q)get `:splayedprice2/
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>qty  price cars
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>---------------
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>1000 500   A
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>350  1100  B
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>20   1500  C
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>1500 70    D
+</code></pre></div></li>
+<li>we can also sort the table - using <code>xasc</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q)`qty xasc `:splayedprice2/
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>`:splayedprice2/
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>q)get `:splayedprice2/
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>qty  price cars
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>---------------
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>20   1500  C
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>350  1100  B
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>1000 500   A
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>1500 70    D
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)`:splayedprice2/date set 2022.10.01 2022.10.02 2022.10.03
-`:splayedprice2/date
-q)`:splayedprice2/.d set (get `:splayedprice2/.d),`date
-`:splayedprice2/.d
-q)load `:splayedprice2
-`splayedprice2
-q)splayedprice2
-qty  price cars date
---------------------------
-1000 500   A    2022.10.01
-350  1100  B    2022.10.02
-20   1500  C    2022.10.03
-</code></pre>
-<ul>
-<li>similarly we can delete the column from splayed table on disk using <code>hdel</code> and here as well we need to edit <code>.d</code> file</li>
-</ul>
-<pre><code class="language-q">q)hdel `:splayedprice2/date
-`:splayedprice2/date
-q)(get `:splayedprice2/.d) except `date
-`qty`price`cars
-q)`:splayedprice2/.d set (get `:splayedprice2/.d) except `date
-`:splayedprice2/.d
-q)load `:splayedprice2
-`splayedprice2
-q)splayedprice2
-qty  price cars
----------------
-1000 500   A
-350  1100  B
-20   1500  C
-</code></pre>
-<ul>
-<li>we can also add a new row to splayed table on disk using <code>upsert</code> function</li>
-</ul>
-<pre><code class="language-q">q)`:splayedprice2/ upsert (1500;70;&quot;D&quot;)
-`:splayedprice2/
-q)get `:splayedprice2/
-qty  price cars
----------------
-1000 500   A
-350  1100  B
-20   1500  C
-1500 70    D
-</code></pre>
-<ul>
-<li>we can also sort the table - using <code>xasc</code></li>
-</ul>
-<pre><code class="language-q">q)`qty xasc `:splayedprice2/
-`:splayedprice2/
-q)get `:splayedprice2/
-qty  price cars
----------------
-20   1500  C
-350  1100  B
-1000 500   A
-1500 70    D
-</code></pre>
 <h2 id="partitioned-tables">Partitioned tables</h2>
 <ul>
 <li>Partitioned tables can be split horizontally as well as vertically - meaning data is split by row value(date or month) then each column is splayed into single file on disk - similar to splayed table</li>
@@ -1517,226 +1500,214 @@ qty  price cars
 <h3 id="save-partitioned-table">Save partitioned table</h3>
 <ul>
 <li>Lets define 2 tables for each parition and save them to disk using <code>set</code></li>
-<li>here we are providing directory, parition and table name in file handle</li>
+<li>here we are providing directory, parition and table name in file handle
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q)price1:([]car:&quot;ABC&quot;;qty:10 20 30; price: 33 44 55)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>q)price1
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>car qty price
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>-------------
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>A   10  33
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>B   20  44
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>C   30  55
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>q)price2:([]car:&quot;ZXY&quot;;qty:99 88 77; price: 10 20 30)
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>q)price2
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>car qty price
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>-------------
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>Z   99  10
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>X   88  20
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>Y   77  30
+</code></pre></div></li>
+<li>on disk structure
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)system&quot;ls -lah&quot;
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>&quot;total 16&quot;
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>&quot;drwxr-xr-x   6 ranayk  staff   192B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>&quot;drwxr-xr-x+ 54 ranayk  staff   1.7K Oct  4 23:22 ..&quot;
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>&quot;drwxr-xr-x   4 ranayk  staff   128B Oct  4 23:25 partprice&quot;
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>&quot;-rw-r--r--   1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>&quot;-rw-r--r--   1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>&quot;drwxr-xr-x   6 ranayk  staff   192B Oct  4 23:04 splayedprice2&quot;
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>q)system&quot;ls -lah partprice&quot;
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>&quot;total 0&quot;
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 2022.10.01&quot;
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 2022.10.02&quot;
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>q)system&quot;ls -lah partprice/2022.10.01/&quot;
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>&quot;total 0&quot;
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>q)system&quot;ls -lah partprice/2022.10.01/price/&quot; //if we had more tables in this partition it would show as another directory with directory name same as table&#39;s name
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>&quot;total 32&quot;
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>&quot;-rw-r--r--  1 ranayk  staff    22B Oct  4 23:25 .d&quot;
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 23:25 car&quot;
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 qty&quot;
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>q)system&quot;ls -lah partprice/2022.10.02/&quot;
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>&quot;total 0&quot;
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>q)system&quot;ls -lah partprice/2022.10.02/price/&quot;
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>&quot;total 32&quot;
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>&quot;-rw-r--r--  1 ranayk  staff    22B Oct  4 23:25 .d&quot;
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 23:25 car&quot;
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 qty&quot;
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)price1:([]car:&quot;ABC&quot;;qty:10 20 30; price: 33 44 55)
-q)price1
-car qty price
--------------
-A   10  33
-B   20  44
-C   30  55
-q)price2:([]car:&quot;ZXY&quot;;qty:99 88 77; price: 10 20 30)
-q)price2
-car qty price
--------------
-Z   99  10
-X   88  20
-Y   77  30
-</code></pre>
-<ul>
-<li>on disk structure</li>
-</ul>
-<pre><code>q)system&quot;ls -lah&quot;
-&quot;total 16&quot;
-&quot;drwxr-xr-x   6 ranayk  staff   192B Oct  4 23:25 .&quot;
-&quot;drwxr-xr-x+ 54 ranayk  staff   1.7K Oct  4 23:22 ..&quot;
-&quot;drwxr-xr-x   4 ranayk  staff   128B Oct  4 23:25 partprice&quot;
-&quot;-rw-r--r--   1 ranayk  staff   118B Oct  4 22:26 price&quot;
-&quot;-rw-r--r--   1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
-&quot;drwxr-xr-x   6 ranayk  staff   192B Oct  4 23:04 splayedprice2&quot;
-q)system&quot;ls -lah partprice&quot;
-&quot;total 0&quot;
-&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 .&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 ..&quot;
-&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 2022.10.01&quot;
-&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 2022.10.02&quot;
-q)system&quot;ls -lah partprice/2022.10.01/&quot;
-&quot;total 0&quot;
-&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 .&quot;
-&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 ..&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 price&quot;
-q)system&quot;ls -lah partprice/2022.10.01/price/&quot; //if we had more tables in this partition it would show as another directory with directory name same as table's name
-&quot;total 32&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 .&quot;
-&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 ..&quot;
-&quot;-rw-r--r--  1 ranayk  staff    22B Oct  4 23:25 .d&quot;
-&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 23:25 car&quot;
-&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 price&quot;
-&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 qty&quot;
-q)system&quot;ls -lah partprice/2022.10.02/&quot;
-&quot;total 0&quot;
-&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 .&quot;
-&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 ..&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 price&quot;
-q)system&quot;ls -lah partprice/2022.10.02/price/&quot;
-&quot;total 32&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 .&quot;
-&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 ..&quot;
-&quot;-rw-r--r--  1 ranayk  staff    22B Oct  4 23:25 .d&quot;
-&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 23:25 car&quot;
-&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 price&quot;
-&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 qty&quot;
-</code></pre>
 <h3 id="load-the-partitioned-table">Load the partitioned table</h3>
 <ul>
-<li>we can use <code>\l</code> with directory name to load the partitioned table</li>
+<li>we can use <code>\l</code> with directory name to load the partitioned table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)\l partprice
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>q)price
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>date       car qty price
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>------------------------
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>2022.10.01 A   10  33
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>2022.10.01 B   20  44
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>2022.10.01 C   30  55
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>2022.10.02 Z   99  10
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>2022.10.02 X   88  20
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>2022.10.02 Y   77  30
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)\l partprice
-q)price
-date       car qty price
-------------------------
-2022.10.01 A   10  33
-2022.10.01 B   20  44
-2022.10.01 C   30  55
-2022.10.02 Z   99  10
-2022.10.02 X   88  20
-2022.10.02 Y   77  30
-</code></pre>
 <h3 id="qind"><code>.Q.ind</code></h3>
 <ul>
-<li>we can use <code>.Q.ind</code> to access rows of table by providing indexes as argument</li>
+<li>we can use <code>.Q.ind</code> to access rows of table by providing indexes as argument
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q).Q.ind[price;2 5]
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>date       car qty price
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>------------------------
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>2022.10.01 C   30  55
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>2022.10.02 Y   77  30
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q).Q.ind[price;2 5]
-date       car qty price
-------------------------
-2022.10.01 C   30  55
-2022.10.02 Y   77  30
-</code></pre>
 <h3 id="qchk"><code>.Q.chk</code></h3>
 <ul>
-<li>if we have partitions with table directories missing then we can use <code>.Q.chk</code> to populate them using the schema of last parition</li>
-</ul>
-<pre><code class="language-q"> q)\ls
-&quot;partprice&quot;
-&quot;price&quot;
-&quot;pricetab&quot;
-&quot;splayedprice2&quot;
-q)system&quot;mkdir partprice/2022.10.03&quot;
-q)system&quot;ls -lh partprice/2022.10.03&quot; //latest partition doesn't have tables data populated
-&quot;total 0&quot;
-q).Q.chk[`:partprice]
-,`:partprice/2022.10.03
-()
-()
-q)system&quot;ls -lh partprice/2022.10.03&quot; //now it is populated
-&quot;total 0&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:39 price&quot;
-q)\l partprice
-q)price
-date       car qty price
-------------------------
-2022.10.01 A   10  33
-2022.10.01 B   20  44
-2022.10.01 C   30  55
-2022.10.02 Z   99  10
-2022.10.02 X   88  20
-2022.10.02 Y   77  30
-</code></pre>
-<ul>
+<li>if we have partitions with table directories missing then we can use <code>.Q.chk</code> to populate them using the schema of last parition
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a> q)\ls
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>&quot;partprice&quot;
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>&quot;price&quot;
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>&quot;pricetab&quot;
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>&quot;splayedprice2&quot;
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>q)system&quot;mkdir partprice/2022.10.03&quot;
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>q)system&quot;ls -lh partprice/2022.10.03&quot; //latest partition doesn&#39;t have tables data populated
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>&quot;total 0&quot;
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>q).Q.chk[`:partprice]
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>,`:partprice/2022.10.03
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>()
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>()
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>q)system&quot;ls -lh partprice/2022.10.03&quot; //now it is populated
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>&quot;total 0&quot;
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:39 price&quot;
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>q)\l partprice
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>q)price
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>date       car qty price
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>------------------------
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>2022.10.01 A   10  33
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>2022.10.01 B   20  44
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>2022.10.01 C   30  55
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>2022.10.02 Z   99  10
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>2022.10.02 X   88  20
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>2022.10.02 Y   77  30
+</code></pre></div></li>
 <li>directory structure till now</li>
 <li>partprice is partitioned table</li>
 <li>price and pricetab are flat tables, and</li>
-<li>splayedprice2 is splayed table</li>
-</ul>
-<pre><code>├── partprice
-│   ├── 2022.10.01
-│   │   └── price
-│   │       ├── car
-│   │       ├── price
-│   │       └── qty
-│   ├── 2022.10.02
-│   │   └── price
-│   │       ├── car
-│   │       ├── price
-│   │       └── qty
-│   └── 2022.10.03
-│       └── price
-│           ├── car
-│           ├── price
-│           └── qty
-├── price
-├── pricetab
-└── splayedprice2
-    ├── cars
-    ├── price
-    └── qty
-</code></pre>
-<ul>
+<li>splayedprice2 is splayed table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>├── partprice
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>│   ├── 2022.10.01
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>│   │   └── price
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>│   │       ├── car
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>│   │       ├── price
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>│   │       └── qty
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>│   ├── 2022.10.02
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>│   │   └── price
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>│   │       ├── car
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>│   │       ├── price
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>│   │       └── qty
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>│   └── 2022.10.03
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>│       └── price
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>│           ├── car
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>│           ├── price
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>│           └── qty
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>├── price
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>├── pricetab
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>└── splayedprice2
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>    ├── cars
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    ├── price
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>    └── qty
+</code></pre></div></li>
 <li>Now if we try to save splayed or partitioned table with symbol column it will fail as it needs enumeration</li>
 </ul>
 <h2 id="enumeration">Enumeration</h2>
 <ul>
 <li>to enumerate means - unique symbols are identified and index assigned to each symbol - this map is stored in <code>sym</code> file in the root of database directory</li>
-<li>We use <code>.Q.en</code> to enumerate the table and generate/upsert values to <code>sym</code> file when saving down splayed or partitioned table</li>
+<li>We use <code>.Q.en</code> to enumerate the table and generate/upsert values to <code>sym</code> file when saving down splayed or partitioned table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>q)price
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>fruit  qty prc
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>----------------
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>banana 10  10.78
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>grapes 15  40.88
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>orange 13  30.87
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>q)`:ensplayed/price/ set .Q.en[`:ensplayed;price]
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>`:ensplayed/price/
+</code></pre></div></li>
+<li>now we can see additional <code>sym</code> file created for price splayed table under ensplayed directory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>q)system&quot;ls -lh&quot;
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>&quot;total 16&quot;
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:52 ensplayed&quot;
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>&quot;drwxr-xr-x  5 ranayk  staff   160B Oct  4 23:38 partprice&quot;
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:04 splayedprice2&quot;
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>q)system&quot;ls -lh ensplayed&quot;
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>&quot;total 8&quot;
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:52 price&quot;
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>&quot;-rw-r--r--  1 ranayk  staff    29B Oct  4 23:52 sym&quot;
+</code></pre></div></li>
+<li>we can also load it into memory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>q)\l ensplayed/price
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>`price
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>q)price
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>fruit  qty prc
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>----------------
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>banana 10  10.78
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>grapes 15  40.88
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>orange 13  30.87
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)price
-fruit  qty prc
-----------------
-banana 10  10.78
-grapes 15  40.88
-orange 13  30.87
-q)`:ensplayed/price/ set .Q.en[`:ensplayed;price]
-`:ensplayed/price/
-</code></pre>
-<ul>
-<li>now we can see additional <code>sym</code> file created for price splayed table under ensplayed directory</li>
-</ul>
-<pre><code class="language-q">q)system&quot;ls -lh&quot;
-&quot;total 16&quot;
-&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:52 ensplayed&quot;
-&quot;drwxr-xr-x  5 ranayk  staff   160B Oct  4 23:38 partprice&quot;
-&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
-&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:04 splayedprice2&quot;
-q)system&quot;ls -lh ensplayed&quot;
-&quot;total 8&quot;
-&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:52 price&quot;
-&quot;-rw-r--r--  1 ranayk  staff    29B Oct  4 23:52 sym&quot;
-</code></pre>
-<ul>
-<li>we can also load it into memory</li>
-</ul>
-<pre><code class="language-q">q)\l ensplayed/price
-`price
-q)price
-fruit  qty prc
-----------------
-banana 10  10.78
-grapes 15  40.88
-orange 13  30.87
-</code></pre>
 <h2 id="qdpft"><code>.Q.dpft</code></h2>
 <ul>
 <li>we can use <code>.Q.dpft</code> to save partitioned table on disk </li>
 <li>it needs table to be defined in-memory</li>
-<li><code>.Q.dpft</code> - directory, partition, column to apply part attribute to, (in-memory)tablename</li>
+<li><code>.Q.dpft</code> - directory, partition, column to apply part attribute to, (in-memory)tablename
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>q)price
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>fruit  qty prc
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>----------------
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>banana 10  10.78
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>grapes 15  40.88
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>orange 13  30.87
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>q)meta price
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>c    | t f a
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>-----| -----
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>fruit| s
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>qty  | j
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>prc  | f
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>q).Q.dpft[`:hdb;2022.10.01;`fruit;`price]
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>`price
+</code></pre></div></li>
+<li>directory structure
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>hdb
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>└── 2022.10.01
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>    └── price
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>        ├── fruit
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>        ├── prc
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>        └── qty
+</code></pre></div></li>
 </ul>
-<pre><code class="language-q">q)price
-fruit  qty prc
-----------------
-banana 10  10.78
-grapes 15  40.88
-orange 13  30.87
-q)meta price
-c    | t f a
------| -----
-fruit| s
-qty  | j
-prc  | f
-q).Q.dpft[`:hdb;2022.10.01;`fruit;`price]
-`price
-</code></pre>
-<ul>
-<li>directory structure</li>
-</ul>
-<pre><code class="language-q">hdb
-└── 2022.10.01
-    └── price
-        ├── fruit
-        ├── prc
-        └── qty
-</code></pre>
 
               
             </article>

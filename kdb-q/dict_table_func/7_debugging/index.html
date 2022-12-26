@@ -1039,108 +1039,104 @@
 <li>typing single <code>\</code> back slash used to toggle to <strong>k</strong> console</li>
 <li>to return back to <strong>q</strong> console type <code>\</code> from <strong>k</strong> console</li>
 </ul>
-<pre><code class="language-q">q)\                     / goes into k mode
-
-
-\               
-q)                      / comes back to q mode
- ```
-* if an error occurs while executing commands in console, it goes in error trap mode showing what type of error occured -  `'type` is most common error :P
-* when it goes into error trap mode, its stuck where the error occurred, so if its within the function we can check what are the values passed which caused error
-
-```q
-q)f:{x*y}
-q)f[3;4]
-12
-q)f[`sym;4]
-'type
-  [1]  f:{x*y}           
- q))x
- `sym
- q))y
- 4
- ```
-* 3 useful things to help debugging:
-** `.z.s` shows function definition where its stuck when in error trap mode -  useful for nested functions
-** `'` tick  - used to go 1 level higher in case of nested functions
-** `:` or `:value` - we can force to continue the execution with `:value` meaning use value provided with `:` instead of where error is occurring and continue the execution
-
-```q
-q)f:{x*x}
-q)g:{f[x]*y+10}
-q)g[3;4]
-126
-q)g[`aa;4]
-'type
-  [2]  f:{x*x}
-           ^
-q)).z.s                     / print function where error is
-{x*x}
-q))'                        / go 1 level up - it goes from f to g
-'
-  [1]  g:{f[x]*y+10}
-          ^
-q)):3                       / continue execution with value 3 - thus 10+4=14*3=42
-42
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)\                     / goes into k mode
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>\               
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>q)                      / comes back to q mode
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a> ```
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>* if an error occurs while executing commands in console, it goes in error trap mode showing what type of error occured -  `&#39;type` is most common error :P
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>* when it goes into error trap mode, its stuck where the error occurred, so if its within the function we can check what are the values passed which caused error
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>```q
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>q)f:{x*y}
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>q)f[3;4]
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>12
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>q)f[`sym;4]
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>&#39;type
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>  [1]  f:{x*y}           
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a> q))x
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a> `sym
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a> q))y
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a> 4
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a> ```
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>* 3 useful things to help debugging:
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>** `.z.s` shows function definition where its stuck when in error trap mode -  useful for nested functions
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>** `&#39;` tick  - used to go 1 level higher in case of nested functions
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>** `:` or `:value` - we can force to continue the execution with `:value` meaning use value provided with `:` instead of where error is occurring and continue the execution
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>```q
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>q)f:{x*x}
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>q)g:{f[x]*y+10}
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>q)g[3;4]
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>126
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>q)g[`aa;4]
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>&#39;type
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>  [2]  f:{x*x}
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>           ^
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>q)).z.s                     / print function where error is
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>{x*x}
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>q))&#39;                        / go 1 level up - it goes from f to g
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>&#39;
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>  [1]  g:{f[x]*y+10}
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>          ^
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>q)):3                       / continue execution with value 3 - thus 10+4=14*3=42
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>42
+</code></pre></div>
 <ul>
 <li>another example</li>
 </ul>
-<pre><code class="language-q">q)f:{x+10}
-q)g:{x*2}
-q)h:{n:f[x]+4; m:n+g[x] +g[y]}
-q)h[2;10]
-40
-q)h[`aa;10]                             
-'type
-  [2]  f:{x+10}
-           ^
-q)).z.s                             / error at f[x]
-{x+10}
-q)):10                              / we force execution with 10 - thus f[x] is 10 now - thus n:14
-'type
-  [2]  g:{x*2}
-           ^
-q)).z.s                             / now we are stuck at g[x]
-{x*2}
-q)):2                               / we force execution with 2 - thus g[x] is 2 now - thus m:14+2:16 + g[y]:10*2:20 - thus return value is m+20:16+20
-36
-</code></pre>
-<ul>
-<li>to help with debugging within the function we use <code>:</code> and <code>'</code></li>
-<li>now these will help in debugging function line by line</li>
-</ul>
-<pre><code class="language-q">q)f:{a:x+3; y+5; a}
-q)f[3;4]
-6
-q)f:{a:x+3; :y+5; a}                / we can force return with :
-q)f[3;4]
-9
-q)f:{a:x+3; 'polo; a:99; a}         / we can use ' as 'polo
-q)f[3]
-'polo
-  [1]  f:{a:x+3; 'polo; a:99; a}
-                  ^
-q))a                                / we check a isnt assigned 99 till now coz there break statement before it
-6
-q))\
-q)
-</code></pre>
-<ul>
-<li>we can also use <code>0N!</code> and <code>-3!</code> to return each statement of function as its evaluated or print as string</li>
-</ul>
-<pre><code class="language-q">q)f:{0N!a:x+3;0N!a*:a; 0N!a+3}
-q)f[3]
-6
-36
-39
-39
-q)f:{0N!a:x+3;0N!a*:a; -3!a+3}
-q)f[3]
-6
-36
-&quot;39&quot;
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)f:{x+10}
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)g:{x*2}
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q)h:{n:f[x]+4; m:n+g[x] +g[y]}
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>q)h[2;10]
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>40
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>q)h[`aa;10]                             
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>&#39;type
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  [2]  f:{x+10}
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>           ^
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>q)).z.s                             / error at f[x]
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>{x+10}
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>q)):10                              / we force execution with 10 - thus f[x] is 10 now - thus n:14
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>&#39;type
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>  [2]  g:{x*2}
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>           ^
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>q)).z.s                             / now we are stuck at g[x]
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>{x*2}
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>q)):2                               / we force execution with 2 - thus g[x] is 2 now - thus m:14+2:16 + g[y]:10*2:20 - thus return value is m+20:16+20
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>36
+</code></pre></div>
+* to help with debugging within the function we use <code>:</code> and <code>'</code>
+* now these will help in debugging function line by line</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)f:{a:x+3; y+5; a}
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>q)f[3;4]
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>6
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>q)f:{a:x+3; :y+5; a}                / we can force return with :
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>q)f[3;4]
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>9
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>q)f:{a:x+3; &#39;polo; a:99; a}         / we can use &#39; as &#39;polo
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>q)f[3]
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>&#39;polo
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  [1]  f:{a:x+3; &#39;polo; a:99; a}
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>                  ^
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>q))a                                / we check a isnt assigned 99 till now coz there break statement before it
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>6
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>q))\
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>q)
+</code></pre></div>
+* we can also use <code>0N!</code> and <code>-3!</code> to return each statement of function as its evaluated or print as string</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)f:{0N!a:x+3;0N!a*:a; 0N!a+3}
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>q)f[3]
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>6
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>36
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>39
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>39
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>q)f:{0N!a:x+3;0N!a*:a; -3!a+3}
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>q)f[3]
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>6
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>36
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>&quot;39&quot;
+</code></pre></div>
 
               
             </article>

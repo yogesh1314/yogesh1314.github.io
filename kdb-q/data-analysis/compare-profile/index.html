@@ -1013,201 +1013,183 @@
 
 <p>Common practice in data analysis is compare an activity for a specific time period against the average activity(profile) over a wider time 
 * We will compare trading volumes on a specific date against the average daily volume (ADV)
-* first, let's create hdb for 60 days</p>
-<pre><code>q)\l fakedb.q
-USAGE: makedb[NUM QUOTES;NUM TRADES] eg makedb[100000;10000]
-
-makedb1[NUM QUOTES;NUM TRADES;DATE;RANDOMISED COUNT FACTOR] eg makedb1[100000;10000;.z.d;.3]
-
-makehdb[HDBDIR;NUM DAYS;APPROXIMATE NUM QUOTES PER DAY; APPROXIMATE NUM TRADES PER DAY] eg makehdb[`:hdb; 5; 100000; 10000]
-
-makecsv[CSVDIR;NUM DAYS;NUM QUOTES;NUM TRADES]
-
-q)makehdb[`:hdb;60;100000;10000]
-2022.12.26T12:29:09.312 saving data for date 2014.04.21 to :hdb
-2022.12.26T12:29:09.380 saving data for date 2014.04.22 to :hdb
-..
-..
-2022.12.26T12:29:13.521 saving data for date 2014.07.10 to :hdb
-2022.12.26T12:29:13.580 saving data for date 2014.07.11 to :hdb
-
-q)\l hdb
-</code></pre>
+* first, let's create hdb for 60 days
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)\l fakedb.q
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>USAGE: makedb[NUM QUOTES;NUM TRADES] eg makedb[100000;10000]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>makedb1[NUM QUOTES;NUM TRADES;DATE;RANDOMISED COUNT FACTOR] eg makedb1[100000;10000;.z.d;.3]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>makehdb[HDBDIR;NUM DAYS;APPROXIMATE NUM QUOTES PER DAY; APPROXIMATE NUM TRADES PER DAY] eg makehdb[`:hdb; 5; 100000; 10000]
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>makecsv[CSVDIR;NUM DAYS;NUM QUOTES;NUM TRADES]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>q)makehdb[`:hdb;60;100000;10000]
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>2022.12.26T12:29:09.312 saving data for date 2014.04.21 to :hdb
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>2022.12.26T12:29:09.380 saving data for date 2014.04.22 to :hdb
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>..
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>..
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>2022.12.26T12:29:13.521 saving data for date 2014.07.10 to :hdb
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>2022.12.26T12:29:13.580 saving data for date 2014.07.11 to :hdb
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>q)\l hdb
+</code></pre></div>
+* we want to get out average daily profile for which we define time period </p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)dts:(2014.04.22;2014.05.22)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)p: select sum size by date,sym, 5 xbar time.minute from trades where date within dts
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q)p
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>date       sym  minute| size
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>----------------------| -----
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>2014.04.22 AAPL 08:00 | 8536
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>2014.04.22 AAPL 08:05 | 15896
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>2014.04.22 AAPL 08:10 | 18935
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>2014.04.22 AAPL 08:15 | 6874
+</code></pre></div>
+* next we update to get cumulative sum using <code>sums</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)p: update sums size by date,sym from p
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>q)p
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>date       sym  minute| size
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>----------------------| ------
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>2014.04.22 AAPL 08:00 | 8536
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>2014.04.22 AAPL 08:05 | 24432
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>2014.04.22 AAPL 08:10 | 43367
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>2014.04.22 AAPL 08:15 | 50241
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>2014.04.22 AAPL 08:20 | 65972
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>2014.04.22 AAPL 08:25 | 86996
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>2014.04.22 AAPL 08:30 | 97990
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>2014.04.22 AAPL 08:35 | 116046
+</code></pre></div>
+* next we get average size for each sym and minute
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)p1: select avgSize: (sum size)%count distinct date by sym,minute from p
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>q)p1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sym  minute| avgSize
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>-----------| --------
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>AAPL 08:00 | 25892.09
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>AAPL 08:05 | 51668.17
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>AAPL 08:10 | 82826.09
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>AAPL 08:15 | 107311.2
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>AAPL 08:20 | 135899.5
+</code></pre></div>
+* now we need to rack this data
+* first, we create rack - which is cross of distinct syms and all possible time interval between start and end with 5 minute time slice
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)rack: (select distinct sym from p) cross ([]minute: start+00:05*til `int$end-start)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>q)rack
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>sym  minute
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>-----------
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>AAPL 08:00
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>AAPL 08:05
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>AAPL 08:10
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>AAPL 08:15
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>AAPL 08:20
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>AAPL 08:25
+</code></pre></div>
+* we can then left join this to table of daily averages
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)rack lj p1
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>sym  minute avgSize
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>--------------------
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>AAPL 08:00  25892.09
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>AAPL 08:05  51668.17
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>AAPL 08:10  82826.09
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>AAPL 08:15  107311.2
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>AAPL 08:20  135899.5
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>AAPL 08:25  163998.3
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>AAPL 08:30  192402.9
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>AAPL 08:35  216513.4
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>AAPL 08:40  244737.7
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>AAPL 08:45  270592.9
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>AAPL 08:50  294260
+</code></pre></div></p>
 <ul>
-<li>we want to get out average daily profile for which we define time period </li>
-</ul>
-<pre><code>q)dts:(2014.04.22;2014.05.22)
-q)p: select sum size by date,sym, 5 xbar time.minute from trades where date within dts
-q)p
-date       sym  minute| size
-----------------------| -----
-2014.04.22 AAPL 08:00 | 8536
-2014.04.22 AAPL 08:05 | 15896
-2014.04.22 AAPL 08:10 | 18935
-2014.04.22 AAPL 08:15 | 6874
-</code></pre>
-<ul>
-<li>next we update to get cumulative sum using <code>sums</code></li>
-</ul>
-<pre><code>q)p: update sums size by date,sym from p
-q)p
-date       sym  minute| size
-----------------------| ------
-2014.04.22 AAPL 08:00 | 8536
-2014.04.22 AAPL 08:05 | 24432
-2014.04.22 AAPL 08:10 | 43367
-2014.04.22 AAPL 08:15 | 50241
-2014.04.22 AAPL 08:20 | 65972
-2014.04.22 AAPL 08:25 | 86996
-2014.04.22 AAPL 08:30 | 97990
-2014.04.22 AAPL 08:35 | 116046
-</code></pre>
-<ul>
-<li>next we get average size for each sym and minute</li>
-</ul>
-<pre><code>q)p1: select avgSize: (sum size)%count distinct date by sym,minute from p
-q)p1
-sym  minute| avgSize
------------| --------
-AAPL 08:00 | 25892.09
-AAPL 08:05 | 51668.17
-AAPL 08:10 | 82826.09
-AAPL 08:15 | 107311.2
-AAPL 08:20 | 135899.5
-</code></pre>
-<ul>
-<li>now we need to rack this data</li>
-<li>first, we create rack - which is cross of distinct syms and all possible time interval between start and end with 5 minute time slice</li>
-</ul>
-<pre><code>q)rack: (select distinct sym from p) cross ([]minute: start+00:05*til `int$end-start)
-q)rack
-sym  minute
------------
-AAPL 08:00
-AAPL 08:05
-AAPL 08:10
-AAPL 08:15
-AAPL 08:20
-AAPL 08:25
-</code></pre>
-<ul>
-<li>we can then left join this to table of daily averages</li>
-</ul>
-<pre><code>q)rack lj p1
-sym  minute avgSize
---------------------
-AAPL 08:00  25892.09
-AAPL 08:05  51668.17
-AAPL 08:10  82826.09
-AAPL 08:15  107311.2
-AAPL 08:20  135899.5
-AAPL 08:25  163998.3
-AAPL 08:30  192402.9
-AAPL 08:35  216513.4
-AAPL 08:40  244737.7
-AAPL 08:45  270592.9
-AAPL 08:50  294260
-</code></pre>
-<ul>
-<li>Now let's create a script for same</li>
-</ul>
-<pre><code>q)adv:{[startdate;enddate;bucketsize]
-    // extract the bucketed totals
-    p: select sum size by date, sym, bucketsize xbar time.minute from trades where date within (startdate;enddate);
-
-    // make total cumulative
-    p: update sums size by date, sym from p;
-
-    // calculate avergae daily volume across all dates
-    p: select avgSize: (sum size)% count distinct date by sym,minute from p;
-
-    // rack the data
-    start: min exec minute from p;
-    end: max exec minute from p;
-    rack: (select distinct sym from p) cross ([]minute: start+bucketsize*til `int$(end-start)%bucketsize);
-
-    // join and fill racked data
-    update fills avgSize by sym from rack lj p
-    }
-    // 
-</code></pre>
-<ul>
-<li>now we have loaded the function and hdb in same session</li>
-</ul>
-<pre><code>q)adv
-{[startdate;enddate;bucketsize] p: select sum size by date, sym, bucketsize x..
-q)adv[2014.04.22;2014.05.22;5]
-sym  minute avgSize
---------------------
-AAPL 08:00  25892.09
-AAPL 08:05  51668.17
-AAPL 08:10  82826.09
-AAPL 08:15  107311.2
-AAPL 08:20  135899.5
-</code></pre>
-<ul>
+<li>Now let's create a script for same
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)adv:{[startdate;enddate;bucketsize]
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    // extract the bucketed totals
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    p: select sum size by date, sym, bucketsize xbar time.minute from trades where date within (startdate;enddate);
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    // make total cumulative
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    p: update sums size by date, sym from p;
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    // calculate avergae daily volume across all dates
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    p: select avgSize: (sum size)% count distinct date by sym,minute from p;
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    // rack the data
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    start: min exec minute from p;
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    end: max exec minute from p;
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    rack: (select distinct sym from p) cross ([]minute: start+bucketsize*til `int$(end-start)%bucketsize);
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    // join and fill racked data
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>    update fills avgSize by sym from rack lj p
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    }
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    // 
+</code></pre></div></li>
+<li>now we have loaded the function and hdb in same session
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)adv
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>{[startdate;enddate;bucketsize] p: select sum size by date, sym, bucketsize x..
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>q)adv[2014.04.22;2014.05.22;5]
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>sym  minute avgSize
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>--------------------
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>AAPL 08:00  25892.09
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>AAPL 08:05  51668.17
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>AAPL 08:10  82826.09
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>AAPL 08:15  107311.2
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>AAPL 08:20  135899.5
+</code></pre></div></li>
 <li>we can compare by joining on cumulative size data for specified date</li>
-<li>we can also fill forward to remove any blank value</li>
-</ul>
-<pre><code>q)update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.23
-sym  minute| size
------------| ------
-AAPL 08:00 | 31991
-AAPL 08:05 | 53513
-AAPL 08:10 | 88931
-AAPL 08:15 | 125699
-AAPL 08:20 | 151826
-q)adv[2014.04.22;2014.05.22;5] lj update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.22
-sym  minute avgSize  size
----------------------------
-AAPL 08:00  25892.09 17140
-AAPL 08:05  51668.17 45260
-AAPL 08:10  82826.09 58595
-AAPL 08:15  107311.2 87317
-q)update fills size from adv[2014.04.22;2014.05.22;5] lj update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.22
-sym  minute avgSize  size
----------------------------
-AAPL 08:00  25892.09 17140
-AAPL 08:05  51668.17 45260
-AAPL 08:10  82826.09 58595
-AAPL 08:15  107311.2 87317
-AAPL 08:20  135899.5 113833
-AAPL 08:25  163998.3 131745
-AAPL 08:30  192402.9 176591
-AAPL 08:35  216513.4 184667
-AAPL 08:40  244737.7 197525
-</code></pre>
-<ul>
+<li>we can also fill forward to remove any blank value
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.23
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>sym  minute| size
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>-----------| ------
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>AAPL 08:00 | 31991
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>AAPL 08:05 | 53513
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>AAPL 08:10 | 88931
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>AAPL 08:15 | 125699
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>AAPL 08:20 | 151826
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>q)adv[2014.04.22;2014.05.22;5] lj update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.22
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>sym  minute avgSize  size
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>---------------------------
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>AAPL 08:00  25892.09 17140
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>AAPL 08:05  51668.17 45260
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>AAPL 08:10  82826.09 58595
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>AAPL 08:15  107311.2 87317
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>q)update fills size from adv[2014.04.22;2014.05.22;5] lj update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.22
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>sym  minute avgSize  size
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>---------------------------
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>AAPL 08:00  25892.09 17140
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>AAPL 08:05  51668.17 45260
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>AAPL 08:10  82826.09 58595
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>AAPL 08:15  107311.2 87317
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>AAPL 08:20  135899.5 113833
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>AAPL 08:25  163998.3 131745
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>AAPL 08:30  192402.9 176591
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>AAPL 08:35  216513.4 184667
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>AAPL 08:40  244737.7 197525
+</code></pre></div></li>
 <li>now we can compare 1 date's data to adv for date range</li>
 </ul>
-<pre><code>q)update sizeComp: 100*size%avgSize from update fills size from adv[2014.04.22;2014.05.22;5] lj update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.22
-sym  minute avgSize  size   sizeComp
-------------------------------------
-AAPL 08:00  25892.09 17140  66.19783
-AAPL 08:05  51668.17 45260  87.59744
-AAPL 08:10  82826.09 58595  70.74462
-AAPL 08:15  107311.2 87317  81.36804
-AAPL 08:20  135899.5 113833 83.76265
-AAPL 08:25  163998.3 131745 80.33317
-AAPL 08:30  192402.9 176591 91.7819
-</code></pre>
-<ul>
-<li>now we can make new function for this comparison </li>
-</ul>
-<pre><code>q)comparetoAdv:{[startdate;enddate;bucketsize;comparisonDate]
-    res: update sums size from select sum size by sym,bucketsize xbar time.minute from trades where date=comparisonDate;
-    res1: update fills size from adv[2014.04.22;2014.05.22;5] lj res;
-    update sizeComp: 100*size%avgSize from res1 
-    };
-q)compareToAdv[2014,04,22;2014.05.22;5;2014.05.22]
-sym  minute avgSize  size   sizeComp
-------------------------------------
-AAPL 08:00  25892.09 17140  66.19783
-AAPL 08:05  51668.17 45260  87.59744
-AAPL 08:10  82826.09 58595  70.74462
-AAPL 08:15  107311.2 87317  81.36804
-AAPL 08:20  135899.5 113833 83.76265
-</code></pre>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)update sizeComp: 100*size%avgSize from update fills size from adv[2014.04.22;2014.05.22;5] lj update sums size from select sum size by sym,5 xbar time.minute from trades where date=2014.05.22
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sym  minute avgSize  size   sizeComp
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>------------------------------------
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>AAPL 08:00  25892.09 17140  66.19783
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>AAPL 08:05  51668.17 45260  87.59744
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>AAPL 08:10  82826.09 58595  70.74462
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>AAPL 08:15  107311.2 87317  81.36804
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>AAPL 08:20  135899.5 113833 83.76265
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>AAPL 08:25  163998.3 131745 80.33317
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>AAPL 08:30  192402.9 176591 91.7819
+</code></pre></div>
+* now we can make new function for this comparison </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)comparetoAdv:{[startdate;enddate;bucketsize;comparisonDate]
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    res: update sums size from select sum size by sym,bucketsize xbar time.minute from trades where date=comparisonDate;
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    res1: update fills size from adv[2014.04.22;2014.05.22;5] lj res;
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    update sizeComp: 100*size%avgSize from res1 
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    };
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>q)compareToAdv[2014,04,22;2014.05.22;5;2014.05.22]
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>sym  minute avgSize  size   sizeComp
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>------------------------------------
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>AAPL 08:00  25892.09 17140  66.19783
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>AAPL 08:05  51668.17 45260  87.59744
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>AAPL 08:10  82826.09 58595  70.74462
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>AAPL 08:15  107311.2 87317  81.36804
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>AAPL 08:20  135899.5 113833 83.76265
+</code></pre></div>
 
               
             </article>
