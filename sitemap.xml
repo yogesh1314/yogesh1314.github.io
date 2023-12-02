@@ -2,177 +2,182 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://yogesh1314.github.io/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://yogesh1314.github.io/aoc/23/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://yogesh1314.github.io/aoc/23/1/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://yogesh1314.github.io/aoc/23/2/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/Qsql/1_using_select_statements/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/Qsql/2_where_clause/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/atom-lists/atom/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/Qsql/3_by_clause/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/atom-lists/basic_operations/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/Qsql/4_functional_form/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/atom-lists/hints_and_tricks/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/atom/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/atom-lists/introduction_to_lists/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/basic_operations/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/atom-lists/list_operations/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/hints_and_tricks/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/data-analysis/compare-profile/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/introduction_to_lists/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/data-analysis/map-reduce-parallel/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/atom-lists/list_operations/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/data-analysis/rack-align-pivot/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/compare-profile/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/data-analysis/trade-analysis/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/map-reduce-parallel/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/dict-table-func/1_dictionaries/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/rack-align-pivot/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/dict-table-func/2_operations_on_dictionaries/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/data-analysis/trade-analysis/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/dict-table-func/3_tables/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/1_dictionaries/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/dict-table-func/4_functions/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/2_operations_on_dictionaries/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/dict-table-func/5_execution_control/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/3_tables/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/dict-table-func/6_scripts/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/4_functions/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/dict-table-func/7_debugging/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/5_execution_control/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/fileio/load-save-files/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/6_scripts/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/fileio/on-disk-tables/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/dict_table_func/7_debugging/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/ipc-web-access/ipc-sending-receiving/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/fileio/load-save-files/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/ipc-web-access/ipc_connecting/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/fileio/on-disk-tables/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/ipc-web-access/kdb-via-web-browser/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/ipc_web_access/ipc-sending-receiving/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/keywords-joins-adverbs-attributes/1_keywords/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/ipc_web_access/ipc_connecting/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/keywords-joins-adverbs-attributes/2_joins/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/ipc_web_access/kdb-via-web-browser/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/keywords-joins-adverbs-attributes/3_asof_window_joins/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/1_keywords/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/keywords-joins-adverbs-attributes/4_adverbs/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/2_joins/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/keywords-joins-adverbs-attributes/5_attributes/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/3_asof_window_joins/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/keywords-joins-adverbs-attributes/6_index_amend_apply/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/4_adverbs/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/qsql/1_using_select_statements/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/5_attributes/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/qsql/2_where_clause/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://yogesh1314.github.io/kdb-q/keywords_joins_adverbs_attributes/6_index_amend_apply/</loc>
-         <lastmod>2023-12-01</lastmod>
+         <loc>https://yogesh1314.github.io/qkdb/qsql/3_by_clause/</loc>
+         <lastmod>2023-12-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://yogesh1314.github.io/qkdb/qsql/4_functional_form/</loc>
+         <lastmod>2023-12-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

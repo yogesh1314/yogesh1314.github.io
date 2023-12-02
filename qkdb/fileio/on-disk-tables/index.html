@@ -1,0 +1,1821 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal Tech Wiki">
+      
+      
+      
+        <link rel="canonical" href="https://yogesh1314.github.io/qkdb/fileio/on-disk-tables/">
+      
+      <link rel="icon" href="../../../static/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
+    
+    
+      
+        <title>On disk tables - Tech Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2b4465f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/prism.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#on-disk-tables" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Tech Blog" class="md-header__button md-logo" aria-label="Tech Blog" data-md-component="logo">
+      
+  <img src="../../../static/YR.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tech Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              On disk tables
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
+        qkdb
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../aoc/23/" class="md-tabs__link">
+        Advent-of-Code
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tech Blog" class="md-nav__button md-logo" aria-label="Tech Blog" data-md-component="logo">
+      
+  <img src="../../../static/YR.svg" alt="logo">
+
+    </a>
+    Tech Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          qkdb
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="qkdb" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          qkdb
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          Atom-lists
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Atom-lists" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Atom-lists
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/basic_operations/" class="md-nav__link">
+        Basic Operations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/atom/" class="md-nav__link">
+        Atoms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/introduction_to_lists/" class="md-nav__link">
+        Lists
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/list_operations/" class="md-nav__link">
+        List Operations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/hints_and_tricks/" class="md-nav__link">
+        Hints and Tricks
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          Dictionary
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dictionary" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Dictionary
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/1_dictionaries.md" class="md-nav__link">
+        Dictionaries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/2_operations_on_dictionaries.md" class="md-nav__link">
+        Operation on Dictionaries
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/3_tables.md" class="md-nav__link">
+        Tables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/4_functions.md" class="md-nav__link">
+        Functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/5_execution_control.md" class="md-nav__link">
+        Execution Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/6_scripts.md" class="md-nav__link">
+        Scripts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/7_debugging.md" class="md-nav__link">
+        Debugging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9" type="checkbox" id="__nav_1_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_9">
+          Q-SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Q-SQL" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Q-SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/1_using_select_statements/" class="md-nav__link">
+        Select
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/2_where_clause/" class="md-nav__link">
+        Where
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/3_by_clause/" class="md-nav__link">
+        By
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/4_functional_form/" class="md-nav__link">
+        Functional Form
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/1_keywords/" class="md-nav__link">
+        Keywords
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_11" type="checkbox" id="__nav_1_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_11">
+          Joins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Joins" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_11">
+          <span class="md-nav__icon md-icon"></span>
+          Joins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/2_joins/" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/3_asof_window_joins/" class="md-nav__link">
+        Asof-Windows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/4_adverbs/" class="md-nav__link">
+        Adverbs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/5_attributes/" class="md-nav__link">
+        Attributes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/6_index_amend_apply/" class="md-nav__link">
+        Index Amend
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_15" type="checkbox" id="__nav_1_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_15">
+          IPC
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="IPC" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_15">
+          <span class="md-nav__icon md-icon"></span>
+          IPC
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipc-web-access/ipc_connecting/" class="md-nav__link">
+        Connecting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipc-web-access/ipc-sending-receiving/" class="md-nav__link">
+        Send Receive
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipc-web-access/kdb-via-web-browser/" class="md-nav__link">
+        Web Browser
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_16" type="checkbox" id="__nav_1_16" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_16">
+          File I/O
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="File I/O" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_16">
+          <span class="md-nav__icon md-icon"></span>
+          File I/O
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          On disk tables
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        On disk tables
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flat-table" class="md-nav__link">
+    Flat Table
+  </a>
+  
+    <nav class="md-nav" aria-label="Flat Table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-flat-table" class="md-nav__link">
+    Save flat table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-flat-table" class="md-nav__link">
+    Load flat table
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#splayed-table" class="md-nav__link">
+    Splayed table
+  </a>
+  
+    <nav class="md-nav" aria-label="Splayed table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-splayed-tables" class="md-nav__link">
+    Save splayed tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-splayed-tables" class="md-nav__link">
+    Load splayed tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-splayed-table-on-disk" class="md-nav__link">
+    Edit splayed table on disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partitioned-tables" class="md-nav__link">
+    Partitioned tables
+  </a>
+  
+    <nav class="md-nav" aria-label="Partitioned tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-partitioned-table" class="md-nav__link">
+    Save partitioned table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-the-partitioned-table" class="md-nav__link">
+    Load the partitioned table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qind" class="md-nav__link">
+    .Q.ind
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qchk" class="md-nav__link">
+    .Q.chk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumeration" class="md-nav__link">
+    Enumeration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qdpft" class="md-nav__link">
+    .Q.dpft
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../load-save-files/" class="md-nav__link">
+        Load save files
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_17" type="checkbox" id="__nav_1_17" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_17">
+          Data Analysis
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Analysis" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_17">
+          <span class="md-nav__icon md-icon"></span>
+          Data Analysis
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-analysis/rack-align-pivot/" class="md-nav__link">
+        Rack Align Pivot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-analysis/compare-profile/" class="md-nav__link">
+        Compare Profile
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-analysis/trade-analysis/" class="md-nav__link">
+        Trade Analysis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-analysis/map-reduce-parallel/" class="md-nav__link">
+        Map Reduce Parallelization
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Advent-of-Code
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advent-of-Code" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Advent-of-Code
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aoc/23/" class="md-nav__link">
+        Y2023
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#flat-table" class="md-nav__link">
+    Flat Table
+  </a>
+  
+    <nav class="md-nav" aria-label="Flat Table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-flat-table" class="md-nav__link">
+    Save flat table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-flat-table" class="md-nav__link">
+    Load flat table
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#splayed-table" class="md-nav__link">
+    Splayed table
+  </a>
+  
+    <nav class="md-nav" aria-label="Splayed table">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-splayed-tables" class="md-nav__link">
+    Save splayed tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-splayed-tables" class="md-nav__link">
+    Load splayed tables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-splayed-table-on-disk" class="md-nav__link">
+    Edit splayed table on disk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partitioned-tables" class="md-nav__link">
+    Partitioned tables
+  </a>
+  
+    <nav class="md-nav" aria-label="Partitioned tables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-partitioned-table" class="md-nav__link">
+    Save partitioned table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-the-partitioned-table" class="md-nav__link">
+    Load the partitioned table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qind" class="md-nav__link">
+    .Q.ind
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qchk" class="md-nav__link">
+    .Q.chk
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enumeration" class="md-nav__link">
+    Enumeration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qdpft" class="md-nav__link">
+    .Q.dpft
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="on-disk-tables">On Disk Tables</h1>
+<p>We can save a table to disk in 3 different formats 
+ 1. flat table
+ 2. splayed table
+ 3. partitioned table</p>
+<h2 id="flat-table">Flat Table</h2>
+<ul>
+<li>Saved to disk as-is, with all the information in one file</li>
+<li>These can only be used by loading them into memory</li>
+<li>Used only by small, frequently used databases</li>
+<li>Generally not suitable for large dataset</li>
+</ul>
+<h3 id="save-flat-table">Save flat table</h3>
+<ul>
+<li>Lets create a table in-memory 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)price:([]fruit: `banana`grapes`orange; qty: 10 15 13; prc: 10.78 40.88 30.87)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)price
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>fruit  qty prc
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>----------------
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>banana 10  10.78
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>grapes 15  40.88
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>orange 13  30.87
+</code></pre></div></li>
+<li>we can save the table to disk using <code>handle_to_file set table_name</code> </li>
+<li>here <code>handle_to_file</code> can be relative if saving in current directory or full path if saving in another directory provided write permissions are valid
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)`:pricetab set price
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>`:pricetab
+</code></pre></div></li>
+<li>or we can use <code>save</code> in case we want to keep filename same as tablename 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)save `:price
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>`:price
+</code></pre></div></li>
+<li>after saving to disk we can see there are two flat files in the working directory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)system&quot;ls -lh&quot;
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>&quot;total 16&quot;
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+</code></pre></div></li>
+</ul>
+<h3 id="load-flat-table">Load flat table</h3>
+<ul>
+<li>to read these flat files we can use function <code>get</code> or <code>load</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)get `:price
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>fruit  qty prc
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>----------------
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>banana 10  10.78
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>grapes 15  40.88
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>orange 13  30.87
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>q)load `:pricetab
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>`pricetab
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>q)pricetab
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>fruit  qty prc
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>----------------
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>banana 10  10.78
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>grapes 15  40.88
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>orange 13  30.87
+</code></pre></div></li>
+</ul>
+<h2 id="splayed-table">Splayed table</h2>
+<ul>
+<li>In splayed table a directory is created with name same as table name and having files for each columns and also a <code>.d</code> file which contains the order of the columns </li>
+<li>to splay we add the <code>/</code> to the end of file handle to specify it is a directory - it is same for both unix and windows system i.e; <code>/</code> forward slash</li>
+</ul>
+<h3 id="save-splayed-tables">Save splayed tables</h3>
+<ul>
+<li>let's create a new table called <code>prices2</code> which we can save as splayed table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)prices2:([]cars:&quot;ABC&quot;; price: 500 1100 1500 ; qty: 1000 350 20)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>q)prices2
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>cars price qty
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>---------------
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>A    500   1000
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>B    1100  350
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>C    1500  20
+</code></pre></div></li>
+<li>we can save splayed table using <code>set</code> but adding <code>/</code> at the end of file handle
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)`:splayedprice2/ set prices2
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>`:splayedprice2/
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>q)system&quot;ls -lh&quot;
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>&quot;total 16&quot;
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 22:43 splayedprice2&quot;
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>q)system&quot;ls -alh splayedprice2&quot;
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>&quot;total 32&quot;
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 22:43 .&quot;
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>&quot;drwxr-xr-x  5 ranayk  staff   160B Oct  4 22:43 ..&quot;
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>&quot;-rw-r--r--  1 ranayk  staff    23B Oct  4 22:43 .d&quot;
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 22:43 cars&quot;
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 22:43 price&quot;
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 22:43 qty&quot;
+</code></pre></div></li>
+</ul>
+<h3 id="load-splayed-tables">Load splayed tables</h3>
+<ul>
+<li>when we load the splayed table into the memory it is mapped to the memory not loaded into the memory - we can see this by checking <code>mmap</code> value from result of <code>.Q.w[]</code> function</li>
+<li>before loading the table <code>.Q.w[]</code> shows <code>0</code> for <code>mmap</code>
+```qq).Q.w[]
+used| 357056
+heap| 67108864
+peak| 67108864
+wmax| 0
+mmap| 0
+mphy| 8589934592
+syms| 663
+symw| 28351
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>* we can load the splayed table using `get`
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>* after loading the table into memory we can re-examine the `mmap` value from `.Q.w[]` output
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>```q
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>q)prices2
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>cars price qty
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>---------------
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>A    500   1000
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>B    1100  350
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>C    1500  20
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>q).Q.w[]
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>used| 358336
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>heap| 67108864
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>peak| 67108864
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>wmax| 0
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>mmap| 99
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>mphy| 8589934592
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>syms| 669
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>symw| 28547
+</code></pre></div></li>
+</ul>
+<h3 id="edit-splayed-table-on-disk">Edit splayed table on disk</h3>
+<ul>
+<li>we can re-order the table's columns by editing <code>.d</code> file
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)get `:splayedprice2/.d
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>`cars`price`qty
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>q)`:splayedprice2/.d set `qty`price`cars
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>`:splayedprice2/.d
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>q)load `:splayedprice2
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>`splayedprice2
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>q)splayedprice2
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>qty  price cars
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>---------------
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>1000 500   A
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>350  1100  B
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>20   1500  C
+</code></pre></div></li>
+<li>we can add the columns to splayed table on disk </li>
+<li>and we need to edit the <code>.d</code> file as well
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)`:splayedprice2/date set 2022.10.01 2022.10.02 2022.10.03
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>`:splayedprice2/date
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>q)`:splayedprice2/.d set (get `:splayedprice2/.d),`date
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>`:splayedprice2/.d
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>q)load `:splayedprice2
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>`splayedprice2
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>q)splayedprice2
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>qty  price cars date
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>--------------------------
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>1000 500   A    2022.10.01
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>350  1100  B    2022.10.02
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>20   1500  C    2022.10.03
+</code></pre></div></li>
+<li>similarly we can delete the column from splayed table on disk using <code>hdel</code> and here as well we need to edit <code>.d</code> file
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)hdel `:splayedprice2/date
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>`:splayedprice2/date
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>q)(get `:splayedprice2/.d) except `date
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>`qty`price`cars
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>q)`:splayedprice2/.d set (get `:splayedprice2/.d) except `date
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>`:splayedprice2/.d
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>q)load `:splayedprice2
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>`splayedprice2
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>q)splayedprice2
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>qty  price cars
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>---------------
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>1000 500   A
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>350  1100  B
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>20   1500  C
+</code></pre></div></li>
+<li>we can also add a new row to splayed table on disk using <code>upsert</code> function
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q)`:splayedprice2/ upsert (1500;70;&quot;D&quot;)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>`:splayedprice2/
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>q)get `:splayedprice2/
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>qty  price cars
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>---------------
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>1000 500   A
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>350  1100  B
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>20   1500  C
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>1500 70    D
+</code></pre></div></li>
+<li>we can also sort the table - using <code>xasc</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q)`qty xasc `:splayedprice2/
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>`:splayedprice2/
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>q)get `:splayedprice2/
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>qty  price cars
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>---------------
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>20   1500  C
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>350  1100  B
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>1000 500   A
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>1500 70    D
+</code></pre></div></li>
+</ul>
+<h2 id="partitioned-tables">Partitioned tables</h2>
+<ul>
+<li>Partitioned tables can be split horizontally as well as vertically - meaning data is split by row value(date or month) then each column is splayed into single file on disk - similar to splayed table</li>
+</ul>
+<h3 id="save-partitioned-table">Save partitioned table</h3>
+<ul>
+<li>Lets define 2 tables for each parition and save them to disk using <code>set</code></li>
+<li>here we are providing directory, parition and table name in file handle
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q)price1:([]car:&quot;ABC&quot;;qty:10 20 30; price: 33 44 55)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>q)price1
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>car qty price
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>-------------
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>A   10  33
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>B   20  44
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>C   30  55
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>q)price2:([]car:&quot;ZXY&quot;;qty:99 88 77; price: 10 20 30)
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>q)price2
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>car qty price
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>-------------
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>Z   99  10
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>X   88  20
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>Y   77  30
+</code></pre></div></li>
+<li>on disk structure
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)system&quot;ls -lah&quot;
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>&quot;total 16&quot;
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>&quot;drwxr-xr-x   6 ranayk  staff   192B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>&quot;drwxr-xr-x+ 54 ranayk  staff   1.7K Oct  4 23:22 ..&quot;
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>&quot;drwxr-xr-x   4 ranayk  staff   128B Oct  4 23:25 partprice&quot;
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>&quot;-rw-r--r--   1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>&quot;-rw-r--r--   1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>&quot;drwxr-xr-x   6 ranayk  staff   192B Oct  4 23:04 splayedprice2&quot;
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>q)system&quot;ls -lah partprice&quot;
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>&quot;total 0&quot;
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 2022.10.01&quot;
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 2022.10.02&quot;
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>q)system&quot;ls -lah partprice/2022.10.01/&quot;
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>&quot;total 0&quot;
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>q)system&quot;ls -lah partprice/2022.10.01/price/&quot; //if we had more tables in this partition it would show as another directory with directory name same as table&#39;s name
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>&quot;total 32&quot;
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>&quot;-rw-r--r--  1 ranayk  staff    22B Oct  4 23:25 .d&quot;
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 23:25 car&quot;
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 qty&quot;
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>q)system&quot;ls -lah partprice/2022.10.02/&quot;
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>&quot;total 0&quot;
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>q)system&quot;ls -lah partprice/2022.10.02/price/&quot;
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>&quot;total 32&quot;
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:25 .&quot;
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>&quot;drwxr-xr-x  3 ranayk  staff    96B Oct  4 23:25 ..&quot;
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>&quot;-rw-r--r--  1 ranayk  staff    22B Oct  4 23:25 .d&quot;
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>&quot;-rw-r--r--  1 ranayk  staff    19B Oct  4 23:25 car&quot;
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 price&quot;
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>&quot;-rw-r--r--  1 ranayk  staff    40B Oct  4 23:25 qty&quot;
+</code></pre></div></li>
+</ul>
+<h3 id="load-the-partitioned-table">Load the partitioned table</h3>
+<ul>
+<li>we can use <code>\l</code> with directory name to load the partitioned table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)\l partprice
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>q)price
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>date       car qty price
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>------------------------
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>2022.10.01 A   10  33
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>2022.10.01 B   20  44
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>2022.10.01 C   30  55
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>2022.10.02 Z   99  10
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>2022.10.02 X   88  20
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>2022.10.02 Y   77  30
+</code></pre></div></li>
+</ul>
+<h3 id="qind"><code>.Q.ind</code></h3>
+<ul>
+<li>we can use <code>.Q.ind</code> to access rows of table by providing indexes as argument
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q).Q.ind[price;2 5]
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>date       car qty price
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>------------------------
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>2022.10.01 C   30  55
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>2022.10.02 Y   77  30
+</code></pre></div></li>
+</ul>
+<h3 id="qchk"><code>.Q.chk</code></h3>
+<ul>
+<li>if we have partitions with table directories missing then we can use <code>.Q.chk</code> to populate them using the schema of last parition
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a> q)\ls
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>&quot;partprice&quot;
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>&quot;price&quot;
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>&quot;pricetab&quot;
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>&quot;splayedprice2&quot;
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>q)system&quot;mkdir partprice/2022.10.03&quot;
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>q)system&quot;ls -lh partprice/2022.10.03&quot; //latest partition doesn&#39;t have tables data populated
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>&quot;total 0&quot;
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>q).Q.chk[`:partprice]
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>,`:partprice/2022.10.03
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>()
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>()
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>q)system&quot;ls -lh partprice/2022.10.03&quot; //now it is populated
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>&quot;total 0&quot;
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:39 price&quot;
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>q)\l partprice
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>q)price
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>date       car qty price
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>------------------------
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>2022.10.01 A   10  33
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>2022.10.01 B   20  44
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>2022.10.01 C   30  55
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>2022.10.02 Z   99  10
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>2022.10.02 X   88  20
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>2022.10.02 Y   77  30
+</code></pre></div></li>
+<li>directory structure till now</li>
+<li>partprice is partitioned table</li>
+<li>price and pricetab are flat tables, and</li>
+<li>splayedprice2 is splayed table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>├── partprice
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>│   ├── 2022.10.01
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>│   │   └── price
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>│   │       ├── car
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>│   │       ├── price
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>│   │       └── qty
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>│   ├── 2022.10.02
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>│   │   └── price
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>│   │       ├── car
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>│   │       ├── price
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>│   │       └── qty
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>│   └── 2022.10.03
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>│       └── price
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>│           ├── car
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>│           ├── price
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>│           └── qty
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>├── price
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>├── pricetab
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>└── splayedprice2
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>    ├── cars
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    ├── price
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>    └── qty
+</code></pre></div></li>
+<li>Now if we try to save splayed or partitioned table with symbol column it will fail as it needs enumeration</li>
+</ul>
+<h2 id="enumeration">Enumeration</h2>
+<ul>
+<li>to enumerate means - unique symbols are identified and index assigned to each symbol - this map is stored in <code>sym</code> file in the root of database directory</li>
+<li>We use <code>.Q.en</code> to enumerate the table and generate/upsert values to <code>sym</code> file when saving down splayed or partitioned table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>q)price
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>fruit  qty prc
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>----------------
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>banana 10  10.78
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>grapes 15  40.88
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>orange 13  30.87
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>q)`:ensplayed/price/ set .Q.en[`:ensplayed;price]
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>`:ensplayed/price/
+</code></pre></div></li>
+<li>now we can see additional <code>sym</code> file created for price splayed table under ensplayed directory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>q)system&quot;ls -lh&quot;
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>&quot;total 16&quot;
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>&quot;drwxr-xr-x  4 ranayk  staff   128B Oct  4 23:52 ensplayed&quot;
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>&quot;drwxr-xr-x  5 ranayk  staff   160B Oct  4 23:38 partprice&quot;
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:26 price&quot;
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>&quot;-rw-r--r--  1 ranayk  staff   118B Oct  4 22:25 pricetab&quot;
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:04 splayedprice2&quot;
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>q)system&quot;ls -lh ensplayed&quot;
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>&quot;total 8&quot;
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>&quot;drwxr-xr-x  6 ranayk  staff   192B Oct  4 23:52 price&quot;
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>&quot;-rw-r--r--  1 ranayk  staff    29B Oct  4 23:52 sym&quot;
+</code></pre></div></li>
+<li>we can also load it into memory
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>q)\l ensplayed/price
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>`price
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>q)price
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>fruit  qty prc
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>----------------
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>banana 10  10.78
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>grapes 15  40.88
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>orange 13  30.87
+</code></pre></div></li>
+</ul>
+<h2 id="qdpft"><code>.Q.dpft</code></h2>
+<ul>
+<li>we can use <code>.Q.dpft</code> to save partitioned table on disk </li>
+<li>it needs table to be defined in-memory</li>
+<li><code>.Q.dpft</code> - directory, partition, column to apply part attribute to, (in-memory)tablename
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>q)price
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>fruit  qty prc
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>----------------
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>banana 10  10.78
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>grapes 15  40.88
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>orange 13  30.87
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>q)meta price
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>c    | t f a
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>-----| -----
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>fruit| s
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>qty  | j
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>prc  | f
+<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>q).Q.dpft[`:hdb;2022.10.01;`fruit;`price]
+<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>`price
+</code></pre></div></li>
+<li>directory structure
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>hdb
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>└── 2022.10.01
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>    └── price
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>        ├── fruit
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>        ├── prc
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>        └── qty
+</code></pre></div></li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../ipc-web-access/kdb-via-web-browser/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Web Browser" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Web Browser
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../load-save-files/" class="md-footer__link md-footer__link--next" aria-label="Next: Load save files" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Load save files
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://github.com/yogesh1314" target="_blank" rel="noopener" title="Yogesh Rana on github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://in.linkedin.com/in/yogesh1314" target="_blank" rel="noopener" title="Yogesh Rana on linkedin" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.top", "navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.960e086b.min.js"></script>
+      
+        <script src="../../../scripts/prism.js"></script>
+      
+        <script src="../../../scripts/jquery-3.6.3.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1595 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Personal Tech Wiki">
+      
+      
+      
+        <link rel="canonical" href="https://yogesh1314.github.io/qkdb/data-analysis/rack-align-pivot/">
+      
+      <link rel="icon" href="../../../static/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.9">
+    
+    
+      
+        <title>Rack Align Pivot - Tech Blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.2b4465f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/prism.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rack-align-pivot" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Tech Blog" class="md-header__button md-logo" aria-label="Tech Blog" data-md-component="logo">
+      
+  <img src="../../../static/YR.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tech Blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Rack Align Pivot
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link md-tabs__link--active">
+        qkdb
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../aoc/23/" class="md-tabs__link">
+        Advent-of-Code
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tech Blog" class="md-nav__button md-logo" aria-label="Tech Blog" data-md-component="logo">
+      
+  <img src="../../../static/YR.svg" alt="logo">
+
+    </a>
+    Tech Blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          qkdb
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="qkdb" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          qkdb
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          Atom-lists
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Atom-lists" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Atom-lists
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/basic_operations/" class="md-nav__link">
+        Basic Operations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/atom/" class="md-nav__link">
+        Atoms
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/introduction_to_lists/" class="md-nav__link">
+        Lists
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/list_operations/" class="md-nav__link">
+        List Operations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atom-lists/hints_and_tricks/" class="md-nav__link">
+        Hints and Tricks
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          Dictionary
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dictionary" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Dictionary
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/1_dictionaries.md" class="md-nav__link">
+        Dictionaries
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/2_operations_on_dictionaries.md" class="md-nav__link">
+        Operation on Dictionaries
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/3_tables.md" class="md-nav__link">
+        Tables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/4_functions.md" class="md-nav__link">
+        Functions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/5_execution_control.md" class="md-nav__link">
+        Execution Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/6_scripts.md" class="md-nav__link">
+        Scripts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dict_table_func/7_debugging.md" class="md-nav__link">
+        Debugging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_9" type="checkbox" id="__nav_1_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_9">
+          Q-SQL
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Q-SQL" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Q-SQL
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/1_using_select_statements/" class="md-nav__link">
+        Select
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/2_where_clause/" class="md-nav__link">
+        Where
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/3_by_clause/" class="md-nav__link">
+        By
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../qsql/4_functional_form/" class="md-nav__link">
+        Functional Form
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/1_keywords/" class="md-nav__link">
+        Keywords
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_11" type="checkbox" id="__nav_1_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_11">
+          Joins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Joins" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_11">
+          <span class="md-nav__icon md-icon"></span>
+          Joins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/2_joins/" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/3_asof_window_joins/" class="md-nav__link">
+        Asof-Windows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/4_adverbs/" class="md-nav__link">
+        Adverbs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/5_attributes/" class="md-nav__link">
+        Attributes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../keywords-joins-adverbs-attributes/6_index_amend_apply/" class="md-nav__link">
+        Index Amend
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_15" type="checkbox" id="__nav_1_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_15">
+          IPC
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="IPC" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_15">
+          <span class="md-nav__icon md-icon"></span>
+          IPC
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipc-web-access/ipc_connecting/" class="md-nav__link">
+        Connecting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipc-web-access/ipc-sending-receiving/" class="md-nav__link">
+        Send Receive
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ipc-web-access/kdb-via-web-browser/" class="md-nav__link">
+        Web Browser
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_16" type="checkbox" id="__nav_1_16" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_16">
+          File I/O
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="File I/O" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_16">
+          <span class="md-nav__icon md-icon"></span>
+          File I/O
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fileio/on-disk-tables/" class="md-nav__link">
+        On disk tables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fileio/load-save-files/" class="md-nav__link">
+        Load save files
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_17" type="checkbox" id="__nav_1_17" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_17">
+          Data Analysis
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Data Analysis" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_17">
+          <span class="md-nav__icon md-icon"></span>
+          Data Analysis
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Rack Align Pivot
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Rack Align Pivot
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#racking" class="md-nav__link">
+    Racking
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#align" class="md-nav__link">
+    Align
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#offset-alignment" class="md-nav__link">
+    Offset Alignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pivoting" class="md-nav__link">
+    Pivoting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compare-profile/" class="md-nav__link">
+        Compare Profile
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trade-analysis/" class="md-nav__link">
+        Trade Analysis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../map-reduce-parallel/" class="md-nav__link">
+        Map Reduce Parallelization
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Advent-of-Code
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advent-of-Code" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Advent-of-Code
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../aoc/23/" class="md-nav__link">
+        Y2023
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#racking" class="md-nav__link">
+    Racking
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#align" class="md-nav__link">
+    Align
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#offset-alignment" class="md-nav__link">
+    Offset Alignment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pivoting" class="md-nav__link">
+    Pivoting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+<h1 id="rack-align-pivot">Rack Align Pivot</h1>
+<h2 id="racking">Racking</h2>
+<ul>
+<li>common operation with timeseries data is grouping data by time bucket using function <code>xbar</code></li>
+<li>However using <code>xbar</code> we don't get buckets for all symbols for all possible time buckets, rather buckets are created for which data is present</li>
+<li>Let's create timeseries table
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>q)tab:([]sym:`TCS`SBI`TCS`SBI`SBI;time: 09:00 09:01 09:20 09:32 09:34; size: 200 300 5000 400 350; price: 39.99 45.3 34.56 22.34 99.89)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>q)tab
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>sym time  size price
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>--------------------
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>TCS 09:00 200  39.99
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>SBI 09:01 300  45.3
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>TCS 09:20 5000 34.56
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>SBI 09:32 400  22.34
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>SBI 09:34 350  99.89
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>q)select sum price by sym, 15 xbar time.minute from tab
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>sym minute| price
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>----------| ------
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>SBI 09:00 | 45.3
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>SBI 09:30 | 122.23
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>TCS 09:00 | 39.99
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>TCS 09:15 | 34.56
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>// here we dont see 09:15 bucket for SBI
+</code></pre></div></li>
+<li>we can resolve above issue with racking - creating bucket for each 15 minute interval and merging it with table <code>tab</code></li>
+<li>first we define <code>start</code>, <code>end</code> and <code>bucket</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>q)start:09:00
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>q)end:09:59
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>q)bucket:15
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>q)(end-start)%bucket
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>3.933333
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>q)ceiling (end-start)%bucket
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>4
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>q)til ceiling (end-start)%bucket
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>0 1 2 3
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>q)bucket*til ceiling (end-start)%bucket
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>0 15 30 45
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>q)start+bucket*til ceiling (end-start)%bucket
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>09:00 09:15 09:30 09:45
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>q)times: start+bucket*til ceiling (end-start)%bucket
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>q)times
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>09:00 09:15 09:30 09:45
+</code></pre></div></li>
+<li>to create a rack we need original symbols from tables
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>q)select distinct sym from tab
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sym
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>---
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>TCS
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>SBI
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>q)rack: (`sym xasc select distinct sym from tab) cross ([]minute: times)
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>q)rack
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>sym minute
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>----------
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>SBI 09:00
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>SBI 09:15
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>SBI 09:30
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>SBI 09:45
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>TCS 09:00
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>TCS 09:15
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>TCS 09:30
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>TCS 09:45
+</code></pre></div></li>
+<li>now we can perform same operation but with value for each sym for each window
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>q)select sum price by sym,bucket xbar time.minute from tab //earlier
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sym minute| price
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>----------| ------
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>SBI 09:00 | 45.3
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>SBI 09:30 | 122.23
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>TCS 09:00 | 39.99
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>TCS 09:15 | 34.56
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>q)rack#select sum price by sym,bucket xbar time.minute from tab //after using rack
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>sym minute| price
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>----------| ------
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>SBI 09:00 | 45.3
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>SBI 09:15 |
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>SBI 09:30 | 122.23
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>SBI 09:45 |
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>TCS 09:00 | 39.99
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>TCS 09:15 | 34.56
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>TCS 09:30 |
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>TCS 09:45 |
+</code></pre></div></li>
+<li>we can fill the blank data with <code>fills</code> or <code>^</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>q)update 0^price from rack#select sum price by sym,bucket xbar time.minute from tab
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>sym minute| price
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>----------| ------
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>SBI 09:00 | 45.3
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>SBI 09:15 | 0
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>SBI 09:30 | 122.23
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>SBI 09:45 | 0
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>TCS 09:00 | 39.99
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>TCS 09:15 | 34.56
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>TCS 09:30 | 0
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>TCS 09:45 | 0
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>q)update fills size by sym from update 0^price from rack#select sum sum price, last size by sym,bucket xbar time.minute from tab
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>sym minute| price  size
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>----------| -----------
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>SBI 09:00 | 45.3   300
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>SBI 09:15 | 0      300
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>SBI 09:30 | 122.23 350
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>SBI 09:45 | 0      350
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>TCS 09:00 | 39.99  200
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>TCS 09:15 | 34.56  5000
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>TCS 09:30 | 0      5000
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>TCS 09:45 | 0      5000
+</code></pre></div></li>
+<li>we can create a function to do same on HDB
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>q)\l fakedb.q
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>USAGE: makedb[NUM QUOTES;NUM TRADES] eg makedb[100000;10000]
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>makedb1[NUM QUOTES;NUM TRADES;DATE;RANDOMISED COUNT FACTOR] eg makedb1[100000;10000;.z.d;.3]
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>makehdb[HDBDIR;NUM DAYS;APPROXIMATE NUM QUOTES PER DAY; APPROXIMATE NUM TRADES PER DAY] eg makehdb[`:hdb; 5; 100000; 10000]
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>makecsv[CSVDIR;NUM DAYS;NUM QUOTES;NUM TRADES]
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>q)
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>q)makehdb[`:hdb;5;100000;10000]
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>2022.10.05T17:37:30.075 saving data for date 2014.04.21 to :hdb
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>2022.10.05T17:37:30.139 saving data for date 2014.04.22 to :hdb
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>2022.10.05T17:37:30.225 saving data for date 2014.04.23 to :hdb
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>2022.10.05T17:37:30.306 saving data for date 2014.04.24 to :hdb
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>2022.10.05T17:37:30.380 saving data for date 2014.04.25 to :hdb
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>q)\l hdb
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>q)\a
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>`depth`quotes`trades
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>q)// function to create rack
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>q)createrack:{[start;end;bucket;symbol] times:start+bucket*til ceiling (end-start:bucket xbar start)%bucket}
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>q)createrack[2022.10.05D09:00;2022.10.05D09:59;0D00:15;`SBI]
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>2022.10.05D09:00:00.000000000 2022.10.05D09:15:00.000000000 2022.10.05D09:30:..
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>q)//only create list of times
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>q)//lets add cross with sym logic
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>q)createrack:{[start;end;bucket;symbol] times:start+bucket*til ceiling (end-start:bucket xbar start)%bucket; ([]sym:symbol,()) cross ([]time: times)}
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>q)createrack[2022.10.05D09:00;2022.10.05D09:59;0D00:15;`SBI]
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>sym time
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>---------------------------------
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>SBI 2022.10.05D09:00:00.000000000
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>SBI 2022.10.05D09:15:00.000000000
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>SBI 2022.10.05D09:30:00.000000000
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>SBI 2022.10.05D09:45:00.000000000
+</code></pre></div></li>
+<li>we need to create another function for using <code>createrack</code> function with hdb data
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>q)jointables:{[start;end;bucket;symbol] createrack[start;end;bucket;symbol]#select sum price by sym, bucket xbar time from trades where date within `date$(start;end), sym in symbol, time within `timestamp$(start;end)}
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>q)jointables[2014.04.21D09:00;2014.04.21D12:59;0D00:15;`AAPL]
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>sym  time                         | price
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>----------------------------------| -------
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>AAPL 2014.04.21D09:00:00.000000000| 853.09
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>AAPL 2014.04.21D09:15:00.000000000| 823.7
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>AAPL 2014.04.21D09:30:00.000000000| 794.11
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>AAPL 2014.04.21D09:45:00.000000000| 799.56
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>AAPL 2014.04.21D10:00:00.000000000| 624.37
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>AAPL 2014.04.21D10:15:00.000000000| 650.2
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>AAPL 2014.04.21D10:30:00.000000000| 803.53
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>AAPL 2014.04.21D10:45:00.000000000| 933.05
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>AAPL 2014.04.21D11:00:00.000000000| 785.23
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>AAPL 2014.04.21D11:15:00.000000000| 1034.56
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>AAPL 2014.04.21D11:30:00.000000000| 779.19
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>AAPL 2014.04.21D11:45:00.000000000| 1205.52
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>AAPL 2014.04.21D12:00:00.000000000| 873.81
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>AAPL 2014.04.21D12:15:00.000000000| 991.83
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>AAPL 2014.04.21D12:30:00.000000000| 945.7
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>AAPL 2014.04.21D12:45:00.000000000| 823.28
+</code></pre></div></li>
+</ul>
+<h2 id="align">Align</h2>
+<ul>
+<li>Another common problem is to align two asynchronous timeseries data where the time rarely match </li>
+<li>Alignment can be for the same dataset but different instruments for example aligning <code>GOOG</code> with <code>AAPL</code> </li>
+<li>There are three main approached to aligning <ol>
+<li>we can use bucketing to align - have buckets of common time and then join </li>
+<li>use <code>asof</code> join</li>
+<li>use <code>fill</code> join where we want all data at every timepoint</li>
+</ol>
+</li>
+<li>we can load the data from HDB
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>q)trades1: select time, sym, price, size from trades where date=2014.04.21
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>q)quotes1: select time, sym, bid,ask from quotes where date=2014.04.21
+</code></pre></div></li>
+<li><code>aj</code> will join prevailing quote price to each trade i.e; the quote which occured just before will be joined on to that trade </li>
+<li><code>aj</code> makes exact match on the <code>sym</code> and as-of match on <code>time</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>q)aj[`sym`time;trades1;quotes1]
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>time                          sym  price size bid   ask
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>---------------------------------------------------------
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>2014.04.21D08:00:12.155000000 AAPL 25.31 2450 25.31 25.33
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>2014.04.21D08:00:42.186000000 AAPL 25.32 289  25.32 25.34
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>2014.04.21D08:00:51.764000000 AAPL 25.34 3167 25.34 25.37
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>2014.04.21D08:00:54.526000000 AAPL 25.34 6474 25.34 25.37
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>2014.04.21D08:00:57.071000000 AAPL 25.34 1335 25.34 25.37
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>2014.04.21D08:01:19.773000000 AAPL 25.4  317  25.36 25.4
+</code></pre></div></li>
+<li>Now, what if we want to align prices and cumulative volumes of two different syms </li>
+<li>example: we want to align prevailing <code>GOOG</code> data to <code>AAPL</code> data </li>
+<li>For this, first we create a table for price and total volume for <code>AAPL</code> trades and same for <code>GOOG</code> trades 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>q)apple: select time, appleprice:price, applevol: sums size from trades1 where sym in `AAPL
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>q)apple
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>time                          appleprice applevol
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>-------------------------------------------------
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>2014.04.21D08:00:12.155000000 25.31      2450
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>2014.04.21D08:00:42.186000000 25.32      2739
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>2014.04.21D08:00:51.764000000 25.34      5906
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>2014.04.21D08:00:54.526000000 25.34      12380
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>2014.04.21D08:00:57.071000000 25.34      13715
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>q)google: select time, googprice:price, googvol: sums size from trades1 where sym in `GOOG
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>q)google
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>time                          googprice googvol
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>-----------------------------------------------
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>2014.04.21D08:00:01.184000000 41.3      2422
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>2014.04.21D08:00:23.103000000 41.3      4313
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>2014.04.21D08:00:49.515000000 41.29     5444
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>2014.04.21D08:00:57.435000000 41.26     12207
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>2014.04.21D08:01:02.314000000 41.29     18694
+</code></pre></div></li>
+<li>now we can use <code>aj</code> to align the two tables
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>q)aj[`time;apple;google]
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>time                          appleprice applevol googprice googvol
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>-------------------------------------------------------------------
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>2014.04.21D08:00:12.155000000 25.31      2450     41.3      2422
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>2014.04.21D08:00:42.186000000 25.32      2739     41.3      4313
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>2014.04.21D08:00:51.764000000 25.34      5906     41.29     5444
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>2014.04.21D08:00:54.526000000 25.34      12380    41.29     5444
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>2014.04.21D08:00:57.071000000 25.34      13715    41.29     5444
+</code></pre></div></li>
+</ul>
+<h2 id="offset-alignment">Offset Alignment</h2>
+<ul>
+<li>it is shifting the time field of one table to calculate something either side of another</li>
+<li>using similar approach, calculate for every trade the VWAP for the 5 minutes following the trade (excluding the contribution from current trade)</li>
+<li>we can calculate VWAP using the running sum of the size and the running sum of the size*price
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>q)makedb[100000;10000]
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>q)tables`
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>`depth`quotes`trades
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>q)trades1: update sumps: sums price*size, sumsize: sums size by sym from trades
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>q)trades1
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>time                          sym  src price size sumps    sumsize
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>------------------------------------------------------------------
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>2022.12.25D08:00:04.569000000 CSCO N   35.48 3827 135782   3827
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>2022.12.25D08:00:22.311000000 MSFT L   36.11 354  12782.94 354
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>2022.12.25D08:00:27.438000000 IBM  N   43.54 2589 112725.1 2589
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>2022.12.25D08:00:27.511000000 YHOO L   35.54 6956 247216.2 6956
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>2022.12.25D08:00:27.906000000 IBM  N   43.54 2397 217090.4 4986
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>2022.12.25D08:00:30.278000000 NOK  L   31.76 353  11211.28 353
+</code></pre></div></li>
+<li>Now we want to take just the running vwap from trades1 and shift it all by 5 mins, we can do this by creating new table </li>
+</ul>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>q)shiftreades: select time-0D00:05,sym,sumplus5: sumps, sumsizeplus5: sumsize from trades1
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>q)shiftreades
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>time                          sym  sumplus5 sumsizeplus5
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>--------------------------------------------------------
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>2022.12.25D07:55:04.569000000 CSCO 135782   3827
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>2022.12.25D07:55:22.311000000 MSFT 12782.94 354
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>2022.12.25D07:55:27.438000000 IBM  112725.1 2589
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>2022.12.25D07:55:27.511000000 YHOO 247216.2 6956
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>2022.12.25D07:55:27.906000000 IBM  217090.4 4986
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>2022.12.25D07:55:30.278000000 NOK  11211.28 353
+</code></pre></div>
+* Now we want to join this time shifted vwap info back onto the non-shifted vwap using <code>aj</code>
+* we can have desired result by subtracting shifted from non-shifted </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>q)aligntab: aj[`sym`time;delete src,size from trades1;shiftreades]
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>q)aligntab
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>time                          sym  price sumps    sumsize sumplus5 sumsizeplus5
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>-------------------------------------------------------------------------------
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>2022.12.25D08:00:04.569000000 CSCO 35.48 135782   3827    1492906  42000
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>2022.12.25D08:00:22.311000000 MSFT 36.11 12782.94 354     507052.6 14077
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>2022.12.25D08:00:27.438000000 IBM  43.54 112725.1 2589    1258692  28796
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>2022.12.25D08:00:27.511000000 YHOO 35.54 247216.2 6956    1170549  33014
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>2022.12.25D08:00:27.906000000 IBM  43.54 217090.4 4986    1258692  28796
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>2022.12.25D08:00:30.278000000 NOK  31.76 11211.28 353     498678.1 15746
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>2022.12.25D08:00:30.579000000 CSCO 35.45 161518.7 4553    1571526  44201
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>2022.12.25D08:00:32.203000000 DELL 29.1  30758.7  1057    734669.4 25218
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>q)update vwapplus5: (sumplus5-sumps)%sumsizeplus5 - sumsize from delete date, time from aligntab
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>sym  price sumps    sumsize sumplus5 sumsizeplus5 vwapplus5
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>-----------------------------------------------------------
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>CSCO 35.48 135782   3827    1492906  42000        35.55193
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>MSFT 36.11 12782.94 354     507052.6 14077        36.01761
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>IBM  43.54 112725.1 2589    1258692  28796        43.72753
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>YHOO 35.54 247216.2 6956    1170549  33014        35.43376
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>IBM  43.54 217090.4 4986    1258692  28796        43.74641
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>NOK  31.76 11211.28 353     498678.1 15746        31.66809
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>CSCO 35.45 161518.7 4553    1571526  44201        35.56313
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>DELL 29.1  30758.7  1057    734669.4 25218        29.13417
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>ORCL 32.25 181728.8 5635    1451326  45032        32.22575
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>ORCL 32.26 268250.1 8317    1451326  45032        32.22324
+</code></pre></div>
+<h2 id="pivoting">Pivoting</h2>
+<ul>
+<li>Used to move row values into column values</li>
+<li>We have a table <code>tab</code> which has sym, time and price 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>q)tab:([]sym:`TCS`SBI`TCS`SBI`SBI;time: 09:00 09:01 09:20 09:32 09:34; size: 200 300 5000 400 350; price: 39.99 45.3 34.56 22.34 99.89)
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>q)tab
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sym time  size price
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>--------------------
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>TCS 09:00 200  39.99
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>SBI 09:01 300  45.3
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>TCS 09:20 5000 34.56
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>SBI 09:32 400  22.34
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>SBI 09:34 350  99.89
+</code></pre></div></li>
+<li>Now we want to swap the row values to column values</li>
+<li>Ex: we can use sym column as column headers</li>
+<li>we get the distinct sym from table, these will form as column headers
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>q)colnames: asc exec distinct sym from tab
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>q)colnames
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>`s#`SBI`TCS
+</code></pre></div></li>
+<li>we then extract dictionary for sym!price for each time value that we have 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>q)exec sym!price by time from tab
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>09:00| (,`TCS)!,39.99
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>09:01| (,`SBI)!,45.3
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>09:20| (,`TCS)!,34.56
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>09:32| (,`SBI)!,22.34
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>09:34| (,`SBI)!,99.89
+</code></pre></div></li>
+<li>then we can populate the dictionary using our <code>colnames</code> list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>q)pivtab: exec colnames#sym!price by time from tab
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>q)pivtab
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>     | SBI   TCS
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>-----| -----------
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>09:00|       39.99
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>09:01| 45.3
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>09:20|       34.56
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>09:32| 22.34
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>09:34| 99.89
+</code></pre></div></li>
+<li>we need to name the time column 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>q)pivtab: exec colnames#sym!price by time:time from tab
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>q)pivtab
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>time | SBI   TCS
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>-----| -----------
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>09:00|       39.99
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>09:01| 45.3
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>09:20|       34.56
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>09:32| 22.34
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>09:34| 99.89
+</code></pre></div></li>
+<li>finally, we can forward fill the gaps using <code>fills</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>q)pivtab: fills exec colnames#sym!price by time:time from tab
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>q)pivtab
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>time | SBI   TCS
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>-----| -----------
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>09:00|       39.99
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>09:01| 45.3  39.99
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>09:20| 45.3  34.56
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>09:32| 22.34 34.56
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>09:34| 99.89 34.56
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>q)pivtab: 0^fills exec colnames#sym!price by time:time from tab
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>q)pivtab
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>time | SBI   TCS
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>-----| -----------
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>09:00| 0     39.99
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>09:01| 45.3  39.99
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>09:20| 45.3  34.56
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>09:32| 22.34 34.56
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>09:34| 99.89 34.56
+</code></pre></div></li>
+<li>simple formula can be: <code>pivot_table: 0^fills exec (exec asc distinct col1 from tab)#col1!col2 by col3:col3 from tab</code></li>
+<li>here <code>col1</code> is column header row</li>
+<li><code>col2</code> are values inside matrix</li>
+<li><code>col3</code> is row of matrix</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../../fileio/load-save-files/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Load save files" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Load save files
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../compare-profile/" class="md-footer__link md-footer__link--next" aria-label="Next: Compare Profile" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Compare Profile
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    <a href="https://github.com/yogesh1314" target="_blank" rel="noopener" title="Yogesh Rana on github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    <a href="https://in.linkedin.com/in/yogesh1314" target="_blank" rel="noopener" title="Yogesh Rana on linkedin" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["header.autohide", "navigation.top", "navigation.tabs"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.960e086b.min.js"></script>
+      
+        <script src="../../../scripts/prism.js"></script>
+      
+        <script src="../../../scripts/jquery-3.6.3.min.js"></script>
+      
+    
+  </body>
+</html>
