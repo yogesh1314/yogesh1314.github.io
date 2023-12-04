@@ -1056,7 +1056,7 @@ In game 1, three sets of cubes are revealed from the bag (and then put back agai
 <p>The Elf would first like to know which games would have been possible if the bag contained only <strong>12 red cubes, 13 green cubes, and 14 blue cubes</strong>?</p>
 <p>In the example above, games 1, 2, and 5 would have been possible if the bag had been loaded with that configuration. However, game 3 would have been impossible because at one point the Elf showed you 20 red cubes at once; similarly, game 4 would also have been impossible because the Elf showed you 15 blue cubes at once. If you add up the IDs of the games that would have been possible, you get 8.</p>
 <p>Determine which games would have been possible if the bag had been loaded with only <strong>12 red cubes, 13 green cubes, and 14 blue cubes</strong>. What is the sum of the IDs of those games?</p>
-<p>Your puzzle answer was 3059.</p>
+<p>Your puzzle answer was <code>3059</code>.</p>
 <h2 id="solution">Solution</h2>
 <h3 id="kdbq">kdb+/q</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:2_sample.txt                         / read input
@@ -1087,7 +1087,7 @@ Game 4 required at least 14 red, 3 green, and 15 blue cubes.
 Game 5 needed no fewer than 6 red, 3 green, and 2 blue cubes in the bag.
 The power of a set of cubes is equal to the numbers of red, green, and blue cubes multiplied together. The power of the minimum set of cubes in game 1 is 48. In games 2-5 it was 12, 1560, 630, and 36, respectively. Adding up these five powers produces the sum 2286.</p>
 <p>For each game, find the minimum set of cubes that must have been present. What is the sum of the power of these sets?</p>
-<p>Your puzzle answer was 65371.</p>
+<p>Your puzzle answer was <code>65371</code>.</p>
 <h2 id="solution_1">Solution</h2>
 <h3 id="kdbq_1">kdb+/q</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip:read0 `:2_sample.txt                                 / read input
