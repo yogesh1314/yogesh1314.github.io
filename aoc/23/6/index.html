@@ -17,7 +17,7 @@
     
     
       
-        <title>Day 6 : - Tech Blog</title>
+        <title>Day 6 : Wait for it - Tech Blog</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#day-6" class="md-skip">
+        <a href="#day-6-wait-for-it" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 6 :
+              Day 6 : Wait for it
             
           </span>
         </div>
@@ -1036,18 +1036,63 @@
               
                 
 
-<h1 id="day-6">Day 6 :</h1>
+<h1 id="day-6-wait-for-it">Day 6 : Wait for it</h1>
 <p>Question <a href="https://adventofcode.com/2023/day/6">Link</a> </p>
 <h1 id="question">Question</h1>
 <h2 id="part-1">Part 1</h2>
+<p>The ferry quickly brings you across Island Island. After asking around, you discover that there is indeed normally a large pile of sand somewhere near here, but you don't see anything besides lots of water and the small island where the ferry has docked.</p>
+<p>As you try to figure out what to do next, you notice a poster on a wall near the ferry dock. "Boat races! Open to the public! Grand prize is an all-expenses-paid trip to Desert Island!" That must be where the sand comes from! Best of all, the boat races are starting in just a few minutes.</p>
+<p>You manage to sign up as a competitor in the boat races just in time. The organizer explains that it's not really a traditional race - instead, you will get a fixed amount of time during which your boat has to travel as far as it can, and you win if your boat goes the farthest.</p>
+<p>As part of signing up, you get a sheet of paper (your puzzle input) that lists the time allowed for each race and also the best distance ever recorded in that race. To guarantee you win the grand prize, you need to make sure you go farther in each race than the current record holder.</p>
+<p>The organizer brings you over to the area where the boat races are held. The boats are much smaller than you expected - they're actually toy boats, each with a big button on top. Holding down the button charges the boat, and releasing the button allows the boat to move. Boats move faster if their button was held longer, but time spent holding the button counts against the total race time. You can only hold the button at the start of the race, and boats don't move until the button is released.</p>
+<p>For example:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Time:      7  15   30
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Distance:  9  40  200
+</code></pre></div>
+This document describes three races:</p>
+<p>The first race lasts <code>7</code> milliseconds. The record distance in this race is <code>9</code> millimeters.
+The second race lasts <code>15</code> milliseconds. The record distance in this race is <code>40</code> millimeters.
+The third race lasts <code>30</code> milliseconds. The record distance in this race is <code>200</code> millimeters.
+Your toy boat has a starting speed of zero millimeters per millisecond. For each whole millisecond you spend at the beginning of the race holding down the button, the boat's speed increases by one millimeter per millisecond.</p>
+<p>So, because the first race lasts <code>7</code> milliseconds, you only have a few options:</p>
+<p>Don't hold the button at all (that is, hold it for <code>0</code> milliseconds) at the start of the race. The boat won't move; it will have traveled <code>0</code> millimeters by the end of the race.
+Hold the button for <code>1</code> millisecond at the start of the race. Then, the boat will travel at a speed of <code>1</code> millimeter per millisecond for 6 milliseconds, reaching a total distance traveled of <code>6</code> millimeters.
+Hold the button for <code>2</code> milliseconds, giving the boat a speed of <code>2</code> millimeters per millisecond. It will then get <code>5</code> milliseconds to move, reaching a total distance of <code>10</code> millimeters.
+Hold the button for <code>3</code> milliseconds. After its remaining <code>4</code> milliseconds of travel time, the boat will have gone <code>12</code> millimeters.
+Hold the button for <code>4</code> milliseconds. After its remaining <code>3</code> milliseconds of travel time, the boat will have gone <code>12</code> millimeters.
+Hold the button for <code>5</code> milliseconds, causing the boat to travel a total of <code>10</code> millimeters.
+Hold the button for <code>6</code> milliseconds, causing the boat to travel a total of <code>6</code> millimeters.
+Hold the button for <code>7</code> milliseconds. That's the entire duration of the race. You never let go of the button. The boat can't move until you let go of the button. Please make sure you let go of the button so the boat gets to move. <code>0</code> millimeters.
+Since the current record for this race is <code>9</code> millimeters, there are actually <code>4</code> different ways you could win: you could hold the button for <code>2</code>, <code>3</code>, <code>4</code>, or <code>5</code> milliseconds at the start of the race.</p>
+<p>In the second race, you could hold the button for at least 4 milliseconds and at most 11 milliseconds and beat the record, a total of <code>8</code> different ways to win.</p>
+<p>In the third race, you could hold the button for at least <code>11</code> milliseconds and no more than <code>19</code> milliseconds and still beat the record, a total of <code>9</code> ways you could win.</p>
+<p>To see how much margin of error you have, determine the number of ways you can beat the record in each race; in this example, if you multiply these values together, you get <code>288</code>  <code>(4 * 8 * 9)</code>.</p>
+<p>Determine the number of ways you could beat the record in each race. What do you get if you multiply these numbers together?</p>
+<p>Your puzzle answer was <code>1731600</code>.</p>
 <h2 id="solution">Solution</h2>
 <h3 id="kdbq">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip:read0 `:6_sample.txt                         / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:6_sample.txt                         / read input
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>@[`.;(`t`d);:;&quot;I&quot;$trim@/:(&quot;   &quot;vs)@/:trim@/:last@/:(&quot;:&quot;vs )@/:ip]
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>prd {count where y&lt;t*x-t:til 1+x}&#39;[t;d]
 </code></pre></div>
 <h2 id="part-2">Part 2</h2>
+<p>As the race is about to start, you realize the piece of paper with race times and record distances you got earlier actually just has very bad kerning. There's really only one race - ignore the spaces between the numbers on each line.</p>
+<p>So, the example from before:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Time:      7  15   30
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Distance:  9  40  200
+</code></pre></div>
+...now instead means this:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Time:      71530
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Distance:  940200
+</code></pre></div></p>
+<p>Now, you have to figure out how many ways there are to win this single race. In this example, the race lasts for <code>71530</code> milliseconds and the record distance you need to beat is <code>940200</code> millimeters. You could hold the button anywhere from <code>14</code> to <code>71516</code> milliseconds and beat the record, a total of <code>71503</code> ways!</p>
+<p>How many ways can you beat the record in this one much longer race?</p>
+<p>Your puzzle answer was <code>40087680</code>.</p>
 <h2 id="solution_1">Solution</h2>
 <h3 id="kdbq_1">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:6_sample.txt                                 / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ip:read0 `:6_sample.txt                                 / read input
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>@[`.;(`t`d);:;&quot;J&quot;$ssr[;&quot; &quot;;&quot;&quot;]@/:trim@/:last@/:(&quot;:&quot;vs )@/:ip]
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>count where d&lt;a*t-a:til 1+t
 </code></pre></div>
 
               

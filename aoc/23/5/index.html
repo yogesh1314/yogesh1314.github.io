@@ -1040,14 +1040,112 @@
 <p>Question <a href="https://adventofcode.com/2023/day/5">Link</a> </p>
 <h1 id="question">Question</h1>
 <h2 id="part-1">Part 1</h2>
+<p>If You Give A Seed A Fertilizer ---</p>
+<p>You take the boat and find the gardener right where you were told he would be: managing a giant "garden" that looks more to you like a farm.</p>
+<p>"A water source? Island Island is the water source!" You point out that Snow Island isn't receiving any water.</p>
+<p>"Oh, we had to stop the water because we ran out of sand to filter it with! Can't make snow with dirty water. Don't worry, I'm sure we'll get more sand soon; we only turned off the water a few days... weeks... oh no." His face sinks into a look of horrified realization.</p>
+<p>"I've been so busy making sure everyone here has food that I completely forgot to check why we stopped getting more sand! There's a ferry leaving soon that is headed over in that direction - it's much faster than your boat. Could you please go check it out?"</p>
+<p>You barely have time to agree to this request when he brings up another. "While you wait for the ferry, maybe you can help us with our food production problem. The latest Island Island Almanac just arrived and we're having trouble making sense of it."</p>
+<p>The almanac (your puzzle input) lists all of the seeds that need to be planted. It also lists what type of soil to use with each kind of seed, what type of fertilizer to use with each kind of soil, what type of water to use with each kind of fertilizer, and so on. Every type of seed, soil, fertilizer and so on is identified with a number, but numbers are reused by each category - that is, soil 123 and fertilizer 123 aren't necessarily related to each other.</p>
+<p>For example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>seeds: 79 14 55 13
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>seed-to-soil map:
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>50 98 2
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>52 50 48
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>soil-to-fertilizer map:
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>0 15 37
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>37 52 2
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>39 0 15
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>fertilizer-to-water map:
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>49 53 8
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>0 11 42
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>42 0 7
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>57 7 4
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>water-to-light map:
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>88 18 7
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>18 25 70
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>light-to-temperature map:
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>45 77 23
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>81 45 19
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>68 64 13
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>temperature-to-humidity map:
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>0 69 1
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>1 0 69
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>humidity-to-location map:
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>60 56 37
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>56 93 4
+</code></pre></div>
+The almanac starts by listing which seeds need to be planted: seeds 79, 14, 55, and 13.</p>
+<p>The rest of the almanac contains a list of maps which describe how to convert numbers from a source category into numbers in a destination category. That is, the section that starts with seed-to-soil map: describes how to convert a seed number (the source) to a soil number (the destination). This lets the gardener and his team know which soil to use with which seeds, which water to use with which fertilizer, and so on.</p>
+<p>Rather than list every source number and its corresponding destination number one by one, the maps describe entire ranges of numbers that can be converted. Each line within a map contains three numbers: the destination range start, the source range start, and the range length.</p>
+<p>Consider again the example seed-to-soil map:</p>
+<p>50 98 2
+52 50 48
+The first line has a destination range start of 50, a source range start of 98, and a range length of 2. This line means that the source range starts at 98 and contains two values: 98 and 99. The destination range is the same length, but it starts at 50, so its two values are 50 and 51. With this information, you know that seed number 98 corresponds to soil number 50 and that seed number 99 corresponds to soil number 51.</p>
+<p>The second line means that the source range starts at 50 and contains 48 values: 50, 51, ..., 96, 97. This corresponds to a destination range starting at 52 and also containing 48 values: 52, 53, ..., 98, 99. So, seed number 53 corresponds to soil number 55.</p>
+<p>Any source numbers that aren't mapped correspond to the same destination number. So, seed number 10 corresponds to soil number 10.</p>
+<p>So, the entire list of seed numbers and their corresponding soil numbers looks like this:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>seed  soil
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>0     0
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>1     1
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>...   ...
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>48    48
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>49    49
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>50    52
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>51    53
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>...   ...
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>96    98
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>97    99
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>98    50
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>99    51
+</code></pre></div>
+With this map, you can look up the soil number required for each initial seed number:</p>
+<p>Seed number 79 corresponds to soil number 81.
+Seed number 14 corresponds to soil number 14.
+Seed number 55 corresponds to soil number 57.
+Seed number 13 corresponds to soil number 13.
+The gardener and his team want to get started as soon as possible, so they'd like to know the closest location that needs a seed. Using these maps, find the lowest location number that corresponds to any of the initial seeds. To do this, you'll need to convert each seed number through other categories until you can find its corresponding location number. In this example, the corresponding types are:</p>
+<p>Seed <code>79</code>, soil <code>81</code>, fertilizer <code>81</code>, water <code>81</code>, light <code>74</code>, temperature <code>78</code>, humidity 78, location <code>82</code>.
+Seed <code>14</code>, soil <code>14</code>, fertilizer <code>53</code>, water <code>49</code>, light <code>42</code>, temperature <code>42</code>, humidity <code>43</code>, location <code>43</code>.
+Seed <code>55</code>, soil <code>57</code>, fertilizer <code>57</code>, water <code>53</code>, light <code>46</code>, temperature <code>82</code>, humidity <code>82</code>, location <code>86</code>.
+Seed <code>13</code>, soil <code>13</code>, fertilizer <code>52</code>, water <code>41</code>, light <code>34</code>, temperature <code>34</code>, humidity <code>35</code>, location <code>35</code>.
+So, the lowest location number in this example is <code>35</code>.</p>
+<p>What is the lowest location number that corresponds to any of the initial seed numbers?
+Your puzzle answer was <code>993500720</code>.</p>
 <h2 id="solution">Solution</h2>
 <h3 id="kdbq">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip:read0 `:5_sample.txt                         / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip:read0 `:5_sample.txt                         / read input
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>// works for small numbers 
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>fip: (enlist &quot;:&quot; vs ip 0),1_&#39;(where &quot;&quot; ~/:ip)_ip
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>seeds:&quot;J&quot;$/:&quot; &quot;vs trim fip[0;1]
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>f:{td::()!();{tmp:&quot;I&quot;$/:&quot; &quot; vs x; td[tmp[1]+til tmp[2]]:tmp[0]+til tmp[2]}@/:1_x; td};
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>@[`.;(`s2s`s2f`f2w`w2l`l2t`t2h`h2l);:;f each 1_fip]
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>min {x^y@/:x}/[seeds;(s2s;s2f;f2w;w2l;l2t;t2h;h2l)]
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>// for large numbers
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>fip: 2_&#39;(where &quot;&quot; ~/:ip)_ip
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>seeds:&quot;J&quot;$&quot; &quot;vs trim last&quot;:&quot;vs ip 0
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>// func to give me destination
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>min {{res: {y:&quot;J&quot;$&quot; &quot;vs y; $[and[y[1]&lt;=x; x&lt;y[1]+y[2]]; y[0]+x-y[1];0nf]}[x;] each y;$[count i:where not null res;first res[i]; x]}/[x;fip]}each seeds
 </code></pre></div>
 <h2 id="part-2">Part 2</h2>
+<p>Everyone will starve if you only plant such a small number of seeds. Re-reading the almanac, it looks like the seeds: line actually describes ranges of seed numbers.</p>
+<p>The values on the initial seeds: line come in pairs. Within each pair, the first value is the start of the range and the second value is the length of the range. So, in the first line of the example above:</p>
+<p><code>seeds: 79 14 55 13</code>
+This line describes two ranges of seed numbers to be planted in the garden. The first range starts with seed number <code>79</code> and contains <code>14</code> values: <code>79</code>, <code>80</code>, ..., <code>91</code>, <code>92</code>. The second range starts with seed number <code>55</code> and contains <code>13</code> values: <code>55</code>, <code>56</code>, ..., <code>66</code>, <code>67</code>.</p>
+<p>Now, rather than considering four seed numbers, you need to consider a total of <code>27</code> seed numbers.</p>
+<p>In the above example, the lowest location number can be obtained from seed number <code>82</code>, which corresponds to soil <code>84</code>, fertilizer <code>84</code>, water <code>84</code>, light <code>77</code>, temperature <code>45</code>, humidity <code>46</code>, and location <code>46</code>. So, the lowest location number is <code>46</code>.</p>
+<p>Consider all of the initial seed numbers listed in the ranges on the first line of the almanac. What is the lowest location number that corresponds to any of the initial seed numbers?</p>
 <h2 id="solution_1">Solution</h2>
 <h3 id="kdbq_1">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:5_sample.txt                                 / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip:read0 `:5_sample.txt                                 / read input
 </code></pre></div>
 
               
