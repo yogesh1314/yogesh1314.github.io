@@ -17,7 +17,7 @@
     
     
       
-        <title>Day 8 : - Tech Blog</title>
+        <title>Day 19 : Aplenty - Tech Blog</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#day-8" class="md-skip">
+        <a href="#day-19-aplenty" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 8 :
+              Day 19 : Aplenty
             
           </span>
         </div>
@@ -1036,18 +1036,61 @@
               
                 
 
-<h1 id="day-8">Day 8 :</h1>
-<p>Question <a href="https://adventofcode.com/2023/day/8">Link</a> </p>
+<h1 id="day-19-aplenty">Day 19 : Aplenty</h1>
+<p>Question <a href="https://adventofcode.com/2023/day/19">Link</a> </p>
 <h1 id="question">Question</h1>
 <h2 id="part-1">Part 1</h2>
+<p>The Elves of Gear Island are thankful for your help and send you on your way. They even have a hang glider that someone stole from Desert Island; since you're already going that direction, it would help them a lot if you would use it to get down there and return it to them.</p>
+<p>As you reach the bottom of the relentless avalanche of machine parts, you discover that they're already forming a formidable heap. Don't worry, though - a group of Elves is already here organizing the parts, and they have a system.</p>
+<p>To start, each part is rated in each of four categories:</p>
+<p><code>x</code>: Extremely cool looking
+<code>m</code>: Musical (it makes a noise when you hit it)
+<code>a</code>: Aerodynamic
+<code>s</code>: Shiny
+Then, each part is sent through a series of workflows that will ultimately accept or reject the part. Each workflow has a name and contains a list of rules; each rule specifies a condition and where to send the part if the condition is true. The first rule that matches the part being considered is applied immediately, and the part moves on to the destination described by the rule. (The last rule in each workflow has no condition and always applies if reached.)</p>
+<p>Consider the workflow <code>ex{x&gt;10:one,m&lt;20:two,a&gt;30:R,A}</code>. This workflow is named <code>ex</code> and contains four rules. If workflow <code>ex</code> were considering a specific part, it would perform the following steps in order:</p>
+<p>Rule "<code>x&gt;10:one</code>": If the part's <code>x</code> is more than <code>10</code>, send the part to the workflow named <code>one</code>.
+Rule "<code>m&lt;20:two</code>": Otherwise, if the part's <code>m</code> is less than <code>20</code>, send the part to the workflow named <code>two</code>.
+Rule "<code>a&gt;30:R</code>": Otherwise, if the part's <code>a</code> is more than <code>30</code>, the part is immediately rejected (<code>R</code>).
+Rule "<code>A</code>": Otherwise, because no other rules matched the part, the part is immediately accepted (<code>A</code>).
+If a part is sent to another workflow, it immediately switches to the start of that workflow instead and never returns. If a part is accepted (sent to <code>A</code>) or rejected (sent to <code>R</code>), the part immediately stops any further processing.</p>
+<p>The system works, but it's not keeping up with the torrent of weird metal shapes. The Elves ask if you can help sort a few parts and give you the list of workflows and some part ratings (your puzzle input). For example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>px{a&lt;2006:qkq,m&gt;2090:A,rfg}
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pv{a&gt;1716:R,A}
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>lnx{m&gt;1548:A,A}
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>rfg{s&lt;537:gd,x&gt;2440:R,A}
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>qs{s&gt;3448:A,lnx}
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>qkq{x&lt;1416:A,crn}
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>crn{x&gt;2662:A,R}
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>in{s&lt;1351:px,qqz}
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>qqz{s&gt;2770:qs,m&lt;1801:hdj,R}
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>gd{a&gt;3333:R,R}
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>hdj{m&gt;838:A,pv}
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>{x=787,m=2655,a=1222,s=2876}
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>{x=1679,m=44,a=2067,s=496}
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>{x=2036,m=264,a=79,s=2244}
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>{x=2461,m=1339,a=466,s=291}
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>{x=2127,m=1623,a=2188,s=1013}
+</code></pre></div>
+The workflows are listed first, followed by a blank line, then the ratings of the parts the Elves would like you to sort. All parts begin in the workflow named in. In this example, the five listed parts go through the following workflows:</p>
+<p><code>{x=787,m=2655,a=1222,s=2876}</code>: <code>in</code> -&gt; <code>qqz</code> -&gt; <code>qs</code> -&gt; <code>lnx</code> -&gt; <code>A</code>
+<code>{x=1679,m=44,a=2067,s=496}</code>: <code>in</code> -&gt; <code>px</code> -&gt; <code>rfg</code> -&gt; <code>gd</code> -&gt; <code>R</code>
+<code>{x=2036,m=264,a=79,s=2244}</code>: <code>in</code> -&gt; <code>qqz</code> -&gt; <code>hdj</code> -&gt; <code>pv</code> -&gt; <code>A</code>
+<code>{x=2461,m=1339,a=466,s=291}</code>: <code>in</code> -&gt; <code>px</code> -&gt; <code>qkq</code> -&gt; <code>crn</code> -&gt; <code>R</code>
+<code>{x=2127,m=1623,a=2188,s=1013}</code>: <code>in</code> -&gt; <code>px</code> -&gt; <code>rfg</code> -&gt; <code>A</code>
+Ultimately, three parts are accepted. Adding up the <code>x</code>, <code>m</code>, <code>a</code>, and <code>s</code> rating for each of the accepted parts gives <code>7540</code> for the part with <code>x=787</code>, <code>4623</code> for the part with <code>x=2036</code>, and <code>6951</code> for the part with <code>x=2127</code>. Adding all of the ratings for all of the accepted parts gives the sum total of <code>19114</code>.</p>
+<p>Sort through all of the parts you've been given; what do you get if you add together all of the rating numbers for all of the parts that ultimately get accepted?</p>
+<h2 id="input">Input</h2>
+<p><a href="https://github.com/yogesh1314/yogesh1314-mkdocs/blob/master/docs/aoc/23/ip/19_sample.txt">Link</a></p>
 <h2 id="solution">Solution</h2>
 <h3 id="kdbq">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip:read0 `:8_sample.txt                         / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:19_sample.txt                         / read input
 </code></pre></div>
 <h2 id="part-2">Part 2</h2>
 <h2 id="solution_1">Solution</h2>
 <h3 id="kdbq_1">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:8_sample.txt                                 / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ip:read0 `:19_sample.txt                                 / read input
 </code></pre></div>
 
               

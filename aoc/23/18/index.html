@@ -17,7 +17,7 @@
     
     
       
-        <title>Day 8 : - Tech Blog</title>
+        <title>Day 18 : Lavaduct Lagoon - Tech Blog</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#day-8" class="md-skip">
+        <a href="#day-18-lavaduct-lagoon" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Day 8 :
+              Day 18 : Lavaduct Lagoon
             
           </span>
         </div>
@@ -1036,18 +1036,64 @@
               
                 
 
-<h1 id="day-8">Day 8 :</h1>
-<p>Question <a href="https://adventofcode.com/2023/day/8">Link</a> </p>
+<h1 id="day-18-lavaduct-lagoon">Day 18 : Lavaduct Lagoon</h1>
+<p>Question <a href="https://adventofcode.com/2023/day/18">Link</a> </p>
 <h1 id="question">Question</h1>
 <h2 id="part-1">Part 1</h2>
+<p>Thanks to your efforts, the machine parts factory is one of the first factories up and running since the lavafall came back. However, to catch up with the large backlog of parts requests, the factory will also need a large supply of lava for a while; the Elves have already started creating a large lagoon nearby for this purpose.</p>
+<p>However, they aren't sure the lagoon will be big enough; they've asked you to take a look at the dig plan (your puzzle input). For example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>R 6 (#70c710)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>D 5 (#0dc571)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>L 2 (#5713f0)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>D 2 (#d2c081)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>R 2 (#59c680)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>D 2 (#411b91)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>L 5 (#8ceee2)
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>U 2 (#caa173)
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>L 1 (#1b58a2)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>U 2 (#caa171)
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>R 2 (#7807d2)
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>U 3 (#a77fa3)
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>L 2 (#015232)
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>U 2 (#7a21e3)
+</code></pre></div>
+The digger starts in a 1 meter cube hole in the ground. They then dig the specified number of meters up (<code>U</code>), down (<code>D</code>), left (<code>L</code>), or right (<code>R</code>), clearing full <code>1</code> meter cubes as they go. The directions are given as seen from above, so if "up" were north, then "right" would be east, and so on. Each trench is also listed with the color that the edge of the trench should be painted as an RGB hexadecimal color code.</p>
+<p>When viewed from above, the above example dig plan would result in the following loop of trench (<code>#</code>) having been dug out from otherwise ground-level terrain (<code>.</code>):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>#######
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>#.....#
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>###...#
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>..#...#
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>..#...#
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>###.###
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>#...#..
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>##..###
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>.#....#
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>.######
+</code></pre></div>
+At this point, the trench could contain 38 cubic meters of lava. However, this is just the edge of the lagoon; the next step is to dig out the interior so that it is one meter deep as well:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>#######
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>#######
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>#######
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>..#####
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>..#####
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>#######
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>#####..
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>#######
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>.######
+</code></pre></div>
+.######
+Now, the lagoon can contain a much more respectable 62 cubic meters of lava. While the interior is dug out, the edges are also painted according to the color codes in the dig plan.</p>
+<p>The Elves are concerned the lagoon won't be large enough; if they follow their dig plan, how many cubic meters of lava could it hold?</p>
+<h2 id="input">Input</h2>
+<p><a href="https://github.com/yogesh1314/yogesh1314-mkdocs/blob/master/docs/aoc/23/ip/18_sample.txt">Link</a></p>
 <h2 id="solution">Solution</h2>
 <h3 id="kdbq">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ip:read0 `:8_sample.txt                         / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip:read0 `:18_sample.txt                         / read input
 </code></pre></div>
 <h2 id="part-2">Part 2</h2>
 <h2 id="solution_1">Solution</h2>
 <h3 id="kdbq_1">kdb+/q</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:8_sample.txt                                 / read input
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ip:read0 `:18_sample.txt                                 / read input
 </code></pre></div>
 
               

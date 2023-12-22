@@ -1074,6 +1074,8 @@ This example shows five hands; each hand is followed by its bid amount. Each han
 <code>T55J5</code> and <code>QQQJA</code> are both three of a kind. <code>QQQJA</code> has a stronger first card, so it gets rank <code>5</code> and <code>T55J5</code> gets rank <code>4</code>.
 Now, you can determine the total winnings of this set of hands by adding up the result of multiplying each hand's bid with its rank <code>(765 * 1 + 220 * 2 + 28 * 3 + 684 * 4 + 483 * 5)</code>. So the total winnings in this example are <code>6440</code>.</p>
 <p>Find the rank of every hand in your set. What are the total winnings?</p>
+<h2 id="input">Input</h2>
+<p><a href="https://github.com/yogesh1314/yogesh1314-mkdocs/blob/master/docs/aoc/23/ip/7_sample.txt">Link</a></p>
 <h2 id="solution">Solution</h2>
 <h3 id="kdbq">kdb+/q</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ip:read0 `:7_sample.txt                         / read input
